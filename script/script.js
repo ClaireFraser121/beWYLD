@@ -9,4 +9,25 @@ document.addEventListener("DOMContentLoaded", function () {
      // Get the container where cards will be appended
      const cardContainer = document.getElementById("cardContainer");
   
-     
+     // Dynamically generate cards based on data
+     fitnessGoals.forEach(function (goal) {
+        // Create card element
+        const card = document.createElement("div");
+        card.classList.add("col-md-4", "mb-4", "card");
+    
+        // Create card content
+        const cardContent = `
+          <img src="${goal.image}" class="card-img-top" alt="${goal.title} Image">
+          <div class="card-body">
+            <h5 class="card-title">${goal.title}</h5>
+            <p class="card-text">${goal.text}</p>
+            <button class="btn btn-primary" data-toggle="modal" data-target="#resultsModal" data-result-type="${goal.resultType}">See Results</button>
+          </div>
+        `;
+    
+        // Set card content
+        card.innerHTML = cardContent;
+    
+        // Append the card to the container
+        cardContainer.appendChild(card);
+      });
