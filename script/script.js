@@ -38,5 +38,23 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("leanResults").innerHTML = '';
         document.getElementById("bulkResults").innerHTML = '';
 
-        // Get the result type from the clicked button
+    // Get the result type from the clicked button
         const resultType = event.relatedTarget.getAttribute("data-result-type");
+
+    // Dynamically generate meal cards based on result type
+    if (resultType === "lean") {
+        const leanResultsContainer = document.getElementById("leanResults");
+        generateMealCards(leanResultsContainer, "Lean Results", [
+          "https://www.bewyld.co.uk/product-page/3-day-nurture-maintain-meal-prep-package",
+          "https://www.bewyld.co.uk/product-page/3-day-grow-gain-meal-prep-package",
+          "https://www.bewyld.co.uk/product-page/3-day-lean-and-clean-meal-prep-package"
+        ]);
+      } else if (resultType === "bulk") {
+        const bulkResultsContainer = document.getElementById("bulkResults");
+        generateMealCards(bulkResultsContainer, "Bulk Results", [
+          "https://www.bewyld.co.uk/product-page/nurture-maintain-meal-prep-package",
+          "https://www.bewyld.co.uk/product-page/copy-of-wyld-bulk-medium-box-9-meals-8-per-meal",
+          "https://www.bewyld.co.uk/product-page/wyld-bulk-large-box-12-meals-7-50-per-meal"
+        ]);
+      }
+    });
