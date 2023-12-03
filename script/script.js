@@ -58,3 +58,25 @@ document.addEventListener("DOMContentLoaded", function () {
         ]);
       }
     });
+
+    // Function to generate meal cards
+    function generateMealCards(container, title, mealURLs) {
+        container.innerHTML = `<h2>${title}</h2>`;
+    
+        mealURLs.forEach((url, index) => {
+          const card = document.createElement("div");
+          card.classList.add("card", "mb-3");
+    
+          const cardContent = `
+            <div class="card-body">
+              <h5 class="card-title">Meal ${index + 1}</h5>
+              <p class="card-text">Description for Meal ${index + 1}</p>
+              <a href="${url}" target="_blank" class="btn btn-primary">Find out more</a>
+            </div>
+          `;
+    
+          card.innerHTML = cardContent;
+          container.appendChild(card);
+        });
+      }
+    });
