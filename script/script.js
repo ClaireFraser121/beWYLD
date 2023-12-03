@@ -6,3 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
       { title: "Cardio", text: "Maintain cardiovascular health with our cardio program for a healthy lifestyle.", image: "cardio-image.jpg", resultType: "lean" }
     ];
   
+     // Get the container where cards will be appended
+     const cardContainer = document.getElementById("cardContainer");
+  
+     
