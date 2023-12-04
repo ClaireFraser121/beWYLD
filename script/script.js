@@ -160,3 +160,9 @@ function generateMealCards(container, mealData) {
     container.appendChild(card);
   });
 }
+
+// Populate meal cards
+generateMealCards(document.getElementById("leanMealContainer"), leanMealData);
+generateMealCards(document.getElementById("bulkMealContainer"), bulkMealData);
+});
+
