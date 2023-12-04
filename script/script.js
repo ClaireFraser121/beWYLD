@@ -142,3 +142,21 @@
     { title: "Bulk Meal 3", description: "Our LARGE Bulk Meal Prep Pack comes with 12 meals of your choice from the beWYLD Meal Prep Menu and is designed for those that want to gain Strength and Muscle Mass by including extra Protein and low GI Carbohydrates", url: "https://www.bewyld.co.uk/product-page/wyld-bulk-large-box-12-meals-7-50-per-meal" }
   ];
 
+// Function to dynamically generate meal cards
+function generateMealCards(container, mealData) {
+  mealData.forEach(meal => {
+    const card = document.createElement("div");
+    card.classList.add("card", "mb-4");
+
+    const cardContent = `
+          <div class="card-body">
+            <h5 class="card-title">${meal.title}</h5>
+            <p class="card-text">${meal.description}</p>
+            <a href="${meal.url}" target="_blank" class="btn btn-primary">Find out more</a>
+          </div>
+        `;
+
+    card.innerHTML = cardContent;
+    container.appendChild(card);
+  });
+}
