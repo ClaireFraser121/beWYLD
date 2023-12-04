@@ -99,3 +99,13 @@
       const skillLevels = ["Beginner", "Intermediate", "Advanced"];
       const muscles = ["Chest", "Arms", "Abs", "Back", "Bum", "Legs"];
       const exerciseNumbers = Array.from({ length: 10 }, (_, i) => i + 1);
+
+       // Function to dynamically generate dropdown options
+  function populateDropdown(selectElement, options) {
+    options.forEach(option => {
+      const optionElement = document.createElement("option");
+      optionElement.value = option;
+      optionElement.text = option;
+      selectElement.appendChild(optionElement);
+    });
+  }
