@@ -109,3 +109,9 @@
       selectElement.appendChild(optionElement);
     });
   }
+
+    // Populate dropdowns
+    populateDropdown(document.getElementById("goalSelect"), goals);
+    populateDropdown(document.getElementById("skillSelect"), skillLevels);
+    populateDropdown(document.getElementById("muscleSelect"), muscles);
+    populateDropdown(document.getElementById("exerciseSelect"), exerciseNumbers);
