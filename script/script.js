@@ -19,6 +19,7 @@
     //     answers: [1, 3, 5, 10],
     // },
 
+
     // Object to store user input from question cards
     //   var fitnessGoals = {
     //     fitnessGoal: answer to 1st question
@@ -50,10 +51,12 @@
     // else - show content for all meals with the other class
 
 // var function = displayResults()
+    //fitnessQuestions[0].answers[0] = "strength"
+    //fitnessQuestions[0].answers[1] = "plyometrics"
+    // for loop to iterate through the bodyParts object and match the answer to the final question to the correct object key
+    //math.random to pick a random muscle from the correct array
+    // Change the key value for the bodyParts object to the chosen muscle
     // Get results for all questions and fetch from the fitness API
-    // How do we convert results for final question (research this!)
-        // if statement?
-        // new object?
 // fetch (fitnessApiUrl)
     // get and store the results in JSON object
 // .then fetch (imageApiUrl)
@@ -74,7 +77,7 @@
     // Sets text of each button to index of answer
     // ends the quiz once all the questions have been iterated through, e.g.:
 // } else {
-//     displayResults(); // Runs new function to pass values into the API and generate results page
+//     displayResults(); // Runs new function to pass the values into the API and generate results page
 
 
 // Once results are displayed - drop downs visible for the 3 criteria and a regenerate button
