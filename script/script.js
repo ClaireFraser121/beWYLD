@@ -115,3 +115,13 @@
     populateDropdown(document.getElementById("skillSelect"), skillLevels);
     populateDropdown(document.getElementById("muscleSelect"), muscles);
     populateDropdown(document.getElementById("exerciseSelect"), exerciseNumbers);
+
+     // Function to dynamically generate workout buttons
+  function generateWorkoutButtons(container, workouts) {
+    workouts.forEach(workout => {
+      const button = document.createElement("button");
+      button.classList.add("btn", "btn-primary", "mb-2");
+      button.textContent = workout;
+      container.appendChild(button);
+    });
+  }
