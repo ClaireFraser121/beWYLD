@@ -125,3 +125,6 @@
       container.appendChild(button);
     });
   }
+
+  // Populate workout buttons
+  generateWorkoutButtons(document.getElementById("workoutsContainer"), ["Workout1", "Workout2", "Workout3"]);
