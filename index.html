@@ -15,7 +15,8 @@
   <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">beWYLD</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
@@ -37,6 +38,7 @@
     </div>
   </nav>
 </header>
+
 <body>
   <!-- Workout Dropdown Container -->
   <div class="container mt-5">
@@ -82,15 +84,22 @@
 
   <!-- Workouts Container -->
   <section class="container mt-3">
-    <h2>Your Results</h2>
+    <h2>Your Personalised Workout Program</h2>
     <div id="workoutsContainer">
       <!-- Dynamically generated buttons will be placed here using JavaScript -->
     </div>
   </section>
 
+  <!-- Container for "You're all set" section -->
+  <section class="container mt-3">
+    <h2>You're all set, let's get you those results</h2>
+    <button class="btn btn-primary">Book a Trainer</button>
+    </div>
+  </section>
+
   <!-- Personalized Meal Prep Container -->
   <section class="container mt-3">
-    <h2>Your Personalized Meal Prep</h2>
+    <h2>Your Personalised Meal Prep</h2>
     <div class="row">
       <div class="col-md-6" id="leanMealContainer">
         <!-- Dynamically generated lean meal cards will be placed here using JavaScript -->
@@ -101,16 +110,21 @@
     </div>
   </section>
 
-  <!-- Link jQuery -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <!-- Link to BeWYLD menu -->
+  <div class="container mt-3">
+    <p class="call-to-action">To see the menu we use to create your meals, click below!</p>
+    <button id="viewMenuBtn" class="btn btn-primary">BeWYLD Menu</button>
 
-  <!-- Link Bootstrap JS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-    crossorigin="anonymous"></script>
+    <!-- Link jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
-  <!-- Link to your custom script file -->
-  <script src="./script/script.js"></script>
+    <!-- Link Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"></script>
+
+    <!-- Link to your custom script file -->
+    <script src="./script/script.js"></script>
 </body>
 
 </html>
