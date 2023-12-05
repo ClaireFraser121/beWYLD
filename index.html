@@ -109,7 +109,8 @@
     <button class="btn btn-primary mb-2">Biceps</button>
     <button class="btn btn-primary mb-2">Quadriceps</button>
     <button class="btn btn-primary mb-2">Triceps</button>
-    <button class="btn btn-primary mb-2">Velociraptors</button>
+    <button class="btn btn-primary mb-2">Ha Ha very funny Jem... Roar!!</button>
+    <button class="btn btn-primary mb-2">Save</button>
     <button class="btn btn-secondary">Clear Results</button>
   </aside>
 
@@ -141,11 +142,27 @@
     </div>
   </section>
 
-  <!-- Link to BeWYLD menu -->
   <div class="container mt-3">
+    <!-- Button to View BeWYLD Menu -->
+    <h5 class="call-to-action">To see the menu we use to create your meals, click below!</h5>
+    <button id="viewMenuBtn" class="btn btn-primary">View BeWYLD Menu</button>
+  </div>
+
+  <!-- Include your Bootstrap and jQuery scripts here -->
+
+  <script>
+    // Event listener for the "View BeWYLD Menu" button
+    document.getElementById("viewMenuBtn").addEventListener("click", function () {
+      // Open the PDF in a new tab or window
+      window.open("https://www.bewyld.co.uk/_files/ugd/d9fc74_06834711b1094e22a5fbc17f3c3a8362.pdf", "_blank");
+    });
+  </script>
+
+  <!-- Link to BeWYLD menu -->
+  <!-- <div class="container mt-3">
     <h5 class="call-to-action">To see the menu we use to create your meals, click below!</h5>
     <button id="viewMenuBtn" class="btn btn-primary">BeWYLD Menu</button>
-  </div>
+  </div> -->
 
     <!-- Link jQuery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
