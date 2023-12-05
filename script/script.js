@@ -169,3 +169,16 @@ generateMealCards(document.getElementById("leanMealContainer"), leanMealData);
 generateMealCards(document.getElementById("bulkMealContainer"), bulkMealData);
 });
 
+document.addEventListener("DOMContentLoaded", function () {
+  // Other existing code...
+
+  // Event listener for the "View BeWYLD Menu" button
+  document.getElementById("viewMenuBtn").addEventListener("click", function () {
+    // Open the PDF in a new tab or window
+    window.open("https://www.bewyld.co.uk/_files/ugd/d9fc74_06834711b1094e22a5fbc17f3c3a8362.pdf", "_blank");
+  });
+});
+
+
+
+
