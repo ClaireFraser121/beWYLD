@@ -25,6 +25,7 @@
     //     fitnessGoal: answer to 1st question
     //     fitnessLevel: answer to 2nd question
     //     muscleGroup: answer to 3rd question"
+    //     excerciseNumber: answer to 4th question
     //   };
 
         // match muscle group to below object. Math.random on any resulting array to pick a random muscle group e.g. if legs was picked, pick a random value from that array.
@@ -172,6 +173,7 @@ generateMealCards(document.getElementById("bulkMealContainer"), bulkMealData);
 document.addEventListener("DOMContentLoaded", function () {
   // Other existing code...
 
+  // Add button for this to HTML in results section
   // Event listener for the "View BeWYLD Menu" button
   document.getElementById("viewMenuBtn").addEventListener("click", function () {
     // Open the PDF in a new tab or window
