@@ -109,32 +109,72 @@
         </div>
       </form>
     </div>
-    <!-- Left Sidebar with Buttons -->
-    <!-- needs css to become a sidebar down the left side of the page -->
-    <aside class="container mt-3">
-      <button class="btn btn-primary mb-2">Biceps</button>
-      <button class="btn btn-primary mb-2">Quadriceps</button>
-      <button class="btn btn-primary mb-2">Triceps</button>
-      <button class="btn btn-primary mb-2">Ha Ha very funny Jem... Roar!!</button>
-      <button class="btn btn-primary mb-2">Save</button>
-      <button class="btn btn-secondary">Clear Results</button>
-    </aside>
+   
+    <div id="dynamicContainer" class="container mt-3"></div>
 
-    <!-- Workouts Container -->
-    <section class="container mt-3">
-      <div class="jumbotron">
-        <h2 class="display-4">Your Personalised Workout Program</h2>
-        <div id="workoutsContainer">
-          <!-- Dynamically generated buttons will be placed here using JavaScript -->
-        </div>
-      </div>
-    </section>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      // Create the main container
+      const dynamicContainer = document.getElementById("dynamicContainer");
 
-    <!-- Container for "You're all set" section -->
-    <section class="container mt-3">
-      <h2>You're all set, let's get you those results</h2>
-      <button class="btn btn-primary">Book a Trainer</button>
-    </section>
+      // Create the section with jumbotron
+      const section = document.createElement("section");
+      section.classList.add("mb-3");
+
+      const jumbotron = document.createElement("div");
+      jumbotron.classList.add("jumbotron");
+
+      const h2 = document.createElement("h2");
+      h2.classList.add("display-4");
+      h2.textContent = "Your Personalised Workout Program";
+
+      const workoutsContainer = document.createElement("div");
+      workoutsContainer.id = "workoutsContainer";
+
+      // You can dynamically generate workout buttons here if needed
+
+      // Create the buttons
+      const saveResultsBtn = document.createElement("button");
+      saveResultsBtn.id = "saveResultsBtn";
+      saveResultsBtn.classList.add("btn", "btn-primary", "mb-2");
+      saveResultsBtn.textContent = "Save Results";
+
+      const clearResultsBtn = document.createElement("button");
+      clearResultsBtn.id = "clearResultsBtn";
+      clearResultsBtn.classList.add("btn", "btn-secondary");
+      clearResultsBtn.textContent = "Clear Results";
+
+      const historyBtn = document.createElement("button");
+      historyBtn.id = "historyBtn";
+      historyBtn.classList.add("btn", "btn-secondary");
+      historyBtn.textContent = "History";
+
+      // Add event listener to clear results
+      clearResultsBtn.addEventListener("click", function () {
+        // Clear the content inside the "workoutsContainer"
+        workoutsContainer.innerHTML = "";
+      });
+
+      // Append elements to their respective parents
+      jumbotron.appendChild(h2);
+      jumbotron.appendChild(workoutsContainer);
+      jumbotron.appendChild(saveResultsBtn);
+      jumbotron.appendChild(clearResultsBtn);
+      jumbotron.appendChild(historyBtn);
+
+      section.appendChild(jumbotron);
+      dynamicContainer.appendChild(section);
+    });
+  </script>
+  
+
+      <!-- Container for "You're all set" section -->
+      <section class="mt-3">
+        <h2>You're all set, let's get you those results</h2>
+        <button class="btn btn-primary">Book a Trainer</button>
+      </section>
+    </div>
+    
 
     <!-- Personalized Meal Prep Container -->
     <section class="container mt-3">
