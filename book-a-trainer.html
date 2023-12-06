@@ -42,76 +42,77 @@
   <!-- Jumbotron -->
   <div class="pt-4 pb-4 mb-4 bg-body-tertiary rounded-3 jumbotron-container">
     <div class="container-fluid py-5 d-flex flex-column align-items-center">
-      <h1 class="display-5 fw-bold text-center mb-4">Why Web Weave?</h1>
-      <p class="col-md-8 fs-4 text-center mb-4">Attention to Detail, Harnessing Design. Discover the Mind Crafting Your
-        Digital Success.</p>
-      <button id="meetCreatorBtn" class="btn btn-primary btn-lg">Meet the Creator</button>
+      <h1 class="display-5 fw-bold text-center mb-4">Our Training</h1>
+      <p class="col-md-8 fs-4 text-center mb-4">You've selected your goals and been given some exercises. As part of the
+        beWYLD community, we want to make sure you get your desired results, so we have partnered with local personal
+        training experts to make this happen.</p>
+      <!-- Removed the "Meet the Creator" button -->
     </div>
   </div>
 
-    <!-- Book A Taster Session Form -->
-    <section id="workPortfolio">
-        <main class="container mt-5">
-          <div class="text-block">
-            <h2 class="section-heading">Book A Taster Session</h2>
-            <div class="row custom-card-row">
-              <div class="col">
-                <!-- Card 1 -->
-                <div class="col-md-6">
-                  <!-- Button to trigger the modal -->
-                  <button id="bookSessionBtn" class="btn btn-primary">Book A Session</button>
-                  <!-- Modal -->
-                  <div class="modal" tabindex="-1" id="bookSessionModal">
-                    <div class="modal-dialog">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title">Book A Taster Session</h5>
-                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+  <!-- Book A Taster Session Form -->
+  <section id="workPortfolio">
+    <main class="container mt-5">
+      <div class="text-block">
+        <h2 class="section-heading">Book A Taster Session</h2>
+        <div class="row custom-card-row">
+          <div class="col">
+            <!-- Card 1 -->
+            <div class="col-md-6">
+              <!-- Button to trigger the modal -->
+              <button id="bookSessionBtn" class="btn btn-primary">Book A Session</button>
+              <!-- Modal -->
+              <div class="modal" tabindex="-1" id="bookSessionModal">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Book A Taster Session</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <!-- Form -->
+                      <form id="bookingForm">
+                        <!-- Name Input -->
+                        <div class="mb-3">
+                          <label for="name" class="form-label">Name</label>
+                          <input type="text" class="form-control" id="name" required>
                         </div>
-                        <div class="modal-body">
-                          <!-- Form -->
-                          <form id="bookingForm">
-                            <!-- Name Input -->
-                            <div class="mb-3">
-                              <label for="name" class="form-label">Name</label>
-                              <input type="text" class="form-control" id="name" required>
-                            </div>
-    
-                            <!-- Email Input -->
-                            <div class="mb-3">
-                              <label for="email" class="form-label">Email</label>
-                              <input type="email" class="form-control" id="email" required>
-                            </div>
-    
-                            <!-- Message Input -->
-                            <div class="mb-3">
-                              <label for="message" class="form-label">Message</label>
-                              <textarea class="form-control" id="message" rows="5" required></textarea>
-                            </div>
-    
-                            <!-- Subscribe Checkbox -->
-                            <div class="mb-3 form-check">
-                              <input type="checkbox" class="form-check-input" id="subscribeCheckbox">
-                              <label class="form-check-label" for="subscribeCheckbox">Subscribe to monthly newsletter
-                                for fitness tips and discounts at beWYLD</label>
-                            </div>
-    
-                            <!-- Submit Button -->
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                          </form>
+
+                        <!-- Email Input -->
+                        <div class="mb-3">
+                          <label for="email" class="form-label">Email</label>
+                          <input type="email" class="form-control" id="email" required>
                         </div>
-                      </div>
+
+                        <!-- Message Input -->
+                        <div class="mb-3">
+                          <label for="message" class="form-label">Message</label>
+                          <textarea class="form-control" id="message" rows="5" required></textarea>
+                        </div>
+
+                        <!-- Subscribe Checkbox -->
+                        <div class="mb-3 form-check">
+                          <input type="checkbox" class="form-check-input" id="subscribeCheckbox">
+                          <label class="form-check-label" for="subscribeCheckbox">Subscribe to the monthly newsletter for
+                            fitness tips and discounts at beWYLD</label>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                      </form>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </main>
-      </section>
-      
-      <!-- Return To Results Page Button -->
-<div class="container mt-3">
+        </div>
+      </div>
+    </main>
+  </section>
+
+  <!-- Return To Results Page Button -->
+  <div class="container mt-3" style="display: none;" id="returnToResultsContainer">
     <button id="returnToResultsBtn" class="btn btn-secondary">Return To Results Page</button>
   </div>
   
@@ -126,45 +127,45 @@
   
   <!-- Link jQuery -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-  
-  <!-- Link Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
     crossorigin="anonymous"></script>
-  
   <script>
-    // Wait for the document to be ready
     $(document).ready(function () {
       // Handle click event for "Book A Session" button
       $("#bookSessionBtn").on("click", function () {
         // Show the Bootstrap modal
         $("#bookSessionModal").modal("show");
       });
-  
+
       // Handle form submission
       $("#bookingForm").submit(function (event) {
         // Prevent the default form submission
         event.preventDefault();
-  
+
         // Get form data
         var name = $("#name").val();
         var email = $("#email").val();
         var message = $("#message").val();
         var subscribe = $("#subscribeCheckbox").is(":checked");
-  
+
         // Log form data (you can replace this with your form handling logic)
         console.log("Name: " + name);
         console.log("Email: " + email);
         console.log("Message: " + message);
         console.log("Subscribe: " + subscribe);
-  
+
         // Close the modal
         $("#bookSessionModal").modal("hide");
-  
+
+        // Show the "Return To Results Page" button and hide the "Book A Session" button
+        $("#returnToResultsContainer").show();
+        $("#bookSessionBtn").hide();
+
         // Optional: Perform additional actions after form submission
         // For example, display a confirmation message or send data to a server
       });
-  
+
       // Handle click event for "Return To Results Page" button
       $("#returnToResultsBtn").on("click", function () {
         // Redirect to the index.html page
@@ -172,3 +173,6 @@
       });
     });
   </script>
+</body>
+
+</html>
