@@ -16,22 +16,20 @@
 <body>
   <header>
     <nav class="navbar navbar-expand-lg bg-light">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#"><img src="./images/beWYLD_black_logo.png" alt="logo" width="150"/></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="about.html">About Us</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="book-a-trainer.html">Book A Trainer</a>
-                    </li>
-                    <!-- <li class="nav-item">
-                        <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-                    </li> -->
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#"><img src="./images/beWYLD_black_logo.png" alt="logo" width="150" /></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="about.html">About Us</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="book-a-trainer.html">Book A Trainer</a>
+            </li>
           </ul>
         </div>
       </div>
@@ -58,8 +56,8 @@
             content.</p>
         </div>
       </div>
-      </div>
-      <div class="row justify-content-center">
+    </div>
+    <div class="row justify-content-center">
       <div class="card text-center m-3 pt-3" style="width: 18rem;">
         <i class="fa-solid fa-heart-pulse fa-5x" style="color: #292b2e;"></i>
         <div class="card-body">
@@ -79,62 +77,63 @@
     </div>
   </div>
 
-    <div id="results-screen" class="start">
-      <!-- Workout Dropdown Container -->
-      <div class="container mt-5">
-        <form>
-          <div class="row mb-3">
-            <div class="col">
-              <label for="goalSelect" class="form-label">Goal</label>
-              <select class="form-select" id="goalSelect">
-                <!-- Options dynamically generated using JavaScript -->
-              </select>
-            </div>
-            <div class="col">
-              <label for="skillSelect" class="form-label">Skill Level</label>
-              <select class="form-select" id="skillSelect">
-                <!-- Options dynamically generated using JavaScript -->
-              </select>
-            </div>
-            <div class="col">
-              <label for="muscleSelect" class="form-label">Muscle</label>
-              <select class="form-select" id="muscleSelect">
-                <!-- Options dynamically generated using JavaScript -->
-              </select>
-            </div>
-            <div class="col">
-              <label for="exerciseSelect" class="form-label">Number of Exercises</label>
-              <select class="form-select" id="exerciseSelect">
-
-                <!-- Options dynamically generated using JavaScript -->
-              </select>
-            </div>
+  <div id="results-screen" class="start">
+    <!-- Workout Dropdown Container -->
+    <div class="container mt-5">
+      <form>
+        <div class="row mb-3">
+          <div class="col">
+            <label for="goalSelect" class="form-label">Goal</label>
+            <select class="form-select" id="goalSelect">
+              <!-- Options dynamically generated using JavaScript -->
+            </select>
           </div>
-        </form>
-      </div>
-      <!-- Left Sidebar with Buttons --> <!-- needs css to become a sidebar down the left side of the page -->
-      <aside class="container mt-3">
-        <button class="btn btn-primary mb-2">Biceps</button>
-        <button class="btn btn-primary mb-2">Quadriceps</button>
-        <button class="btn btn-primary mb-2">Triceps</button>
-        <button class="btn btn-primary mb-2">Ha Ha very funny Jem... Roar!!</button>
-        <button class="btn btn-primary mb-2">Save</button>
-        <button class="btn btn-secondary">Clear Results</button>
-      </aside>
+          <div class="col">
+            <label for="skillSelect" class="form-label">Skill Level</label>
+            <select class="form-select" id="skillSelect">
+              <!-- Options dynamically generated using JavaScript -->
+            </select>
+          </div>
+          <div class="col">
+            <label for="muscleSelect" class="form-label">Muscle</label>
+            <select class="form-select" id="muscleSelect">
+              <!-- Options dynamically generated using JavaScript -->
+            </select>
+          </div>
+          <div class="col">
+            <label for="exerciseSelect" class="form-label">Number of Exercises</label>
+            <select class="form-select" id="exerciseSelect">
+              <!-- Options dynamically generated using JavaScript -->
+            </select>
+          </div>
+        </div>
+      </form>
+    </div>
+    <!-- Left Sidebar with Buttons -->
+    <!-- needs css to become a sidebar down the left side of the page -->
+    <aside class="container mt-3">
+      <button class="btn btn-primary mb-2">Biceps</button>
+      <button class="btn btn-primary mb-2">Quadriceps</button>
+      <button class="btn btn-primary mb-2">Triceps</button>
+      <button class="btn btn-primary mb-2">Ha Ha very funny Jem... Roar!!</button>
+      <button class="btn btn-primary mb-2">Save</button>
+      <button class="btn btn-secondary">Clear Results</button>
+    </aside>
 
-      <!-- Workouts Container -->
-      <section class="container mt-3">
-        <h2>Your Personalised Workout Program</h2>
+    <!-- Workouts Container -->
+    <section class="container mt-3">
+      <div class="jumbotron">
+        <h2 class="display-4">Your Personalised Workout Program</h2>
         <div id="workoutsContainer">
           <!-- Dynamically generated buttons will be placed here using JavaScript -->
         </div>
-      </section>
+      </div>
+    </section>
 
-      <!-- Container for "You're all set" section -->
-      <section class="container mt-3">
-        <h2>You're all set, let's get you those results</h2>
-        <button class="btn btn-primary">Book a Trainer</button>
-    </div>
+    <!-- Container for "You're all set" section -->
+    <section class="container mt-3">
+      <h2>You're all set, let's get you those results</h2>
+      <button class="btn btn-primary">Book a Trainer</button>
     </section>
 
     <!-- Personalized Meal Prep Container -->
