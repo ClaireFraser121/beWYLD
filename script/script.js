@@ -98,6 +98,7 @@
 // call function to display new question e.g. generateQuestion(questionIndex)
 
 var questionIndex = 0;
+var userAnswers = []; // Array to store user answers
 var fitnessQuestions = [
   {
     question: "What is your fitness goal?",
@@ -116,8 +117,8 @@ var fitnessQuestions = [
   },
   {
     question: "How many excercises would you like?",
-    answers: [1, 3, 5, 10],
-    iconClass: ["fa-1", "fa-3", "fa-5", "fa-10"],
+    answers: [1, 3, 5],
+    iconClass: ["fa-1", "fa-3", "fa-5"],
   }
 ];
 
@@ -125,8 +126,9 @@ var generateQuestion = function () {
   if (questionIndex < fitnessQuestions.length) {
     $('#question-title').text(fitnessQuestions[questionIndex].question);
     for (var i = 0; i < fitnessQuestions[questionIndex].answers.length; i++) {
+      var iconHtml = "";
       if (questionIndex !== 2) {
-        var iconHtml = `<i class="fa-solid ${fitnessQuestions[questionIndex].iconClass[i]} fa-5x" style="color: #292b2e;"></i>`;
+        iconHtml = `<i class="fa-solid ${fitnessQuestions[questionIndex].iconClass[i]} fa-5x" style="color: #292b2e;"></i>`;
       }
       $('#card-container').append(`<div class="card question-card text-center m-3 pt-3" style="width: 18rem;">
        ${iconHtml}
@@ -140,15 +142,17 @@ var generateQuestion = function () {
         $('#card-container').append('<div class="row justify-content-center"></div>');
       }
     }
-  }
+  } else {
+    console.log(userAnswers)
+}
 };
 
 generateQuestion();
 
 $('#card-container').on('click', '.card', function (event) {
   var userAnswer = $(event.currentTarget).find('.card-title').text();
+  userAnswers.push(userAnswer);
   questionIndex++
-  console.log(userAnswer)
   $('#card-container').text("");
   generateQuestion();
 });
