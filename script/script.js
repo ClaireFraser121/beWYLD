@@ -163,6 +163,134 @@
     
       // Populate workout buttons
       generateWorkoutButtons(document.getElementById("workoutsContainer"), ["View Your Results"]);
+      // All the code below is from a test file and needs to be incorporated into the results ouput for exercises
+  // There is example code which generates buttons to select from the 4 categories: Strength, Plyometrics, Cardio, and Stretching 
+  // Strength = Bulking, Plyometrics = Slimming, Cardio and Stretching matches
+
+// This function obtains a random ID from an array of category IDs
+function getRandomId(categoryIds) {
+  var randomIndex = Math.floor(Math.random() * categoryIds.length);
+  return categoryIds[randomIndex];
+}
+
+// This function retrieves a Giphy image based on a category and API key
+function getGiphyImage(apiKey, category) {
+  // Object containing Giphy IDs for different exercise categories
+  var categories = {
+      'Strength': ['o4HacXW6rQty0', 'f5dDxjoo0MSnQMFPOp', 'dt40pTFK4lETk43ldq', '1oC7CzF6DHBQqPniuS'],
+      'Plyometrics': ['3oKIPz238SgcY0p8xG', 'xeUFXl6Wspcz6Yv7cY', 'jkrI2HmUmdDlBz9oeN', 'H6o2fJlAPEiVhJN3M6'],
+      'Cardio': ['dUelhsHEDmf3UXqGQJ', 'w6VJN62HsjRceiqier', '61Uq7xBqtFu57tYqtV', '26kNaMjv2yfeqgVrZ3'],
+      'Stretching': ['3oKIPpaHCfN7ECPIGs', 'DBbPjLMsQPruMkDcrd', 'YSrDx5MlMDp3dvYCML', 'ef0AeVgH1Jb0FBNKq1']
+  };
+
+  // This will get the category IDs based on the provided category
+  var categoryIds = categories[category];
+
+  // This will check if the category is valid
+  if (!categoryIds) {
+      console.error('Invalid category.');
+      return null;
+  }
+
+  // This will get a random ID from the category
+  var selectedId = getRandomId(categoryIds);
+
+  // This will then set up the Giphy API endpoint and parameters
+  var endpoint = 'https://api.giphy.com/v1/gifs';
+  var params = new URLSearchParams({
+      api_key: apiKey,
+      ids: selectedId
+  });
+  var url = endpoint + '?' + params.toString();
+
+  console.log('API Request URL:', url);
+
+  return fetch(url)
+      .then(function (response) {
+          console.log('API Response Status:', response.status);
+
+          if (!response.ok) {
+              throw new Error('HTTP error! Status: ' + response.status);
+          }
+
+          return response.json();
+      })
+      .then(function (data) {
+          console.log('API Response Data:', data);
+
+          if (data.data && data.data.length > 0) {
+              // This grabs the image URL from the API response
+              var imageUrl = data.data[0].images.original.url;
+              console.log('Image URL:', imageUrl);
+              return data.data[0];
+          } else {
+              console.error('No valid data found in the response.');
+              return null;
+          }
+      })
+      .catch(function (error) {
+          console.error('Error making Giphy API request:', error);
+          return null;
+      });
+}
+
+// See example below. This can be used for structuring the code to sync up both APIs
+var apiKey = 'KoDhL5K0ZtHXlWn5Dsuxf9rQaSPHtZWP';
+var category = 'Strength';
+
+// This function will handle a click on an exercise category button
+function handleExerciseCategoryClick(category) {
+  // This fetches exercise title, difficulty level, and instructions from API Ninja
+  // For demonstration purposes, a placeholder text is used here, which needs to be replaced with API Ninja data
+  var exerciseInfo = {
+      title: 'Sample Exercise title',
+      difficulty: 'Intermediate',
+      instructions: 'Sample Exercise Instructions'
+  };
+
+  // This dynamic html placeholder text is here for demo purposes and can be deleted/replaced with API Ninja data
+  var exerciseInfoContainer = document.getElementById('exercise-info');
+  exerciseInfoContainer.innerHTML = `
+      <h2>${exerciseInfo.title}</h2>
+      <p>Difficulty: ${exerciseInfo.difficulty}</p>
+      <p>Instructions: ${exerciseInfo.instructions}</p>
+  `;
+
+  /// This is how we get and display a Giphy image
+  getGiphyImage(apiKey, category)
+  .then(function (result) {
+      var giphyImageContainer = document.getElementById('giphy-image');
+
+      if (result) {
+          // We use the 'imageUrl' obtained from the Giphy API response
+          var imageUrl = result.images.original.url;
+
+          // We create an <img> element and set its src attribute so the image can be displayed
+          var imageElement = document.createElement('img');
+          imageElement.src = imageUrl;
+          imageElement.alt = 'Giphy Image';
+
+          // Clear the container and append the image
+          giphyImageContainer.innerHTML = '';
+          giphyImageContainer.appendChild(imageElement);
+      } else {
+          giphyImageContainer.innerHTML = '<p>No Giphy image found.</p>';
+      }
+  });
+}
+
+// The code below which is used to dynamically create buttons for each exercise category can be replaced with the 4 large icons
+var exerciseCategories = ['Strength', 'Plyometrics', 'Cardio', 'Stretching'];
+var exerciseButtonsContainer = document.getElementById('exercise-buttons');
+
+exerciseCategories.forEach(function (category) {
+  var button = document.createElement('button');
+  button.textContent = category;
+  button.className = 'btn btn-primary';
+  button.addEventListener('click', function () {
+      handleExerciseCategoryClick(category);
+  });
+  exerciseButtonsContainer.appendChild(button);
     
       // Function to translate user-friendly fitness goals to API terms
       const fitnessGoalMapping = {
