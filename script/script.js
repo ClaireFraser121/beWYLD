@@ -97,7 +97,63 @@
 // Reset HTML to default
 // call function to display new question e.g. generateQuestion(questionIndex)
 
-document.addEventListener("DOMContentLoaded", function () {
+var questionIndex = 0;
+var fitnessQuestions = [
+  {
+    question: "What is your fitness goal?",
+    answers: ["Bulk", "Tone", "Cardio", "Stretch"],
+    iconClass: ["fa-dumbbell", "fa-weight-scale", "fa-heart-pulse", "fa-child-reaching"],
+  },
+  {
+    question: "How would you describe your fitness level?",
+    answers: ["Beginner", "Intermediate", "Advanced"],
+    iconClass: ["fa-circle", "fa-circle-half-stroke", "fa-circle",],
+
+  },
+  {
+    question: "What part of the body would you like to work on?",
+    answers: ["Chest", "Arms", "Abs", "Back", "Bum", "Legs"],
+  },
+  {
+    question: "How many excercises would you like?",
+    answers: [1, 3, 5, 10],
+    iconClass: ["fa-1", "fa-3", "fa-5", "fa-10"],
+  }
+];
+
+var generateQuestion = function () {
+  if (questionIndex < fitnessQuestions.length) {
+    $('#question-title').text(fitnessQuestions[questionIndex].question);
+    for (var i = 0; i < fitnessQuestions[questionIndex].answers.length; i++) {
+      if (questionIndex !== 2) {
+        var iconHtml = `<i class="fa-solid ${fitnessQuestions[questionIndex].iconClass[i]} fa-5x" style="color: #292b2e;"></i>`;
+      }
+      $('#card-container').append(`<div class="card question-card text-center m-3 pt-3" style="width: 18rem;">
+       ${iconHtml}
+      <div class="card-body">
+        <h5 class="card-title">${fitnessQuestions[questionIndex].answers[i]}</h5>
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+          content.</p>
+      </div>
+    </div>`);
+      if (i === 1 || i === 3) {
+        $('#card-container').append('<div class="row justify-content-center"></div>');
+      }
+    }
+  }
+};
+
+generateQuestion();
+
+$('#card-container').on('click', '.card', function (event) {
+  var userAnswer = $(event.currentTarget).find('.card-title').text();
+  questionIndex++
+  console.log(userAnswer)
+  $('#card-container').text("");
+  generateQuestion();
+});
+
+document.addEventListener("DOMContentLoaded"), function () {
   // Sample data for dropdown options
   const goals = ["Bulking", "Slimming", "Cardio", "Stretching"];
   const skillLevels = ["Beginner", "Intermediate", "Advanced"];
@@ -458,10 +514,3 @@ exerciseCategories.forEach(function (category) {
     window.open("https://www.bewyld.co.uk/_files/ugd/d9fc74_06834711b1094e22a5fbc17f3c3a8362.pdf", "_blank");
   });
 });
-
-// Link to your custom script file
-// <script src="./script/script.js"></script>
-
-
-
-
