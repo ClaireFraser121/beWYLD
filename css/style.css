@@ -1,0 +1,77 @@
+.hide {
+    display: none;
+  }
+
+i {
+    margin: 0 auto;
+}
+
+/* Add your custom styles here */
+
+body {
+  font-family: 'Arial', sans-serif;
+}
+
+/* Header styles */
+header {
+  background-color: #f8f9fa;
+  padding: 10px 0;
+}
+
+.navbar-brand img {
+  max-height: 40px;
+}
+
+/* Start screen styles */
+#start-screen {
+  text-align: center;
+  padding: 20px;
+}
+
+.card {
+  border: none;
+}
+
+/* Results screen styles */
+#results-screen {
+  padding: 20px;
+}
+
+/* Dropdown container styles */
+.form-select {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+
+/* Left sidebar styles */
+aside {
+  float: left;
+  width: 20%;
+}
+
+/* Workout container styles */
+#workoutsContainer {
+  /* Add your specific styles here */
+}
+
+/* Jumbotron styles */
+.jumbotron {
+  background-color: #f8f9fa;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+/* Call-to-action styles */
+.call-to-action {
+  margin-top: 20px;
+}
+
+/* Footer styles */
+footer {
+  background-color: #343a40;
+  color: white;
+  text-align: center;
+  padding: 10px 0;
+}
