@@ -1,82 +1,82 @@
 // Variable to questions index
-    // e.g. var questionIndex = 0;
+// e.g. var questionIndex = 0;
 // variable to store questions
 // var fitnessQuestions = [
-    // {
-    //     question: "What is your fitness goal?",
-    //     answers: ["Bulking = strength", "Toning = plyometrics", "cardio", "stretching"
-    //    },
-    //    {
-    //     question: "How would you describe your fitness level?",
-    //     answers: ["1. Beginner", "2. Intermediate", "3. Advanced"],
-    // },
-    //    {
-    //     question: "What part of the body would you like to work on?",
-    //     answers: ["Chest", "Arms", "Abs", "Back", "Bum", "Legs"],
-    // },
-    //    {
-    //     question: "How many excercises would you like?",
-    //     answers: [1, 3, 5, 10],
-    // },
+// {
+//     question: "What is your fitness goal?",
+//     answers: ["Bulking = strength", "Toning = plyometrics", "cardio", "stretching"
+//    },
+//    {
+//     question: "How would you describe your fitness level?",
+//     answers: ["1. Beginner", "2. Intermediate", "3. Advanced"],
+// },
+//    {
+//     question: "What part of the body would you like to work on?",
+//     answers: ["Chest", "Arms", "Abs", "Back", "Bum", "Legs"],
+// },
+//    {
+//     question: "How many excercises would you like?",
+//     answers: [1, 3, 5, 10],
+// },
 
 
-    // Object to store user input from question cards
-    //   var fitnessGoals = {
-    //     fitnessGoal: answer to 1st question
-    //     fitnessLevel: answer to 2nd question
-    //     muscleGroup: answer to 3rd question"
-    //     excerciseNumber: answer to 4th question
-    //   };
+// Object to store user input from question cards
+//   var fitnessGoals = {
+//     fitnessGoal: answer to 1st question
+//     fitnessLevel: answer to 2nd question
+//     muscleGroup: answer to 3rd question"
+//     excerciseNumber: answer to 4th question
+//   };
 
-        // match muscle group to below object. Math.random on any resulting array to pick a random muscle group e.g. if legs was picked, pick a random value from that array.
+// match muscle group to below object. Math.random on any resulting array to pick a random muscle group e.g. if legs was picked, pick a random value from that array.
 
 // Object to store user input from 3rd question
-    //   var bodyParts = {
-    //     chest: chest
-    //     arms: [biceps, forearms, triceps]
-    //     abs: abdominals
-    //     back: [lats, lower_back, middle_back, traps, neck]
-    //     bum: [abductors, glutes]
-    //     legs: [adductors, calves, hamstrings, quadriceps]
-    //   };
+//   var bodyParts = {
+//     chest: chest
+//     arms: [biceps, forearms, triceps]
+//     abs: abdominals
+//     back: [lats, lower_back, middle_back, traps, neck]
+//     bum: [abductors, glutes]
+//     legs: [adductors, calves, hamstrings, quadriceps]
+//   };
 
 // var function = mealMatcherer()
-    // 
-    // Object to convert user answers to meal tags
-    //   var mealTypes = {
-    //     lean: [cardio, stretching, plyometrics]
-    //     bulk: [strength]
-    //   };
-    // if fitnessGoals.muscleGroup = mealtypes value
-    // shows HTML content for all meals with that class
-    // else - show content for all meals with the other class
+// 
+// Object to convert user answers to meal tags
+//   var mealTypes = {
+//     lean: [cardio, stretching, plyometrics]
+//     bulk: [strength]
+//   };
+// if fitnessGoals.muscleGroup = mealtypes value
+// shows HTML content for all meals with that class
+// else - show content for all meals with the other class
 
 // var function = displayResults()
-    //fitnessQuestions[0].answers[0] = "strength"
-    //fitnessQuestions[0].answers[1] = "plyometrics"
-    // for loop to iterate through the bodyParts object and match the answer to the final question to the correct object key
-    //math.random to pick a random muscle from the correct array
-    // Change the key value for the bodyParts object to the chosen muscle
-    // Get results for all questions and fetch from the fitness API
+//fitnessQuestions[0].answers[0] = "strength"
+//fitnessQuestions[0].answers[1] = "plyometrics"
+// for loop to iterate through the bodyParts object and match the answer to the final question to the correct object key
+//math.random to pick a random muscle from the correct array
+// Change the key value for the bodyParts object to the chosen muscle
+// Get results for all questions and fetch from the fitness API
 // fetch (fitnessApiUrl)
-    // get and store the results in JSON object
+// get and store the results in JSON object
 // .then fetch (imageApiUrl)
-    // After fitness API fetch, ideally pass the name of the workout from the results into the image generator API
-    // Display image (ideally) matching the workout
-    // Generate results onto pre-existing HTML elements - pre-existing elements would be dropdowns, Title and container for results.
-    // Generate save buttons for 
-    // mealMatcherer() run the mealmatcher function
+// After fitness API fetch, ideally pass the name of the workout from the results into the image generator API
+// Display image (ideally) matching the workout
+// Generate results onto pre-existing HTML elements - pre-existing elements would be dropdowns, Title and container for results.
+// Generate save buttons for 
+// mealMatcherer() run the mealmatcher function
 
 
 
 // var function = generateQuestion(index) - Function to get a question
 // if (currentQuestion < fitnessQuestions.length) { // If statement to display a  question as long as the question index hasn't reached the end of the array
-    // Display the current question As the question title
-    // For loop to iterate through the answers and generate a cards for each one
-    // Dynamically generate the answers on cards - dynamically generate all HTML in this function
-    // Sets data of each card to correspond to the index of it's answer
-    // Sets text of each button to index of answer
-    // ends the quiz once all the questions have been iterated through, e.g.:
+// Display the current question As the question title
+// For loop to iterate through the answers and generate a cards for each one
+// Dynamically generate the answers on cards - dynamically generate all HTML in this function
+// Sets data of each card to correspond to the index of it's answer
+// Sets text of each button to index of answer
+// ends the quiz once all the questions have been iterated through, e.g.:
 // } else {
 //     displayResults(); // Runs new function to pass the values into the API and generate results page
 
@@ -88,16 +88,16 @@
 // What if each workout had a meal combo?
 // What if each of these combo's could be saved to local storage?
 // Regenerate button could then produce more combos?
-    
-// Event listener
-   // Listening for click event on all cards
-   // Pass value of the selected card (using $(this).text() method) to the matching fitnessGoals object key
-   // add one to the question index
-        // e.g. questionIndex++;
-    // Reset HTML to default
-    // call function to display new question e.g. generateQuestion(questionIndex)
 
-    document.addEventListener("DOMContentLoaded", function () {
+// Event listener
+// Listening for click event on all cards
+// Pass value of the selected card (using $(this).text() method) to the matching fitnessGoals object key
+// add one to the question index
+// e.g. questionIndex++;
+// Reset HTML to default
+// call function to display new question e.g. generateQuestion(questionIndex)
+
+document.addEventListener("DOMContentLoaded", function () {
   // Sample data for dropdown options
   const goals = ["Bulking", "Slimming", "Cardio", "Stretching"];
   const skillLevels = ["Beginner", "Intermediate", "Advanced"];
@@ -120,49 +120,78 @@
     "Triceps"
   ];
   const exerciseNumbers = Array.from({ length: 10 }, (_, i) => i + 1);
-      // Function to dynamically generate dropdown options
-      function populateDropdown(selectElement, options) {
-        options.forEach(option => {
-          const optionElement = document.createElement("option");
-          optionElement.value = option;
-          optionElement.text = option;
-          selectElement.appendChild(optionElement);
-        });
-      }
-    
-      // Populate dropdowns
-      populateDropdown(document.getElementById("goalSelect"), goals);
-      populateDropdown(document.getElementById("skillSelect"), skillLevels);
-      populateDropdown(document.getElementById("muscleSelect"), muscles);
-      populateDropdown(document.getElementById("exerciseSelect"), exerciseNumbers);
-    
-      // Function to dynamically generate workout buttons
-      function generateWorkoutButtons(container, workouts) {
-        workouts.forEach(workout => {
-          const button = document.createElement("button");
-          button.classList.add("btn", "btn-primary", "mb-2");
-          button.textContent = workout;
-          container.appendChild(button);
-    
-          // Add click event listener to each button
-          button.addEventListener("click", function () {
-            // Get user selections
-            const selectedGoal = document.getElementById("goalSelect").value;
-            const selectedSkill = document.getElementById("skillSelect").value;
-            const selectedMuscle = document.getElementById("muscleSelect").value;
-            const selectedExerciseNumber = document.getElementById("exerciseSelect").value;
-    
-            // Translate user-friendly fitness goal to API terms
-            const apiFitnessGoal = translateFitnessGoal(selectedGoal);
-    
-            // Make API request based on user selections
-            makeApiRequest(apiFitnessGoal, selectedSkill, selectedMuscle, selectedExerciseNumber);
-          });
-        });
-      }
-    
-      // Populate workout buttons
-      generateWorkoutButtons(document.getElementById("workoutsContainer"), ["View Your Results"]);
+
+  // Function to dynamically generate dropdown options
+  function populateDropdown(selectElement, options) {
+    options.forEach(option => {
+      const optionElement = document.createElement("option");
+      optionElement.value = option;
+      optionElement.text = option;
+      selectElement.appendChild(optionElement);
+    });
+  }
+
+  // Populate dropdowns
+  populateDropdown(document.getElementById("goalSelect"), goals);
+  populateDropdown(document.getElementById("skillSelect"), skillLevels);
+  populateDropdown(document.getElementById("muscleSelect"), muscles);
+  populateDropdown(document.getElementById("exerciseSelect"), exerciseNumbers);
+
+  // Function to dynamically generate workout buttons
+  function generateWorkoutButtons(container, workouts) {
+    workouts.forEach(workout => {
+      const button = document.createElement("button");
+      button.classList.add("btn", "btn-primary", "mb-2");
+      button.textContent = workout;
+      container.appendChild(button);
+
+      // Add click event listener to each button
+      button.addEventListener("click", function () {
+        // Get user selections
+        const selectedGoal = document.getElementById("goalSelect").value;
+        const selectedSkill = document.getElementById("skillSelect").value;
+        const selectedMuscle = document.getElementById("muscleSelect").value;
+        const selectedExerciseNumber = document.getElementById("exerciseSelect").value;
+
+        // Translate user-friendly fitness goal to API terms
+        const apiFitnessGoal = translateFitnessGoal(selectedGoal);
+
+        // Make API request based on user selections
+        makeApiRequest(apiFitnessGoal, selectedSkill, selectedMuscle, selectedExerciseNumber);
+      });
+    });
+  }
+
+  // Populate workout buttons
+  generateWorkoutButtons(document.getElementById("workoutsContainer"), ["View Your Results"]);
+
+  // Function to translate user-friendly fitness goals to API terms
+  const fitnessGoalMapping = {
+    "Bulking": "strength",
+    "Slimming": "plyometrics",
+    "Cardio": "cardio",
+    "Stretching": "stretching"
+  };
+
+  function translateFitnessGoal(userFriendlyGoal) {
+    return fitnessGoalMapping[userFriendlyGoal] || userFriendlyGoal;
+  }
+
+  // Function to make API request
+  function makeApiRequest(goal, skill, muscle, exerciseNumber) {
+    $.ajax({
+      method: 'GET',
+      url: `https://api.api-ninjas.com/v1/exercises?&difficulty=${skill}&muscle=${muscle}&goal=${goal}&limit=${exerciseNumber}`,
+      headers: { 'X-Api-Key': 'Xm9KrAkFaXPAXu1rR0wdLw==EAJWzakA1gYNDQF6' },
+      contentType: 'application/json',
+      success: function (result) {
+        // Process and display API results here
+        console.log(result);
+        displayWorkouts(result); // Assuming you have a function to display the results
+      },
+      error: function ajaxError(jqXHR) {
+        console.error('Error: ', jqXHR.responseText);
+
       // All the code below is from a test file and needs to be incorporated into the results ouput for exercises
   // There is example code which generates buttons to select from the 4 categories: Strength, Plyometrics, Cardio, and Stretching 
   // Strength = Bulking, Plyometrics = Slimming, Cardio and Stretching matches
@@ -320,77 +349,119 @@ exerciseCategories.forEach(function (category) {
             console.error('Error: ', jqXHR.responseText);
           }
         });
+
       }
-    
-      // Function to display workout results (modify as needed)
-      function displayWorkouts(results) {
-        // Clear previous results
-        const workoutsContainer = document.getElementById("workoutsContainer");
-        workoutsContainer.innerHTML = "";
-    
-        // Display results, modify as needed
-        results.forEach(result => {
-          const workoutCard = document.createElement("div");
-          workoutCard.classList.add("card", "mb-4");
-    
-          const workoutCardContent = `
+    });
+  }
+
+  // Function to display workout results (modify as needed)
+  function displayWorkouts(results) {
+    // Clear previous results
+    const workoutsContainer = document.getElementById("workoutsContainer");
+    workoutsContainer.innerHTML = "";
+
+    // Display results, modify as needed
+    results.forEach(result => {
+      const workoutCard = document.createElement("div");
+      workoutCard.classList.add("card", "mb-4");
+
+      const workoutCardContent = `
             <div class="card-body">
               <h5 class="card-title">${result.name}</h5>
               <p class="card-text">${result.description}</p>
             </div>
           `;
-    
-          workoutCard.innerHTML = workoutCardContent;
-          workoutsContainer.appendChild(workoutCard);
-        });
-      }
-    
-      // Sample data for meal cards (copied from WYLD website so can be changed)
-      const leanMealData = [
-        { title: "Lean Meal 1", description: "Our Small Meal Prep Pack comes with 6 meals of your choice from the beWYLD Meal Prep Menu and is designed for those that want to lose body fat and retain or grow muscle mass.", url: "https://www.bewyld.co.uk/product-page/3-day-nurture-maintain-meal-prep-package" },
-        { title: "Lean Meal 2", description: "Our Medium Meal Prep Pack comes with 9 meals of your choice from the beWYLD Meal Prep Menu and is designed for those that want to lose body fat and retain or grow muscle mass.", url: "https://www.bewyld.co.uk/product-page/3-day-grow-gain-meal-prep-package" },
-        { title: "Lean Meal 3", description: "Our Large Meal Prep Pack comes with 9 meals of your choice from the beWYLD Meal Prep Menu and is designed for those that want to lose body fat and retain or grow muscle mass.", url: "https://www.bewyld.co.uk/product-page/3-day-lean-and-clean-meal-prep-package" }
-      ];
-    
-      const bulkMealData = [
-        { title: "Bulk Meal 1", description: "Our Small Bulk Meal Prep Pack comes with 6 meals of your choice from the beWYLD Meal Prep Menu and is designed for those that want to gain Strength and Muscle Mass by including extra Protein and low GI Carbohydrates", url: "https://www.bewyld.co.uk/product-page/nurture-maintain-meal-prep-package" },
-        { title: "Bulk Meal 2", description: "Our Medium Bulk Meal Prep Pack comes with 9 meals of your choice from the beWYLD Meal Prep Menu and is designed for those that want to gain Strength and Muscle Mass by including extra Protein and low GI Carbohydrates", url: "https://www.bewyld.co.uk/product-page/copy-of-wyld-bulk-medium-box-9-meals-8-per-meal" },
-        { title: "Bulk Meal 3", description: "Our LARGE Bulk Meal Prep Pack comes with 12 meals of your choice from the beWYLD Meal Prep Menu and is designed for those that want to gain Strength and Muscle Mass by including extra Protein and low GI Carbohydrates", url: "https://www.bewyld.co.uk/product-page/wyld-bulk-large-box-12-meals-7-50-per-meal" }
-      ];
-    
-      // Function to dynamically generate meal cards
-      function generateMealCards(container, mealData) {
-        mealData.forEach(meal => {
-          const card = document.createElement("div");
-          card.classList.add("card", "mb-4");
-    
-          const cardContent = `
+
+      workoutCard.innerHTML = workoutCardContent;
+      workoutsContainer.appendChild(workoutCard);
+    });
+  }
+
+  // Function to save results to Local Storage
+  function saveResultsToLocalStorage(results) {
+    localStorage.setItem('savedResults', JSON.stringify(results));
+  }
+
+  // Function to get results from Local Storage
+  function getResultsFromLocalStorage() {
+    const savedResults = localStorage.getItem('savedResults');
+    return savedResults ? JSON.parse(savedResults) : null;
+  }
+
+  // Function to display saved results
+  function displaySavedResults() {
+    const savedResults = getResultsFromLocalStorage();
+
+    if (savedResults) {
+      // Display saved results on the page as needed
+      console.log("Saved Results:", savedResults);
+      // Modify the display logic based on your page structure
+    } else {
+      console.log("No saved results found.");
+    }
+  }
+
+  // Event listener for the "Save Results" button
+  document.getElementById("saveResultsBtn").addEventListener("click", function () {
+    // Get current results (modify this based on your page structure)
+    const currentResults = /* logic to get current results */
+
+      // Save results to Local Storage
+      saveResultsToLocalStorage(currentResults);
+  });
+
+  // Event listener for history buttons
+  document.getElementById("historyBtn").addEventListener("click", function () {
+    // Display saved results when history button is clicked
+    displaySavedResults();
+  });
+
+  // Sample data for meal cards (copied from WYLD website so can be changed)
+  const leanMealData = [
+    { title: "Lean Meal 1", description: "Our Small Meal Prep Pack comes with 6 meals of your choice from the beWYLD Meal Prep Menu and is designed for those that want to lose body fat and retain or grow muscle mass.", url: "https://www.bewyld.co.uk/product-page/3-day-nurture-maintain-meal-prep-package" },
+    { title: "Lean Meal 2", description: "Our Medium Meal Prep Pack comes with 9 meals of your choice from the beWYLD Meal Prep Menu and is designed for those that want to lose body fat and retain or grow muscle mass.", url: "https://www.bewyld.co.uk/product-page/3-day-grow-gain-meal-prep-package" },
+    { title: "Lean Meal 3", description: "Our Large Meal Prep Pack comes with 9 meals of your choice from the beWYLD Meal Prep Menu and is designed for those that want to lose body fat and retain or grow muscle mass.", url: "https://www.bewyld.co.uk/product-page/3-day-lean-and-clean-meal-prep-package" }
+  ];
+
+  const bulkMealData = [
+    { title: "Bulk Meal 1", description: "Our Small Bulk Meal Prep Pack comes with 6 meals of your choice from the beWYLD Meal Prep Menu and is designed for those that want to gain Strength and Muscle Mass by including extra Protein and low GI Carbohydrates", url: "https://www.bewyld.co.uk/product-page/nurture-maintain-meal-prep-package" },
+    { title: "Bulk Meal 2", description: "Our Medium Bulk Meal Prep Pack comes with 9 meals of your choice from the beWYLD Meal Prep Menu and is designed for those that want to gain Strength and Muscle Mass by including extra Protein and low GI Carbohydrates", url: "https://www.bewyld.co.uk/product-page/copy-of-wyld-bulk-medium-box-9-meals-8-per-meal" },
+    { title: "Bulk Meal 3", description: "Our LARGE Bulk Meal Prep Pack comes with 12 meals of your choice from the beWYLD Meal Prep Menu and is designed for those that want to gain Strength and Muscle Mass by including extra Protein and low GI Carbohydrates", url: "https://www.bewyld.co.uk/product-page/wyld-bulk-large-box-12-meals-7-50-per-meal" }
+  ];
+
+  // Function to dynamically generate meal cards
+  function generateMealCards(container, mealData) {
+    mealData.forEach(meal => {
+      const card = document.createElement("div");
+      card.classList.add("card", "mb-4");
+
+      const cardContent = `
             <div class="card-body">
               <h5 class="card-title">${meal.title}</h5>
               <p class="card-text">${meal.description}</p>
               <a href="${meal.url}" target="_blank" class="btn btn-primary">Find out more</a>
             </div>
           `;
-    
-          card.innerHTML = cardContent;
-          container.appendChild(card);
-        });
-      }
-    
-      // Populate meal cards
-      generateMealCards(document.getElementById("leanMealContainer"), leanMealData);
-      generateMealCards(document.getElementById("bulkMealContainer"), bulkMealData);
-    
-      // Event listener for the "View BeWYLD Menu" button
-      document.getElementById("viewMenuBtn").addEventListener("click", function () {
-        // Open the PDF in a new tab or window
-        window.open("https://www.bewyld.co.uk/_files/ugd/d9fc74_06834711b1094e22a5fbc17f3c3a8362.pdf", "_blank");
-      });
+
+      card.innerHTML = cardContent;
+      container.appendChild(card);
     });
-    
-    // Link to your custom script file
-    // <script src="./script/script.js"></script>
-    
+  }
+
+  // Populate meal cards
+  generateMealCards(document.getElementById("leanMealContainer"), leanMealData);
+  generateMealCards(document.getElementById("bulkMealContainer"), bulkMealData);
+
+  // Event listener for the "View BeWYLD Menu" button
+  document.getElementById("viewMenuBtn").addEventListener("click", function () {
+    // Open the PDF in a new tab or window
+    window.open("https://www.bewyld.co.uk/_files/ugd/d9fc74_06834711b1094e22a5fbc17f3c3a8362.pdf", "_blank");
+  });
+});
+
+// Link to your custom script file
+// <script src="./script/script.js"></script>
+
 
 
 
