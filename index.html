@@ -79,9 +79,16 @@
       </form>
     </div>
 
-    <div id="dynamicContainer" class="container mt-3"></div>
 
-    <script>
+    <!-- Workout container -->
+
+    <section id="workoutContainer" class="jumbotron container mt-3 px-4">
+      <div id="yourWorkout" class="row">
+
+      </div>
+    </section>
+
+    <!-- <script>
       document.addEventListener("DOMContentLoaded", function () {
         // Create the main container
         const dynamicContainer = document.getElementById("dynamicContainer");
@@ -134,7 +141,7 @@
         section.appendChild(jumbotron);
         dynamicContainer.appendChild(section);
       });
-    </script>
+    </script> -->
 
 
     <!-- Container for "You're all set" section -->
@@ -143,27 +150,27 @@
       <button class="btn btn-primary">Book a Trainer</button>
     </section>
 
-  <!-- Personalized Meal Prep Container -->
-  <section class="row justify-content-center mt-5">
-    <h2 class="text-center">Your Personalised Meal Prep</h2>
-    <div class="row">
-      <div class="col-md-6" id="leanMealContainer">
-        <!-- Dynamically generated lean meal cards will be placed here using JavaScript -->
+    <!-- Personalized Meal Prep Container -->
+    <section class="row justify-content-center mt-5">
+      <h2 class="text-center">Your Personalised Meal Prep</h2>
+      <div class="row">
+        <div class="col-md-6" id="leanMealContainer">
+          <!-- Dynamically generated lean meal cards will be placed here using JavaScript -->
+        </div>
+        <div class="col-md-6" id="bulkMealContainer">
+          <!-- Dynamically generated bulk meal cards will be placed here using JavaScript -->
+        </div>
       </div>
-      <div class="col-md-6" id="bulkMealContainer">
-        <!-- Dynamically generated bulk meal cards will be placed here using JavaScript -->
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Button to View BeWYLD Menu -->
-  <div class="container-fluid justify-content-center">
-    <h5 class="call-to-action text-center">To see the menu we use to create your meals, click below!</h5>
-    <div class="row justify-content-center mt-4">
-    <button id="viewMenuBtn" class="col-2 btn btn-primary">View BeWYLD Menu</button>
+    <!-- Button to View BeWYLD Menu -->
+    <div class="container-fluid justify-content-center">
+      <h5 class="call-to-action text-center">To see the menu we use to create your meals, click below!</h5>
+      <div class="row justify-content-center mt-4">
+        <button id="viewMenuBtn" class="col-2 btn btn-primary">View BeWYLD Menu</button>
+      </div>
     </div>
   </div>
-</div>
   <!-- Include your Bootstrap and jQuery scripts here -->
   <script>
     // Event listener for the "View BeWYLD Menu" button
@@ -179,44 +186,48 @@
     <button id="viewMenuBtn" class="btn btn-primary">BeWYLD Menu</button>
   </div> -->
 
-<!-- Included Footer -->
-<footer class="text-center text-lg-start bg-body-tertiary text-muted" style="background-color: rgba(0, 0, 0, 0.05);">
-  <div class="container text-center text-md-start mt-5">
-    <div class="row mt-2">
-      <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mb-4 mt-5">
-        <img src="images/beWYLD_black_logo.png" class="logo-image" alt="bewyld logo image">
-      </div>
-  
-      <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mb-4 mt-4">
-        <h6 class="text-uppercase fw-bold mb-4">
-          Opening Hours
-        </h6>
-        <p class="text-reset"> MON-WED: 8:30am-6pm​</p>
-        <p class="text-reset">THUR-SAT: 8:30am- 6pm ​</p>
-        <p class="text-reset"> SUN: 10am-5pm​</p>
-      </div>
+  <!-- Included Footer -->
+  <footer class="text-center text-lg-start bg-body-tertiary text-muted" style="background-color: rgba(0, 0, 0, 0.05);">
+    <div class="container text-center text-md-start mt-5">
+      <div class="row mt-2">
+        <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mb-4 mt-5">
+          <img src="images/beWYLD_black_logo.png" class="logo-image" alt="bewyld logo image">
+        </div>
 
-      <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mb-4 mt-4">
-        <h6 class="text-uppercase fw-bold mb-4">ADDRESS
-        </h6>
-        <p class="text-reset"> beWYLD​</p>
-        <p class="text-reset">28 Streatham High Road​</p>
-        <p class="text-reset"> SW16 1DB​</p>
-      </div>
-     
-      <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4 mt-4">
-        <h6 class="text-uppercase fw-bold mb-4">Contact Us</h6>
-        <p> info@bewyld.co.uk</p>
-        <p> 020 8677 0807</p>
-        <p><a href="https://www.instagram.com/bewyldsocial/?hl=en" class="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"><i class="bi bi-instagram"></i></a></p>  
-          <p><a href="https://m.facebook.com/bewyldsocial/photos/" class="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"><i class="bi bi-facebook"></i></a></p>  
+        <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mb-4 mt-4">
+          <h6 class="text-uppercase fw-bold mb-4">
+            Opening Hours
+          </h6>
+          <p class="text-reset"> MON-WED: 8:30am-6pm​</p>
+          <p class="text-reset">THUR-SAT: 8:30am- 6pm ​</p>
+          <p class="text-reset"> SUN: 10am-5pm​</p>
+        </div>
+
+        <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mb-4 mt-4">
+          <h6 class="text-uppercase fw-bold mb-4">ADDRESS
+          </h6>
+          <p class="text-reset"> beWYLD​</p>
+          <p class="text-reset">28 Streatham High Road​</p>
+          <p class="text-reset"> SW16 1DB​</p>
+        </div>
+
+        <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4 mt-4">
+          <h6 class="text-uppercase fw-bold mb-4">Contact Us</h6>
+          <p> info@bewyld.co.uk</p>
+          <p> 020 8677 0807</p>
+          <p><a href="https://www.instagram.com/bewyldsocial/?hl=en"
+              class="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"><i
+                class="bi bi-instagram"></i></a></p>
+          <p><a href="https://m.facebook.com/bewyldsocial/photos/"
+              class="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"><i
+                class="bi bi-facebook"></i></a></p>
+        </div>
       </div>
     </div>
-  </div>
-<div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
-  <p>&copy;2020 by agave ltd.</p> 
-</div>
-</footer> 
+    <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+      <p>&copy;2020 by agave ltd.</p>
+    </div>
+  </footer>
   <!-- Link jQuery -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 

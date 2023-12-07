@@ -61,6 +61,34 @@ var showResults = function(workout, gif) {
   $("#quiz-screen").attr("class", "hide")
   console.log(workout);
   console.log(gif);
+  function toTitleCase(str) {
+    // Split the string into words
+    let words = str.split(' ');
+  
+    // Capitalize the first letter of each word
+    let titleCaseWords = words.map(word => {
+      return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+    });
+  
+    // Join the words back into a string
+    let titleCaseString = titleCaseWords.join(' ');
+  
+    return titleCaseString;
+  }
+
+  $('#yourWorkout').append(`<h2 class="display-4 mb-4">You asked for workouts to help you ${userAnswers[0].toLowerCase()}`)
+  for (var i = 0; i < 3; i++) {
+    $('#yourWorkout').append(`<div class="card mb-3">
+  <img src="${gif.data[0].images.original.url}" class="card-img-top" alt="${userAnswers[0]} Workout Gif" style="width:500px">
+  <div class="card-body">
+    <h4 class="card-title">${workout[i].name}</h4>
+    <p class="card-text">Equipment: ${toTitleCase(workout[i].equipment.replace(/_/g, ' '))}</p>
+    <h5>Instructions</h5>
+    <p class="card-text">${workout[i].instructions}</p>
+    <a href="#" class="btn btn-primary">Go somewhere</a>
+  </div>
+</div>`)
+  }
 }
 
 // Function to pass fitnessQuestions into the excercises API and log results
