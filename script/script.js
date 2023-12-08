@@ -261,29 +261,117 @@ $('#card-container').on('click', '.card', function (event) {
         makeApiRequest(apiFitnessGoal, selectedSkill, selectedMuscle, selectedExerciseNumber);
       });
     });
+  }
 
-    // Add "Regenerate" button
-    // const regenerateButton = document.createElement("button");
-    // regenerateButton.classList.add("btn", "btn-primary", "mb-2");
-    // regenerateButton.textContent = "Regenerate";
-    // container.appendChild(regenerateButton);
+  // Populate workout buttons
+  generateWorkoutButtons(document.getElementById("workoutsContainer"), ["View Your Results"]);
 
-    // Add click event listener to the "Regenerate" button
-    regenerateButton.addEventListener("click", function () {
-      // Get user selections
-      const selectedGoal = document.getElementById("goalSelect").value;
-      const selectedSkill = document.getElementById("skillSelect").value;
+  // Function to translate user-friendly fitness goals to API terms
+  const fitnessGoalMapping = {
+    "Bulking": "strength",
+    "Slimming": "plyometrics",
+    "Cardio": "cardio",
+    "Stretching": "stretching"
+  };
 
-      // Translate user-friendly fitness goal to API terms
-      const apiFitnessGoal = translateFitnessGoal(selectedGoal);
+  function translateFitnessGoal(userFriendlyGoal) {
+    return fitnessGoalMapping[userFriendlyGoal] || userFriendlyGoal;
+  }
 
-      // Make API request based on user selections
-      makeApiRequest(apiFitnessGoal, selectedSkill, selectedMuscle, selectedExerciseNumber);
+  // Function to make API request
+  function makeApiRequest(goal, skill, muscle, exerciseNumber) {
+    $.ajax({
+      method: 'GET',
+      url: `https://api.api-ninjas.com/v1/exercises?&difficulty=${skill}&muscle=${muscle}&goal=${goal}&limit=${exerciseNumber}`,
+      headers: { 'X-Api-Key': 'Xm9KrAkFaXPAXu1rR0wdLw==EAJWzakA1gYNDQF6' },
+      contentType: 'application/json',
+      success: function (result) {
+        // Process and display API results here
+        console.log(result);
+        displayWorkouts(result); // Assuming you have a function to display the results
+      },
+      error: function ajaxError(jqXHR) {
+        console.error('Error: ', jqXHR.responseText);
+      }
     });
   }
 
-//   // Populate workout buttons
-  generateWorkoutButtons(document.getElementById("workoutsContainer"), ["Regenerate"]);
+  // Function to display workout results (modify as needed)
+function displayWorkouts(results) {
+  // Clear previous results
+  const workoutsContainer = document.getElementById("workoutsContainer");
+  workoutsContainer.innerHTML = "";
+
+  // Display results, modify as needed
+  results.forEach(result => {
+    const workoutCard = document.createElement("div");
+    workoutCard.classList.add("card", "mb-4");
+
+    const workoutCardContent = `
+      <div class="card-body">
+        <h5 class="card-title">${result.name}</h5>
+        <p class="card-text">${result.description}</p>
+      </div>
+    `;
+
+    workoutCard.innerHTML = workoutCardContent;
+    workoutsContainer.appendChild(workoutCard);
+  });
+
+  // Create the "View Saved Workouts" button dynamically
+  const viewSavedWorkoutsBtn = document.createElement("button");
+  viewSavedWorkoutsBtn.id = "viewSavedWorkoutsBtn";
+  viewSavedWorkoutsBtn.classList.add("btn", "btn-primary", "mb-2");
+  viewSavedWorkoutsBtn.textContent = "View Saved Workouts";
+
+  // Add an event listener to the button for redirection
+  viewSavedWorkoutsBtn.addEventListener("click", function () {
+    // Redirect to the saved workouts page
+    window.location.href = "saved-workouts.html";
+  });
+
+  // Append the button to the same container as the "Save Results" button
+  workoutsContainer.appendChild(viewSavedWorkoutsBtn);
+}
+// Function to display saved results on a separate page
+function displaySavedResultsPage() {
+  const savedResults = getResultsFromLocalStorage();
+
+  if (savedResults) {
+    // Display saved results on the saved workouts page
+    const savedWorkoutsContainer = document.getElementById("savedWorkoutsContainer");
+
+    // Clear previous results
+    savedWorkoutsContainer.innerHTML = "";
+
+    // Display results, modify as needed
+    savedResults.forEach(result => {
+      const workoutCard = document.createElement("div");
+      workoutCard.classList.add("col-md-4", "mb-4");
+
+      const cardContent = `
+        <div class="card h-100">
+          <div class="card-body">
+            <h5 class="card-title">${result.name}</h5>
+            <p class="card-text">${result.description}</p>
+          </div>
+        </div>
+      `;
+
+      workoutCard.innerHTML = cardContent;
+      savedWorkoutsContainer.appendChild(workoutCard);
+    });
+  } else {
+    console.log("No saved results found.");
+    console.log("Saved Workouts Container not found.");
+  }
+}
+
+// Call the function to display saved results when the page loads
+document.addEventListener("DOMContentLoaded", function () {
+  displaySavedResultsPage();
+});
+
 
 
   // This will get the category IDs based on the provided category
