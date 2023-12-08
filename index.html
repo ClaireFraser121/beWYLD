@@ -146,33 +146,47 @@
 
     <!-- Container for "You're all set" section -->
     <section id="bookTrainer" class="jumbotron container px-4 justify-content-center mt-5">
-      <h2 class="text-center mb-4">You're all set, let's get you those results</h2>
+      <h2 class="text-center mb-4">Need support with your workouts?</h2>
       <div class="row justify-content-center mt-4">
       <a class="justify-content-center" href="book-a-trainer.html" target="_blank">
       <button class="col-2 btn btn-primary">Book a Trainer</button></a>
       </div>
     </section>
 
-    <!-- Personalized Meal Prep Container -->
-    <section id="mealPrep" class="jumbotron container px-4 justify-content-center mt-5">
-      <h2 class="text-center">Your Personalised Meal Prep</h2>
-      <div class="row">
-        <div class="col-md-6" id="leanMealContainer">
-          <!-- Dynamically generated lean meal cards will be placed here using JavaScript -->
-        </div>
-        <div class="col-md-6" id="bulkMealContainer">
-          <!-- Dynamically generated bulk meal cards will be placed here using JavaScript -->
+<!-- Personalized Meal Prep Container -->
+<section id="mealPrep" class="jumbotron container px-4 mt-5">
+  <h2 class="text-center">Your Personalised Meal Prep</h2>
+  <div class="row justify-content-center">
+    <!-- Dynamically generated lean meal cards will be placed here using JavaScript -->
+    <div class="col-md-3" id="leanMealCard">
+      <div class="card" style="width: 18rem;">
+        <i class="fas fa-utensils fa-5x text-primary mx-auto mt-3"></i> <!-- Font Awesome icon -->
+        <div class="card-body">
+          <h5 class="card-title">Lean Meal</h5>
+          <p class="card-text">Select from one of our stress-free meal prep pack sizes, which you can customize using the menu below.</p>
+          <a href="#" class="btn btn-primary">Go somewhere</a>
         </div>
       </div>
-
+    </div>
+    <!-- Dynamically generated bulk meal cards will be placed here using JavaScript -->
+    <div class="col-md-3" id="bulkMealCard">
+      <div class="card" style="width: 18rem;">
+        <i class="fas fa-dumbbell fa-5x text-danger mx-auto mt-3"></i> <!-- Font Awesome icon -->
+        <div class="card-body">
+          <h5 class="card-title">Bulk Meal</h5>
+          <p class="card-text">Select from one of our stress-free meal prep pack sizes, which you can customize using the menu below.</p>
+          <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+      </div>
+    </div>
+  </div>
     <!-- Button to View BeWYLD Menu -->
     <div class="row justify-content-center">
       <h5 class="call-to-action text-center">To see the menu we use to create your meals, click below!</h5>
         <a class="justify-content-center" href="https://www.bewyld.co.uk/_files/ugd/d9fc74_06834711b1094e22a5fbc17f3c3a8362.pdf" target="_blank">
         <button id="viewMenuBtn" class="col-2 btn btn-primary">View BeWYLD Menu</button></a>
-    
     </div>
-  </section>
+</section>
   </div>
 
 

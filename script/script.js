@@ -37,15 +37,26 @@ var fitnessQuestions = [
   {
     question: "What is your fitness goal?",
     answers: ["Bulk", "Tone", "Cardio", "Stretch"],
-    iconClass: ["fa-dumbbell", "fa-weight-scale", "fa-heart-pulse", "fa-child-reaching"],
+    iconClass: ["fa-dumbbell", "fa-weight-scale", "fa-heart-pulse", "fa-child-reaching"]
   },
   {
     question: "How intense would you like to go?",
     answers: ["Easy", "Make Me Sweat!",],
-    iconClass: ["fa-person-walking", "fa-face-grin-beam-sweat",],
+    iconClass: ["fa-person-walking", "fa-face-grin-beam-sweat",]
 
   },
 ];
+
+// Function to dynamically match meals based on fitness goals
+var mealMatcher = function () {
+  var fitnessGoals = {
+    'Bulk': bulkMealCard,
+    'Tone': leanMealCard,
+    'Cardio': leanMealCard,
+    'Stretch': leanMealCard,
+  };
+};
+
 
 // Function to show results page
 // NEEDS BUILDING OUT WITH DYNAMIC HTML
@@ -69,7 +80,11 @@ var showResults = function(workout, gif) {
     return titleCaseString;
   }
 
-  $('#yourWorkout').append(`<h2 class="display-4 mb-4">You asked for workouts to help you ${userAnswers[0].toLowerCase()}`)
+  // Check if userAnswers is defined and has at least one element
+  if (userAnswers && userAnswers.length > 0) {
+    $('#yourWorkout').append(`<h2 class="display-4 mb-4">You asked for workouts to help you ${userAnswers[0].toLowerCase()}`);
+  }
+  
   for (var i = 0; i < 3; i++) {
     $('#yourWorkout').append(`<div class="card mb-3">
   <img src="${gif.data[i].images.original.url}" class="mx-3 mt-4 card-img-top" alt="${userAnswers[0]} Workout Gif" style="width:300px">
@@ -81,8 +96,11 @@ var showResults = function(workout, gif) {
     <a href="#" class="btn btn-primary">Save exercise</a>
   </div>
 </div>`)
-  }
 }
+
+// Display meal cards based on fitness goal
+mealMatcher();
+};
 
 // Function to pass fitnessQuestions into the excercises API and log results
 var getWorkout = function() {
@@ -180,10 +198,25 @@ var generateQuestion = function () {
   } else {
     console.log(userAnswers)
     getWorkout();
+    toggleMealCard(userAnswers[0]);
 }
 };
 
 generateQuestion();
+
+// Function to show/hide meal cards based on user answer
+var toggleMealCard = function (userAnswer) {
+  // Hide both meal cards initially
+  $("#leanMealCard").hide();
+  $("#bulkMealCard").hide();
+
+  // Determine which meal card to show based on user's answer
+  if (userAnswer === "Tone" || userAnswer === "Cardio" || userAnswer === "Stretch") {
+    $("#leanMealCard").show();
+  } else if (userAnswer === "Bulk") {
+    $("#bulkMealCard").show();
+  }
+};
 
 $('#card-container').on('click', '.card', function (event) {
   var userAnswer = $(event.currentTarget).find('.card-title').text();
@@ -194,7 +227,7 @@ $('#card-container').on('click', '.card', function (event) {
 });
 
 // -------------------------- CLAIRE'S CODE ---------------------------------
-
+//#region
 // document.addEventListener("DOMContentLoaded"), function () {
 //   // Sample data for dropdown options
 //   const goals = ["Bulking", "Slimming", "Cardio", "Stretching"];
@@ -437,42 +470,48 @@ $('#card-container').on('click', '.card', function (event) {
 //     // Display saved results when history button is clicked
 //     displaySavedResults();
 //   });
+//#end
 
-//   // Sample data for meal cards (copied from WYLD website so can be changed)
-//   const leanMealData = [
-//     { title: "Lean Meal 1", description: "Our Small Meal Prep Pack comes with 6 meals of your choice from the beWYLD Meal Prep Menu and is designed for those that want to lose body fat and retain or grow muscle mass.", url: "https://www.bewyld.co.uk/product-page/3-day-nurture-maintain-meal-prep-package" },
-//     { title: "Lean Meal 2", description: "Our Medium Meal Prep Pack comes with 9 meals of your choice from the beWYLD Meal Prep Menu and is designed for those that want to lose body fat and retain or grow muscle mass.", url: "https://www.bewyld.co.uk/product-page/3-day-grow-gain-meal-prep-package" },
-//     { title: "Lean Meal 3", description: "Our Large Meal Prep Pack comes with 9 meals of your choice from the beWYLD Meal Prep Menu and is designed for those that want to lose body fat and retain or grow muscle mass.", url: "https://www.bewyld.co.uk/product-page/3-day-lean-and-clean-meal-prep-package" }
-//   ];
+// When a user selects either bulk or tone = lean the matching meal card dynamically displays 
+let leanMealCard = [{ Title: "Lean Meal", description: "Select from one of our stress free meal prep pack sizes whcih you can customise using the menu below" }];
 
-//   const bulkMealData = [
-//     { title: "Bulk Meal 1", description: "Our Small Bulk Meal Prep Pack comes with 6 meals of your choice from the beWYLD Meal Prep Menu and is designed for those that want to gain Strength and Muscle Mass by including extra Protein and low GI Carbohydrates", url: "https://www.bewyld.co.uk/product-page/nurture-maintain-meal-prep-package" },
-//     { title: "Bulk Meal 2", description: "Our Medium Bulk Meal Prep Pack comes with 9 meals of your choice from the beWYLD Meal Prep Menu and is designed for those that want to gain Strength and Muscle Mass by including extra Protein and low GI Carbohydrates", url: "https://www.bewyld.co.uk/product-page/copy-of-wyld-bulk-medium-box-9-meals-8-per-meal" },
-//     { title: "Bulk Meal 3", description: "Our LARGE Bulk Meal Prep Pack comes with 12 meals of your choice from the beWYLD Meal Prep Menu and is designed for those that want to gain Strength and Muscle Mass by including extra Protein and low GI Carbohydrates", url: "https://www.bewyld.co.uk/product-page/wyld-bulk-large-box-12-meals-7-50-per-meal" }
-//   ];
+let bulkMealCard = [{ Title: "Bulk Meal", description: "Select from one of our stress free meal prep pack sizes whcih you can customise using the menu below" }];
 
-//   // Function to dynamically generate meal cards
-//   function generateMealCards(container, mealData) {
-//     mealData.forEach(meal => {
-//       const card = document.createElement("div");
-//       card.classList.add("card", "mb-4");
+// Sample data for meal cards (copied from WYLD website so can be changed)
+  let leanMealData = [
+    { title: "Lean Meal 1", description: "Our Small Meal Prep Pack comes with 6 meals of your choice from the beWYLD Meal Prep Menu and is designed for those that want to lose body fat and retain or grow muscle mass.", url: "https://www.bewyld.co.uk/product-page/3-day-nurture-maintain-meal-prep-package" },
+    { title: "Lean Meal 2", description: "Our Medium Meal Prep Pack comes with 9 meals of your choice from the beWYLD Meal Prep Menu and is designed for those that want to lose body fat and retain or grow muscle mass.", url: "https://www.bewyld.co.uk/product-page/3-day-grow-gain-meal-prep-package" },
+    { title: "Lean Meal 3", description: "Our Large Meal Prep Pack comes with 9 meals of your choice from the beWYLD Meal Prep Menu and is designed for those that want to lose body fat and retain or grow muscle mass.", url: "https://www.bewyld.co.uk/product-page/3-day-lean-and-clean-meal-prep-package" }
+  ];
 
-//       const cardContent = `
-//             <div class="card-body">
-//               <h5 class="card-title">${meal.title}</h5>
-//               <p class="card-text">${meal.description}</p>
-//               <a href="${meal.url}" target="_blank" class="btn btn-primary">Find out more</a>
-//             </div>
-//           `;
+  let bulkMealData = [
+    { title: "Bulk Meal 1", description: "Our Small Bulk Meal Prep Pack comes with 6 meals of your choice from the beWYLD Meal Prep Menu and is designed for those that want to gain Strength and Muscle Mass by including extra Protein and low GI Carbohydrates", url: "https://www.bewyld.co.uk/product-page/nurture-maintain-meal-prep-package" },
+    { title: "Bulk Meal 2", description: "Our Medium Bulk Meal Prep Pack comes with 9 meals of your choice from the beWYLD Meal Prep Menu and is designed for those that want to gain Strength and Muscle Mass by including extra Protein and low GI Carbohydrates", url: "https://www.bewyld.co.uk/product-page/copy-of-wyld-bulk-medium-box-9-meals-8-per-meal" },
+    { title: "Bulk Meal 3", description: "Our LARGE Bulk Meal Prep Pack comes with 12 meals of your choice from the beWYLD Meal Prep Menu and is designed for those that want to gain Strength and Muscle Mass by including extra Protein and low GI Carbohydrates", url: "https://www.bewyld.co.uk/product-page/wyld-bulk-large-box-12-meals-7-50-per-meal" }
+  ];
 
-//       card.innerHTML = cardContent;
-//       container.appendChild(card);
-//     });
-//   }
+  // Function to dynamically generate meal cards
+  function generateMealCards(container, mealData) {
+    mealData.forEach(meal => {
+      const card = document.createElement("div");
+      card.classList.add("card", "mb-4");
 
-//   // Populate meal cards
-//   generateMealCards(document.getElementById("leanMealContainer"), leanMealData);
-//   generateMealCards(document.getElementById("bulkMealContainer"), bulkMealData);
+      const cardContent = `
+            <div class="card-body">
+              <h5 class="card-title">${meal.title}</h5>
+              <p class="card-text">${meal.description}</p>
+              <a href="${meal.url}" target="_blank" class="btn btn-primary">Find out more</a>
+            </div>
+          `;
+
+      card.innerHTML = cardContent;
+      container.appendChild(card);
+    });
+  }
+
+  // Populate meal cards
+  generateMealCards(document.getElementById("leanMealContainer"), leanMealData);
+  generateMealCards(document.getElementById("bulkMealContainer"), bulkMealData);
 
 //   // Event listener for the "View BeWYLD Menu" button
 //   document.getElementById("viewMenuBtn").addEventListener("click", function () {
