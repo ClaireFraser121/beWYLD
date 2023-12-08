@@ -214,11 +214,19 @@ $('#bookaTrainerBtn').on('click', function (event) {
   window.open('./book-a-trainer.html', '_blank');
 });
 
+// event listener to book trainer
+$('#mealPrep').on('click', '.btn', function (event) {
+  event.preventDefault();
+  window.open('https://www.bewyld.co.uk/shop', '_blank');
+});
+
 // event listener to view menu
 $('#viewMenuBtn').on('click', function (event) {
   event.preventDefault();
   window.open('https://www.bewyld.co.uk/_files/ugd/d9fc74_06834711b1094e22a5fbc17f3c3a8362.pdf', '_blank');
 });
+
+
 
 // Event listener for all quiz cards
 $('#card-container').on('click', '.card', function (event) {
