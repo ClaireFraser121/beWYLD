@@ -54,22 +54,32 @@ var showResults = function(workout, gif) {
   $("#quiz-screen").attr("class", "hide")
   console.log(workout);
   console.log(gif);
+  // Dynamically generate dropdown options
+var populateDropdowns = function (element, options) {
+  for (var i = 0; i < options.length; i++) {
+    var optionEl = document.createElement("option");
+    optionEl.value = options[i];
+    optionEl.text = options[i];
+    element.append(optionEl);
+  }
+}
+// Populate dropdowns
+populateDropdowns($("#goalSelect"), fitnessQuestions[0].answers);
+populateDropdowns($("#skillSelect"), fitnessQuestions[1].answers);
+
   function toTitleCase(string) {
     // Split the string into words
     var words = string.split(' ');
-  
     // Capitalize the first letter of each word
     var titleCaseWords = words.map(word => {
       return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
     });
-  
     // Join the words back into a string
     var titleCaseString = titleCaseWords.join(' ');
-  
     return titleCaseString;
   }
 
-  $('#yourWorkout').append(`<h2 class="display-4 mb-4">You asked for workouts to help you ${userAnswers[0].toLowerCase()}`)
+  $('#yourWorkout').append(`<h2 id workoutTitle class="display-4 mb-4">You asked for workouts to help you ${userAnswers[0].toLowerCase()}`)
   for (var i = 0; i < 3; i++) {
     $('#yourWorkout').append(`<div class="card mb-3">
   <img src="${gif.data[i].images.original.url}" class="mx-3 mt-4 card-img-top" alt="${userAnswers[0]} Workout Gif" style="width:300px">
@@ -82,6 +92,7 @@ var showResults = function(workout, gif) {
   </div>
 </div>`)
   }
+
   // IF STATEMENT TO SHOW THE RELEVANT MEAL CARDS
 }
 
@@ -186,6 +197,17 @@ var generateQuestion = function () {
 
 generateQuestion();
 
+$('#regenerateResultsBtn').on('click', function (event) {
+  event.preventDefault();
+  var selectedGoal = $('#goalSelect').val();
+  var selectedSkill = $('#skillSelect').val();
+  userAnswers = [];
+  userAnswers.push(selectedGoal, selectedSkill);
+  console.log(userAnswers)
+  $('#yourWorkout').text("");
+  getWorkout();
+});
+
 $('#card-container').on('click', '.card', function (event) {
   var userAnswer = $(event.currentTarget).find('.card-title').text();
   userAnswers.push(userAnswer);
@@ -198,64 +220,64 @@ $('#card-container').on('click', '.card', function (event) {
 
 // document.addEventListener("DOMContentLoaded"), function () {
 //   // Sample data for dropdown options
-  const goals = ["Bulking", "Slimming", "Cardio", "Stretching"];
-  const skillLevels = ["Beginner", "Intermediate", "Advanced"];
-  const muscles = [
-    "Abdominals",
-    "Abductors",
-    "Adductors",
-    "Biceps",
-    "Calves",
-    "Chest",
-    "Forearms",
-    "Glutes",
-    "Hamstrings",
-    "Lats",
-    "Lower Back",
-    "Middle Back",
-    "Neck",
-    "Quadriceps",
-    "Traps",
-    "Triceps"
-  ];
-  const exerciseNumbers = Array.from({ length: 10 }, (_, i) => i + 1);
+//   const goals = ["Bulking", "Slimming", "Cardio", "Stretching"];
+//   const skillLevels = ["Beginner", "Intermediate", "Advanced"];
+//   const muscles = [
+//     "Abdominals",
+//     "Abductors",
+//     "Adductors",
+//     "Biceps",
+//     "Calves",
+//     "Chest",
+//     "Forearms",
+//     "Glutes",
+//     "Hamstrings",
+//     "Lats",
+//     "Lower Back",
+//     "Middle Back",
+//     "Neck",
+//     "Quadriceps",
+//     "Traps",
+//     "Triceps"
+//   ];
+//   const exerciseNumbers = Array.from({ length: 10 }, (_, i) => i + 1);
 
-//   // Function to dynamically generate dropdown options
-  function populateDropdown(selectElement, options) {
-    options.forEach(option => {
-      const optionElement = document.createElement("option");
-      optionElement.value = option;
-      optionElement.text = option;
-      selectElement.appendChild(optionElement);
-    });
-  }
+// //   // Function to dynamically generate dropdown options
+//   function populateDropdown(selectElement, options) {
+//     options.forEach(option => {
+//       const optionElement = document.createElement("option");
+//       optionElement.value = option;
+//       optionElement.text = option;
+//       selectElement.appendChild(optionElement);
+//     });
+//   }
 
-  // Populate dropdowns
-  populateDropdown(document.getElementById("goalSelect"), fitnessQuestions[0].answers);
-  populateDropdown(document.getElementById("skillSelect"), fitnessQuestions[1].answers);
+//   // Populate dropdowns
+//   populateDropdown(document.getElementById("goalSelect"), fitnessQuestions[0].answers);
+//   populateDropdown(document.getElementById("skillSelect"), fitnessQuestions[1].answers);
  
 
-   // Function to dynamically generate workout buttons
-   function generateWorkoutButtons(container, workouts) {
-    if (!container) {
-      console.error("Container is null");
-      return;
-    }
+//    // Function to dynamically generate workout buttons
+//    function generateWorkoutButtons(container, workouts) {
+//     if (!container) {
+//       console.error("Container is null");
+//       return;
+//     }
 
-    workouts.forEach(workout => {
-      const button = document.createElement("button");
-      button.classList.add("btn", "btn-primary", "mb-2");
-      button.textContent = workout;
-      container.appendChild(button);
+//     workouts.forEach(workout => {
+//       const button = document.createElement("button");
+//       button.classList.add("btn", "btn-primary", "mb-2");
+//       button.textContent = workout;
+//       container.appendChild(button);
 
-      // Add click event listener to each button
-      button.addEventListener("click", function () {
-        // Get user selections
-        const selectedGoal = document.getElementById("goalSelect").value;
-        const selectedSkill = document.getElementById("skillSelect").value;
+//       // Add click event listener to each button
+//       button.addEventListener("click", function () {
+//         // Get user selections
+//         const selectedGoal = document.getElementById("goalSelect").value;
+//         const selectedSkill = document.getElementById("skillSelect").value;
 
-        // Translate user-friendly fitness goal to API terms
-        const apiFitnessGoal = translateFitnessGoal(selectedGoal);
+//         // Translate user-friendly fitness goal to API terms
+//         const apiFitnessGoal = translateFitnessGoal(selectedGoal);
 
         // Make API request based on user selections
         makeApiRequest(apiFitnessGoal, selectedSkill, selectedMuscle, selectedExerciseNumber);
@@ -372,7 +394,7 @@ document.addEventListener("DOMContentLoaded", function () {
   displaySavedResultsPage();
 });
 
-
+// -------------- END OF CLAIRES CODE ---------------------------------
 
   // This will get the category IDs based on the provided category
   // var categoryIds = categories[category];
