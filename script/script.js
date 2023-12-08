@@ -82,6 +82,7 @@ var showResults = function(workout, gif) {
   </div>
 </div>`)
   }
+  // IF STATEMENT TO SHOW THE RELEVANT MEAL CARDS
 }
 
 // Function to pass fitnessQuestions into the excercises API and log results
