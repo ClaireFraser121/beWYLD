@@ -77,7 +77,20 @@ populateDropdowns($("#skillSelect"), fitnessQuestions[1].answers);
   </div>
 </div>`)
 }
+// Function to show/hide meal cards based on user answer
+var toggleMealCard = function (userAnswer) {
+  // Hide both meal cards initially
+  $("#leanMealCard").hide();
+  $("#bulkMealCard").hide();
 
+  // Determine which meal card to show based on user's answer
+  if (userAnswer === "Tone" || userAnswer === "Cardio" || userAnswer === "Stretch") {
+    $("#leanMealCard").show();
+  } else if (userAnswer === "Bulk") {
+    $("#bulkMealCard").show();
+  }
+};
+toggleMealCard(userAnswers[0]);
 // Display meal cards based on fitness goal
 mealMatcher();
 };
@@ -176,25 +189,13 @@ var generateQuestion = function () {
   } else {
     console.log(userAnswers)
     getWorkout();
-    toggleMealCard(userAnswers[0]);
+
 }
 };
 
 generateQuestion();
 
-// Function to show/hide meal cards based on user answer
-var toggleMealCard = function (userAnswer) {
-  // Hide both meal cards initially
-  $("#leanMealCard").hide();
-  $("#bulkMealCard").hide();
 
-  // Determine which meal card to show based on user's answer
-  if (userAnswer === "Tone" || userAnswer === "Cardio" || userAnswer === "Stretch") {
-    $("#leanMealCard").show();
-  } else if (userAnswer === "Bulk") {
-    $("#bulkMealCard").show();
-  }
-};
 
 // event listener to regenerate quiz questions
 $('#regenerateResultsBtn').on('click', function (event) {
