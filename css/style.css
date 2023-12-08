@@ -50,7 +50,7 @@ aside {
 /* Jumbotron styles */
 .jumbotron {
   background-color: #f8f9fa;
-  padding: 20px;
+  padding: 20px 100px 20px 100px;
   margin-bottom: 20px;
 }
 
