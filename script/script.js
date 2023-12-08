@@ -1,35 +1,3 @@
-
-// var function = mealMatcherer()
-// 
-// Object to convert user answers to meal tags
-//   var mealTypes = {
-//     lean: [cardio, stretching, plyometrics]
-//     bulk: [strength]
-//   };
-// if fitnessGoals.muscleGroup = mealtypes value
-// shows HTML content for all meals with that class
-// else - show content for all meals with the other class
-
-// var function = displayResults()
-//fitnessQuestions[0].answers[0] = "strength"
-//fitnessQuestions[0].answers[1] = "plyometrics"
-// for loop to iterate through the bodyParts object and match the answer to the final question to the correct object key
-//math.random to pick a random muscle from the correct array
-// Change the key value for the bodyParts object to the chosen muscle
-// Get results for all questions and fetch from the fitness API
-// fetch (fitnessApiUrl)
-// get and store the results in JSON object
-// .then fetch (imageApiUrl)
-// After fitness API fetch, ideally pass the name of the workout from the results into the image generator API
-// Display image (ideally) matching the workout
-// Generate results onto pre-existing HTML elements - pre-existing elements would be dropdowns, Title and container for results.
-// Generate save buttons for 
-// mealMatcherer() run the mealmatcher function
-
-// Once results are displayed - drop downs visible for the 3 criteria and a regenerate button
-
-// a regenerate button can be clicked if results aren't suitable. 
-
 var questionIndex = 0; // Variable to store questionIndex, which goes up by 1 after each question
 var userAnswers = []; // Array to store user answers
 // Object for questions, answer options and icon classes for each answer
@@ -60,37 +28,31 @@ var mealMatcher = function () {
 
 // Function to show results page
 // NEEDS BUILDING OUT WITH DYNAMIC HTML
-var showResults = function(workout, gif) {
+var showResults = function (workout, gif) {
   $("#results-screen").removeClass("hide")
   $("#quiz-screen").attr("class", "hide")
   console.log(workout);
   console.log(gif);
-  // Dynamically generate dropdown options
-var populateDropdowns = function (element, options) {
-  for (var i = 0; i < options.length; i++) {
-    var optionEl = document.createElement("option");
-    optionEl.value = options[i];
-    optionEl.text = options[i];
-    element.append(optionEl);
-  }
-}
-// Populate dropdowns
-populateDropdowns($("#goalSelect"), fitnessQuestions[0].answers);
-populateDropdowns($("#skillSelect"), fitnessQuestions[1].answers);
-
   function toTitleCase(string) {
     // Split the string into words
     var words = string.split(' ');
+
     // Capitalize the first letter of each word
     var titleCaseWords = words.map(word => {
       return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
     });
+
     // Join the words back into a string
     var titleCaseString = titleCaseWords.join(' ');
+
     return titleCaseString;
   }
 
-  $('#yourWorkout').append(`<h2 id workoutTitle class="display-4 mb-4">You asked for workouts to help you ${userAnswers[0].toLowerCase()}`)
+  // Check if userAnswers is defined and has at least one element
+  if (userAnswers && userAnswers.length > 0) {
+    $('#yourWorkout').append(`<h2 class="display-4 mb-4">You asked for workouts to help you ${userAnswers[0].toLowerCase()}`);
+  }
+
   for (var i = 0; i < 3; i++) {
     $('#yourWorkout').append(`<div class="card mb-3">
   <img src="${gif.data[i].images.original.url}" class="mx-3 mt-4 card-img-top" alt="${userAnswers[0]} Workout Gif" style="width:300px">
@@ -104,11 +66,12 @@ populateDropdowns($("#skillSelect"), fitnessQuestions[1].answers);
 </div>`)
   }
 
-  // IF STATEMENT TO SHOW THE RELEVANT MEAL CARDS
-}
+  // Display meal cards based on fitness goal
+  mealMatcher();
+};
 
 // Function to pass fitnessQuestions into the excercises API and log results
-var getWorkout = function() {
+var getWorkout = function () {
   // Maps user answers to parameters the API can understand
   var answerMappings = {
     'Bulk': 'strength',
@@ -119,29 +82,29 @@ var getWorkout = function() {
     'Make Me Sweat!': 'intermediate',
   };
 
-var type = answerMappings[userAnswers[0]]; // Maps the user chosen fitness goal to one of the APIable types of workout
-var difficulty = answerMappings[userAnswers[1]]; // Maps the user chosen skill level to an APIable parameter
-var workoutUrl = "https://api.api-ninjas.com/v1/exercises?type=" + type + "&difficulty=" + difficulty;
+  var type = answerMappings[userAnswers[0]]; // Maps the user chosen fitness goal to one of the APIable types of workout
+  var difficulty = answerMappings[userAnswers[1]]; // Maps the user chosen skill level to an APIable parameter
+  var workoutUrl = "https://api.api-ninjas.com/v1/exercises?type=" + type + "&difficulty=" + difficulty;
 
-// Fetch from workout API
-fetch(workoutUrl, {
-headers: { 'X-Api-Key': 'Xm9KrAkFaXPAXu1rR0wdLw==EAJWzakA1gYNDQF6' },
-})
-.then(function (response) {
-  console.log(workoutUrl)
-  return response.json();
-})
-.then(function (workoutData) {
-  getGiphy(type, workoutData)
-})
-.catch(function (error) {
-  console.error(error);
-});
+  // Fetch from workout API
+  fetch(workoutUrl, {
+    headers: { 'X-Api-Key': 'Xm9KrAkFaXPAXu1rR0wdLw==EAJWzakA1gYNDQF6' },
+  })
+    .then(function (response) {
+      console.log(workoutUrl)
+      return response.json();
+    })
+    .then(function (workoutData) {
+      getGiphy(type, workoutData)
+    })
+    .catch(function (error) {
+      console.error(error);
+    });
 };
 
 // Function to pass workoutData into Giphy API to get a gif
 var getGiphy = function (type, workoutData) {
-// Maps user answers to appropriate Giphy ID's
+  // Maps user answers to appropriate Giphy ID's
   var giphyMappings = {
     'strength': ['o4HacXW6rQty0', 'f5dDxjoo0MSnQMFPOp', 'dt40pTFK4lETk43ldq', '1oC7CzF6DHBQqPniuS'],
     'plyometrics': ['3oKIPz238SgcY0p8xG', 'xeUFXl6Wspcz6Yv7cY', 'jkrI2HmUmdDlBz9oeN', 'H6o2fJlAPEiVhJN3M6'],
@@ -149,9 +112,9 @@ var getGiphy = function (type, workoutData) {
     'stretching': ['3oKIPpaHCfN7ECPIGs', 'DBbPjLMsQPruMkDcrd', 'YSrDx5MlMDp3dvYCML', 'ef0AeVgH1Jb0FBNKq1']
   };
 
-  var getRandomGif = function(type) {
+  var getRandomGif = function (type) {
     var value = giphyMappings[type];
-    
+
     // Shuffle the array
     for (var i = value.length - 1; i > 0; i--) {
       var j = Math.floor(Math.random() * (i + 1));
@@ -159,7 +122,7 @@ var getGiphy = function (type, workoutData) {
     }
     return value;
   };
-  
+
   var randomGiphyId = getRandomGif(type); // Store random giphyMappings value in variable
   console.log(randomGiphyId)
   var giphyKey = "BpXTUZMuQkSFoZt9q5biIp1nwCwE5xEh";
@@ -167,15 +130,15 @@ var getGiphy = function (type, workoutData) {
 
   // Fetch from Giphy API
   fetch(giphyURL)
-  .then(function (response) {
-    return response.json();
-  })
-  .then(function (gifData) {
-    showResults(workoutData, gifData);
-  })
-  .catch(function (error) {
-    console.error(error);
-});
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (gifData) {
+      showResults(workoutData, gifData);
+    })
+    .catch(function (error) {
+      console.error(error);
+    });
 };
 
 // Generate Quiz question cards
@@ -204,7 +167,7 @@ var generateQuestion = function () {
     console.log(userAnswers)
     getWorkout();
     toggleMealCard(userAnswers[0]);
-}
+  }
 };
 
 generateQuestion();
@@ -220,6 +183,20 @@ $('#regenerateResultsBtn').on('click', function (event) {
   getWorkout();
 });
 
+// Function to show/hide meal cards based on user answer
+var toggleMealCard = function (userAnswer) {
+  // Hide both meal cards initially
+  $("#leanMealCard").hide();
+  $("#bulkMealCard").hide();
+
+  // Determine which meal card to show based on user's answer
+  if (userAnswer === "Tone" || userAnswer === "Cardio" || userAnswer === "Stretch") {
+    $("#leanMealCard").show();
+  } else if (userAnswer === "Bulk") {
+    $("#bulkMealCard").show();
+  }
+};
+
 $('#card-container').on('click', '.card', function (event) {
   var userAnswer = $(event.currentTarget).find('.card-title').text();
   userAnswers.push(userAnswer);
@@ -232,356 +209,88 @@ $('#card-container').on('click', '.card', function (event) {
 //#region
 // document.addEventListener("DOMContentLoaded"), function () {
 //   // Sample data for dropdown options
-//   const goals = ["Bulking", "Slimming", "Cardio", "Stretching"];
-//   const skillLevels = ["Beginner", "Intermediate", "Advanced"];
-//   const muscles = [
-//     "Abdominals",
-//     "Abductors",
-//     "Adductors",
-//     "Biceps",
-//     "Calves",
-//     "Chest",
-//     "Forearms",
-//     "Glutes",
-//     "Hamstrings",
-//     "Lats",
-//     "Lower Back",
-//     "Middle Back",
-//     "Neck",
-//     "Quadriceps",
-//     "Traps",
-//     "Triceps"
-//   ];
-//   const exerciseNumbers = Array.from({ length: 10 }, (_, i) => i + 1);
+const goals = ["Bulking", "Slimming", "Cardio", "Stretching"];
+const skillLevels = ["Beginner", "Intermediate", "Advanced"];
+const muscles = [
+  "Abdominals",
+  "Abductors",
+  "Adductors",
+  "Biceps",
+  "Calves",
+  "Chest",
+  "Forearms",
+  "Glutes",
+  "Hamstrings",
+  "Lats",
+  "Lower Back",
+  "Middle Back",
+  "Neck",
+  "Quadriceps",
+  "Traps",
+  "Triceps"
+];
+const exerciseNumbers = Array.from({ length: 10 }, (_, i) => i + 1);
 
-// //   // Function to dynamically generate dropdown options
-//   function populateDropdown(selectElement, options) {
-//     options.forEach(option => {
-//       const optionElement = document.createElement("option");
-//       optionElement.value = option;
-//       optionElement.text = option;
-//       selectElement.appendChild(optionElement);
-//     });
-//   }
-
-//   // Populate dropdowns
-//   populateDropdown(document.getElementById("goalSelect"), fitnessQuestions[0].answers);
-//   populateDropdown(document.getElementById("skillSelect"), fitnessQuestions[1].answers);
- 
-
-//    // Function to dynamically generate workout buttons
-//    function generateWorkoutButtons(container, workouts) {
-//     if (!container) {
-//       console.error("Container is null");
-//       return;
-//     }
-
-//     workouts.forEach(workout => {
-//       const button = document.createElement("button");
-//       button.classList.add("btn", "btn-primary", "mb-2");
-//       button.textContent = workout;
-//       container.appendChild(button);
-
-//       // Add click event listener to each button
-//       button.addEventListener("click", function () {
-//         // Get user selections
-//         const selectedGoal = document.getElementById("goalSelect").value;
-//         const selectedSkill = document.getElementById("skillSelect").value;
-
-//         // Translate user-friendly fitness goal to API terms
-//         const apiFitnessGoal = translateFitnessGoal(selectedGoal);
-
-        // Make API request based on user selections
-        makeApiRequest(apiFitnessGoal, selectedSkill, selectedMuscle, selectedExerciseNumber);
-      });
-    });
-  }
-
-  // Populate workout buttons
-  generateWorkoutButtons(document.getElementById("workoutsContainer"), ["View Your Results"]);
-
-  // Function to translate user-friendly fitness goals to API terms
-  const fitnessGoalMapping = {
-    "Bulking": "strength",
-    "Slimming": "plyometrics",
-    "Cardio": "cardio",
-    "Stretching": "stretching"
-  };
-
-  function translateFitnessGoal(userFriendlyGoal) {
-    return fitnessGoalMapping[userFriendlyGoal] || userFriendlyGoal;
-  }
-
-  // Function to make API request
-  function makeApiRequest(goal, skill, muscle, exerciseNumber) {
-    $.ajax({
-      method: 'GET',
-      url: `https://api.api-ninjas.com/v1/exercises?&difficulty=${skill}&muscle=${muscle}&goal=${goal}&limit=${exerciseNumber}`,
-      headers: { 'X-Api-Key': 'Xm9KrAkFaXPAXu1rR0wdLw==EAJWzakA1gYNDQF6' },
-      contentType: 'application/json',
-      success: function (result) {
-        // Process and display API results here
-        console.log(result);
-        displayWorkouts(result); // Assuming you have a function to display the results
-      },
-      error: function ajaxError(jqXHR) {
-        console.error('Error: ', jqXHR.responseText);
-      }
-    });
-  }
-
-  // Function to display workout results (modify as needed)
-function displayWorkouts(results) {
-  // Clear previous results
-  const workoutsContainer = document.getElementById("workoutsContainer");
-  workoutsContainer.innerHTML = "";
-
-  // Display results, modify as needed
-  results.forEach(result => {
-    const workoutCard = document.createElement("div");
-    workoutCard.classList.add("card", "mb-4");
-
-    const workoutCardContent = `
-      <div class="card-body">
-        <h5 class="card-title">${result.name}</h5>
-        <p class="card-text">${result.description}</p>
-      </div>
-    `;
-
-    workoutCard.innerHTML = workoutCardContent;
-    workoutsContainer.appendChild(workoutCard);
+//   // Function to dynamically generate dropdown options
+function populateDropdown(selectElement, options) {
+  options.forEach(option => {
+    const optionElement = document.createElement("option");
+    optionElement.value = option;
+    optionElement.text = option;
+    selectElement.appendChild(optionElement);
   });
-
-  // Create the "View Saved Workouts" button dynamically
-  const viewSavedWorkoutsBtn = document.createElement("button");
-  viewSavedWorkoutsBtn.id = "viewSavedWorkoutsBtn";
-  viewSavedWorkoutsBtn.classList.add("btn", "btn-primary", "mb-2");
-  viewSavedWorkoutsBtn.textContent = "View Saved Workouts";
-
-  // Add an event listener to the button for redirection
-  viewSavedWorkoutsBtn.addEventListener("click", function () {
-    // Redirect to the saved workouts page
-    window.location.href = "saved-workouts.html";
-  });
-
-  // Append the button to the same container as the "Save Results" button
-  workoutsContainer.appendChild(viewSavedWorkoutsBtn);
-}
-// Function to display saved results on a separate page
-function displaySavedResultsPage() {
-  const savedResults = getResultsFromLocalStorage();
-
-  if (savedResults) {
-    // Display saved results on the saved workouts page
-    const savedWorkoutsContainer = document.getElementById("savedWorkoutsContainer");
-
-    // Clear previous results
-    savedWorkoutsContainer.innerHTML = "";
-
-    // Display results, modify as needed
-    savedResults.forEach(result => {
-      const workoutCard = document.createElement("div");
-      workoutCard.classList.add("col-md-4", "mb-4");
-
-      const cardContent = `
-        <div class="card h-100">
-          <div class="card-body">
-            <h5 class="card-title">${result.name}</h5>
-            <p class="card-text">${result.description}</p>
-          </div>
-        </div>
-      `;
-
-      workoutCard.innerHTML = cardContent;
-      savedWorkoutsContainer.appendChild(workoutCard);
-    });
-  } else {
-    console.log("No saved results found.");
-    console.log("Saved Workouts Container not found.");
-  }
 }
 
-// Call the function to display saved results when the page loads
-document.addEventListener("DOMContentLoaded", function () {
-  displaySavedResultsPage();
-});
+// Populate dropdowns
+populateDropdown(document.getElementById("goalSelect"), fitnessQuestions[0].answers);
+populateDropdown(document.getElementById("skillSelect"), fitnessQuestions[1].answers);
 
-// -------------- END OF CLAIRES CODE ---------------------------------
 
-  // This will get the category IDs based on the provided category
-  // var categoryIds = categories[category];
+// Function to dynamically generate workout buttons
+function generateWorkoutButtons(container, workouts) {
+  if (!container) {
+    console.error("Container is null");
+    return;
+  }
 
-//   // This will check if the category is valid
-//   if (!categoryIds) {
-//       console.error('Invalid category.');
-//       return null;
-//   }
+  workouts.forEach(workout => {
+    const button = document.createElement("button");
+    button.classList.add("btn", "btn-primary", "mb-2");
+    button.textContent = workout;
+    container.appendChild(button);
 
-//   // This will get a random ID from the category
-//   var selectedId = getRandomId(categoryIds);
+    // Add click event listener to each button
+    button.addEventListener("click", function () {
+      // Get user selections
+      const selectedGoal = document.getElementById("goalSelect").value;
+      const selectedSkill = document.getElementById("skillSelect").value;
 
-//   // This will then set up the Giphy API endpoint and parameters
-//   var endpoint = 'https://api.giphy.com/v1/gifs';
-//   var params = new URLSearchParams({
-//       api_key: apiKey,
-//       ids: selectedId
-//   });
-//   var url = endpoint + '?' + params.toString();
+      // Translate user-friendly fitness goal to API terms
+      const apiFitnessGoal = translateFitnessGoal(selectedGoal);
 
-//   console.log('API Request URL:', url);
+      // Make API request based on user selections
+      makeApiRequest(apiFitnessGoal, selectedSkill, selectedMuscle, selectedExerciseNumber);
+    });
+  });
 
-//   return fetch(url)
-//       .then(function (response) {
-//           console.log('API Response Status:', response.status);
 
-//           if (!response.ok) {
-//               throw new Error('HTTP error! Status: ' + response.status);
-//           }
 
-//           return response.json();
-//       })
-//       .then(function (data) {
-//           console.log('API Response Data:', data);
+  // Add click event listener to the "Regenerate" button
+  regenerateButton.addEventListener("click", function () {
+    // Get user selections
+    const selectedGoal = document.getElementById("goalSelect").value;
+    const selectedSkill = document.getElementById("skillSelect").value;
 
-//           if (data.data && data.data.length > 0) {
-//               // This grabs the image URL from the API response
-//               var imageUrl = data.data[0].images.original.url;
-//               console.log('Image URL:', imageUrl);
-//               return data.data[0];
-//           } else {
-//               console.error('No valid data found in the response.');
-//               return null;
-//           }
-//       })
-//       .catch(function (error) {
-//           console.error('Error making Giphy API request:', error);
-//           return null;
-//       });
-// }
+    // Translate user-friendly fitness goal to API terms
+    const apiFitnessGoal = translateFitnessGoal(selectedGoal);
 
-// // See example below. This can be used for structuring the code to sync up both APIs
-// var apiKey = 'KoDhL5K0ZtHXlWn5Dsuxf9rQaSPHtZWP';
-// var category = 'Strength';
+    // Make API request based on user selections
+    makeApiRequest(apiFitnessGoal, selectedSkill, selectedMuscle, selectedExerciseNumber);
+  });
+}
 
-// // This function will handle a click on an exercise category button
-// function handleExerciseCategoryClick(category) {
-//   // This fetches exercise title, difficulty level, and instructions from API Ninja
-//   // For demonstration purposes, a placeholder text is used here, which needs to be replaced with API Ninja data
-//   var exerciseInfo = {
-//       title: 'Sample Exercise title',
-//       difficulty: 'Intermediate',
-//       instructions: 'Sample Exercise Instructions'
-//   };
-
-//   // This dynamic html placeholder text is here for demo purposes and can be deleted/replaced with API Ninja data
-//   var exerciseInfoContainer = document.getElementById('exercise-info');
-//   exerciseInfoContainer.innerHTML = `
-//       <h2>${exerciseInfo.title}</h2>
-//       <p>Difficulty: ${exerciseInfo.difficulty}</p>
-//       <p>Instructions: ${exerciseInfo.instructions}</p>
-//   `;
-
-//   /// This is how we get and display a Giphy image
-//   getGiphyImage(apiKey, category)
-//   .then(function (result) {
-//       var giphyImageContainer = document.getElementById('giphy-image');
-
-//       if (result) {
-//           // We use the 'imageUrl' obtained from the Giphy API response
-//           var imageUrl = result.images.original.url;
-
-//           // We create an <img> element and set its src attribute so the image can be displayed
-//           var imageElement = document.createElement('img');
-//           imageElement.src = imageUrl;
-//           imageElement.alt = 'Giphy Image';
-
-//           // Clear the container and append the image
-//           giphyImageContainer.innerHTML = '';
-//           giphyImageContainer.appendChild(imageElement);
-//       } else {
-//           giphyImageContainer.innerHTML = '<p>No Giphy image found.</p>';
-//       }
-//   });
-// }
-
-// // The code below which is used to dynamically create buttons for each exercise category can be replaced with the 4 large icons
-// var exerciseCategories = ['Strength', 'Plyometrics', 'Cardio', 'Stretching'];
-// var exerciseButtonsContainer = document.getElementById('exercise-buttons');
-
-// exerciseCategories.forEach(function (category) {
-//   var button = document.createElement('button');
-//   button.textContent = category;
-//   button.className = 'btn btn-primary';
-//   button.addEventListener('click', function () {
-//       handleExerciseCategoryClick(category);
-//   });
-//   exerciseButtonsContainer.appendChild(button);
-    
-    
-// 
-
-//   // Function to display workout results (modify as needed)
-//   function displayWorkouts(results) {
-//     // Clear previous results
-//     const workoutsContainer = document.getElementById("workoutsContainer");
-//     workoutsContainer.innerHTML = "";
-
-//     // Display results, modify as needed
-//     results.forEach(result => {
-//       const workoutCard = document.createElement("div");
-//       workoutCard.classList.add("card", "mb-4");
-
-//       const workoutCardContent = `
-//             <div class="card-body">
-//               <h5 class="card-title">${result.name}</h5>
-//               <p class="card-text">${result.description}</p>
-//             </div>
-//           `;
-
-//       workoutCard.innerHTML = workoutCardContent;
-//       workoutsContainer.appendChild(workoutCard);
-//     });
-//   }
-
-//   // Function to save results to Local Storage
-//   function saveResultsToLocalStorage(results) {
-//     localStorage.setItem('savedResults', JSON.stringify(results));
-//   }
-
-//   // Function to get results from Local Storage
-//   function getResultsFromLocalStorage() {
-//     const savedResults = localStorage.getItem('savedResults');
-//     return savedResults ? JSON.parse(savedResults) : null;
-//   }
-
-//   // Function to display saved results
-//   function displaySavedResults() {
-//     const savedResults = getResultsFromLocalStorage();
-
-//     if (savedResults) {
-//       // Display saved results on the page as needed
-//       console.log("Saved Results:", savedResults);
-//       // Modify the display logic based on your page structure
-//     } else {
-//       console.log("No saved results found.");
-//     }
-//   }
-
-//   // Event listener for the "Save Results" button
-//   document.getElementById("saveResultsBtn").addEventListener("click", function () {
-//     // Get current results (modify this based on your page structure)
-//     const currentResults = /* logic to get current results */
-
-//       // Save results to Local Storage
-//       saveResultsToLocalStorage(currentResults);
-//   });
-
-//   // Event listener for history buttons
-//   document.getElementById("historyBtn").addEventListener("click", function () {
-//     // Display saved results when history button is clicked
-//     displaySavedResults();
-//   });
-//#end
+//   // Populate workout buttons
+generateWorkoutButtons(document.getElementById("workoutsContainer"), ["Regenerate"]);
 
 // When a user selects either bulk or tone = lean the matching meal card dynamically displays 
 let leanMealCard = [{ Title: "Lean Meal", description: "Select from one of our stress free meal prep pack sizes whcih you can customise using the menu below" }];
@@ -589,25 +298,25 @@ let leanMealCard = [{ Title: "Lean Meal", description: "Select from one of our s
 let bulkMealCard = [{ Title: "Bulk Meal", description: "Select from one of our stress free meal prep pack sizes whcih you can customise using the menu below" }];
 
 // Sample data for meal cards (copied from WYLD website so can be changed)
-  let leanMealData = [
-    { title: "Lean Meal 1", description: "Our Small Meal Prep Pack comes with 6 meals of your choice from the beWYLD Meal Prep Menu and is designed for those that want to lose body fat and retain or grow muscle mass.", url: "https://www.bewyld.co.uk/product-page/3-day-nurture-maintain-meal-prep-package" },
-    { title: "Lean Meal 2", description: "Our Medium Meal Prep Pack comes with 9 meals of your choice from the beWYLD Meal Prep Menu and is designed for those that want to lose body fat and retain or grow muscle mass.", url: "https://www.bewyld.co.uk/product-page/3-day-grow-gain-meal-prep-package" },
-    { title: "Lean Meal 3", description: "Our Large Meal Prep Pack comes with 9 meals of your choice from the beWYLD Meal Prep Menu and is designed for those that want to lose body fat and retain or grow muscle mass.", url: "https://www.bewyld.co.uk/product-page/3-day-lean-and-clean-meal-prep-package" }
-  ];
+let leanMealData = [
+  { title: "Lean Meal 1", description: "Our Small Meal Prep Pack comes with 6 meals of your choice from the beWYLD Meal Prep Menu and is designed for those that want to lose body fat and retain or grow muscle mass.", url: "https://www.bewyld.co.uk/product-page/3-day-nurture-maintain-meal-prep-package" },
+  { title: "Lean Meal 2", description: "Our Medium Meal Prep Pack comes with 9 meals of your choice from the beWYLD Meal Prep Menu and is designed for those that want to lose body fat and retain or grow muscle mass.", url: "https://www.bewyld.co.uk/product-page/3-day-grow-gain-meal-prep-package" },
+  { title: "Lean Meal 3", description: "Our Large Meal Prep Pack comes with 9 meals of your choice from the beWYLD Meal Prep Menu and is designed for those that want to lose body fat and retain or grow muscle mass.", url: "https://www.bewyld.co.uk/product-page/3-day-lean-and-clean-meal-prep-package" }
+];
 
-  let bulkMealData = [
-    { title: "Bulk Meal 1", description: "Our Small Bulk Meal Prep Pack comes with 6 meals of your choice from the beWYLD Meal Prep Menu and is designed for those that want to gain Strength and Muscle Mass by including extra Protein and low GI Carbohydrates", url: "https://www.bewyld.co.uk/product-page/nurture-maintain-meal-prep-package" },
-    { title: "Bulk Meal 2", description: "Our Medium Bulk Meal Prep Pack comes with 9 meals of your choice from the beWYLD Meal Prep Menu and is designed for those that want to gain Strength and Muscle Mass by including extra Protein and low GI Carbohydrates", url: "https://www.bewyld.co.uk/product-page/copy-of-wyld-bulk-medium-box-9-meals-8-per-meal" },
-    { title: "Bulk Meal 3", description: "Our LARGE Bulk Meal Prep Pack comes with 12 meals of your choice from the beWYLD Meal Prep Menu and is designed for those that want to gain Strength and Muscle Mass by including extra Protein and low GI Carbohydrates", url: "https://www.bewyld.co.uk/product-page/wyld-bulk-large-box-12-meals-7-50-per-meal" }
-  ];
+let bulkMealData = [
+  { title: "Bulk Meal 1", description: "Our Small Bulk Meal Prep Pack comes with 6 meals of your choice from the beWYLD Meal Prep Menu and is designed for those that want to gain Strength and Muscle Mass by including extra Protein and low GI Carbohydrates", url: "https://www.bewyld.co.uk/product-page/nurture-maintain-meal-prep-package" },
+  { title: "Bulk Meal 2", description: "Our Medium Bulk Meal Prep Pack comes with 9 meals of your choice from the beWYLD Meal Prep Menu and is designed for those that want to gain Strength and Muscle Mass by including extra Protein and low GI Carbohydrates", url: "https://www.bewyld.co.uk/product-page/copy-of-wyld-bulk-medium-box-9-meals-8-per-meal" },
+  { title: "Bulk Meal 3", description: "Our LARGE Bulk Meal Prep Pack comes with 12 meals of your choice from the beWYLD Meal Prep Menu and is designed for those that want to gain Strength and Muscle Mass by including extra Protein and low GI Carbohydrates", url: "https://www.bewyld.co.uk/product-page/wyld-bulk-large-box-12-meals-7-50-per-meal" }
+];
 
-  // Function to dynamically generate meal cards
-  function generateMealCards(container, mealData) {
-    mealData.forEach(meal => {
-      const card = document.createElement("div");
-      card.classList.add("card", "mb-4");
+// Function to dynamically generate meal cards
+function generateMealCards(container, mealData) {
+  mealData.forEach(meal => {
+    const card = document.createElement("div");
+    card.classList.add("card", "mb-4");
 
-      const cardContent = `
+    const cardContent = `
             <div class="card-body">
               <h5 class="card-title">${meal.title}</h5>
               <p class="card-text">${meal.description}</p>
@@ -615,14 +324,14 @@ let bulkMealCard = [{ Title: "Bulk Meal", description: "Select from one of our s
             </div>
           `;
 
-      card.innerHTML = cardContent;
-      container.appendChild(card);
-    });
-  }
+    card.innerHTML = cardContent;
+    container.appendChild(card);
+  });
+}
 
-  // Populate meal cards
-  generateMealCards(document.getElementById("leanMealContainer"), leanMealData);
-  generateMealCards(document.getElementById("bulkMealContainer"), bulkMealData);
+// Populate meal cards
+generateMealCards(document.getElementById("leanMealContainer"), leanMealData);
+generateMealCards(document.getElementById("bulkMealContainer"), bulkMealData);
 
 //   // Event listener for the "View BeWYLD Menu" button
 //   document.getElementById("viewMenuBtn").addEventListener("click", function () {
