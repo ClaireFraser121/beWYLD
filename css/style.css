@@ -1,71 +1,71 @@
 i {
-    margin: 0 auto;
+  margin: 0 auto;
 }
 
 /* Add your custom styles here */
 
 body {
-  font-family: 'Arial', sans-serif;
+font-family: 'Arial', sans-serif;
 }
 
 /* Header styles */
 header {
-  background-color: #f8f9fa;
-  padding: 10px 0;
+background-color: #f8f9fa;
+padding: 10px 0;
 }
 
 .navbar-brand img {
-  max-height: 40px;
+max-height: 40px;
 }
 
 /* Start screen styles */
 #start-screen {
-  text-align: center;
-  padding: 20px;
+text-align: center;
+padding: 20px;
 }
 
 .card {
-  border: none;
+border: none;
 }
 
 /* Results screen styles */
 #results-screen {
-  padding: 20px;
+padding: 20px;
 }
 
 /* Dropdown container styles */
 .form-select {
-  width: 100%;
-  padding: 8px;
-  margin-top: 5px;
-  margin-bottom: 10px;
+width: 100%;
+padding: 8px;
+margin-top: 5px;
+margin-bottom: 10px;
 }
 
 /* Left sidebar styles */
 aside {
-  float: left;
-  width: 20%;
+float: left;
+width: 20%;
 }
 
 /* Jumbotron styles */
 .jumbotron {
-  background-color: #f8f9fa;
-  padding: 20px 100px 20px 100px;
-  margin-bottom: 20px;
+background-color: #f8f9fa;
+padding: 20px 100px 20px 100px;
+margin-bottom: 20px;
 }
 
 /* Call-to-action styles */
 .call-to-action {
-  margin-top: 20px;
+margin-top: 20px;
 }
 
 /* Footer styles */
 footer {
-  background-color: #343a40;
-  color: white;
-  text-align: center;
-  padding: 10px 0;
-  margin-top: 100px;
+background-color: #343a40;
+color: white;
+text-align: center;
+padding: 10px 0;
+margin-top: 100px;
 }
 
 #goalDropdown {
@@ -77,5 +77,5 @@ footer {
 }
 
 .hide {
-  display: none !important;
+display: none !important;
 }
