@@ -209,6 +209,7 @@ $('#card-container').on('click', '.card', function (event) {
 //#region
 // document.addEventListener("DOMContentLoaded"), function () {
 //   // Sample data for dropdown options
+
 const goals = ["Bulking", "Slimming", "Cardio", "Stretching"];
 const skillLevels = ["Beginner", "Intermediate", "Advanced"];
 const muscles = [
@@ -240,6 +241,7 @@ function populateDropdown(selectElement, options) {
     selectElement.appendChild(optionElement);
   });
 }
+
 
 // Populate dropdowns
 populateDropdown(document.getElementById("goalSelect"), fitnessQuestions[0].answers);
