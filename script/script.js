@@ -5,15 +5,26 @@ var fitnessQuestions = [
   {
     question: "What is your fitness goal?",
     answers: ["Bulk", "Tone", "Cardio", "Stretch"],
-    iconClass: ["fa-dumbbell", "fa-weight-scale", "fa-heart-pulse", "fa-child-reaching"],
+    iconClass: ["fa-dumbbell", "fa-weight-scale", "fa-heart-pulse", "fa-child-reaching"]
   },
   {
     question: "How intense would you like to go?",
     answers: ["Easy", "Make Me Sweat!",],
-    iconClass: ["fa-person-walking", "fa-face-grin-beam-sweat",],
+    iconClass: ["fa-person-walking", "fa-face-grin-beam-sweat",]
 
   },
 ];
+
+// Function to dynamically match meals based on fitness goals
+var mealMatcher = function () {
+  var fitnessGoals = {
+    'Bulk': bulkMealCard,
+    'Tone': leanMealCard,
+    'Cardio': leanMealCard,
+    'Stretch': leanMealCard,
+  };
+};
+
 
 // Function to show results page
 // NEEDS BUILDING OUT WITH DYNAMIC HTML
@@ -22,7 +33,7 @@ var showResults = function(workout, gif) {
   $("#quiz-screen").attr("class", "hide")
   console.log(workout);
   console.log(gif);
-  // Dynamically generate dropdown options
+    // Dynamically generate dropdown options
 var populateDropdowns = function (element, options) {
   for (var i = 0; i < options.length; i++) {
     var optionEl = document.createElement("option");
@@ -34,20 +45,26 @@ var populateDropdowns = function (element, options) {
 // Populate dropdowns
 populateDropdowns($("#goalSelect"), fitnessQuestions[0].answers);
 populateDropdowns($("#skillSelect"), fitnessQuestions[1].answers);
-
   function toTitleCase(string) {
     // Split the string into words
     var words = string.split(' ');
+  
     // Capitalize the first letter of each word
     var titleCaseWords = words.map(word => {
       return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
     });
+  
     // Join the words back into a string
     var titleCaseString = titleCaseWords.join(' ');
+  
     return titleCaseString;
   }
-// Generate all HTML for the results page
-  $('#yourWorkout').append(`<h2 id workoutTitle class="display-4 mb-4">You asked for workouts to help you ${userAnswers[0].toLowerCase()}`)
+
+  // Check if userAnswers is defined and has at least one element
+  if (userAnswers && userAnswers.length > 0) {
+    $('#yourWorkout').append(`<h2 class="display-4 mb-4">You asked for workouts to help you ${userAnswers[0].toLowerCase()}`);
+  }
+  
   for (var i = 0; i < 3; i++) {
     $('#yourWorkout').append(`<div class="card mb-3">
   <img src="${gif.data[i].images.original.url}" class="mx-3 mt-4 card-img-top" alt="${userAnswers[0]} Workout Gif" style="width:300px">
@@ -56,13 +73,14 @@ populateDropdowns($("#skillSelect"), fitnessQuestions[1].answers);
     <p class="card-text"><span>Equipment:</span> ${toTitleCase(workout[i].equipment.replace(/_/g, ' '))}</p>
     <h5>Instructions</h5>
     <p class="card-text">${workout[i].instructions}</p>
-    <a href="#" class="btn btn-primary">Save workout</a>
+    <a href="#" class="btn btn-primary">Save exercise</a>
   </div>
 </div>`)
-  }
-
-  // IF STATEMENT TO SHOW THE RELEVANT MEAL CARDS
 }
+
+// Display meal cards based on fitness goal
+mealMatcher();
+};
 
 // Function to pass fitnessQuestions into the excercises API and log results
 var getWorkout = function() {
@@ -158,10 +176,25 @@ var generateQuestion = function () {
   } else {
     console.log(userAnswers)
     getWorkout();
+    toggleMealCard(userAnswers[0]);
 }
 };
 
 generateQuestion();
+
+// Function to show/hide meal cards based on user answer
+var toggleMealCard = function (userAnswer) {
+  // Hide both meal cards initially
+  $("#leanMealCard").hide();
+  $("#bulkMealCard").hide();
+
+  // Determine which meal card to show based on user's answer
+  if (userAnswer === "Tone" || userAnswer === "Cardio" || userAnswer === "Stretch") {
+    $("#leanMealCard").show();
+  } else if (userAnswer === "Bulk") {
+    $("#bulkMealCard").show();
+  }
+};
 
 // event listener to regenerate quiz questions
 $('#regenerateResultsBtn').on('click', function (event) {

@@ -51,19 +51,24 @@
     <div class="container mt-5">
       <form>
         <div class="row mb-3">
-          <div id="goalDropdown" class="col-5">
+          <div class="col">
             <label for="goalSelect" class="form-label">Goal</label>
             <select class="form-select" id="goalSelect">
               <!-- Options dynamically generated using JavaScript -->
-              <option value="" selected>Select your goal</option>
             </select>
           </div>
-          <div id="skillDropdown" class="col-5">
+          <div class="col">
+            <label for="skillSelect" class="form-label">Skill Level</label>
+            <select class="form-select" id="skillSelect">
+              <!-- Options dynamically generated using JavaScript -->
+            </select>
+          </div>
+          <!-- <div id="skillDropdown" class="col-5">
             <label for="skillSelect" class="form-label">Skill Level</label>
             <select class="form-select" id="skillSelect">
               <option value="" selected>Select your intensity</option>
             </select>
-          </div>
+          </div> -->
           <div class="col d-flex align-items-end p-0">
             <button id="regenerateResultsBtn" class="btn btn-primary w-100">Regenerate</button>
           </div>
@@ -79,11 +84,68 @@
       </div>
     </section>
 
+    <!-- <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Create the main container
+        const dynamicContainer = document.getElementById("dynamicContainer");
+
+        // Create the section with jumbotron
+        const section = document.createElement("section");
+        section.classList.add("mb-3");
+
+        const jumbotron = document.createElement("div");
+        jumbotron.classList.add("jumbotron");
+
+        const h2 = document.createElement("h2");
+        h2.classList.add("display-4");
+        h2.textContent = "Your Personalised Workout Program";
+
+        const workoutsContainer = document.createElement("div");
+        workoutsContainer.id = "workoutsContainer";
+
+        // You can dynamically generate workout buttons here if needed
+
+        // Create the buttons
+        const saveResultsBtn = document.createElement("button");
+        saveResultsBtn.id = "saveResultsBtn";
+        saveResultsBtn.classList.add("btn", "btn-primary", "mb-2");
+        saveResultsBtn.textContent = "Save Results";
+
+        const clearResultsBtn = document.createElement("button");
+        clearResultsBtn.id = "clearResultsBtn";
+        clearResultsBtn.classList.add("btn", "btn-secondary");
+        clearResultsBtn.textContent = "Clear Results";
+
+        const historyBtn = document.createElement("button");
+        historyBtn.id = "historyBtn";
+        historyBtn.classList.add("btn", "btn-secondary");
+        historyBtn.textContent = "History";
+
+        // Add event listener to clear results
+        clearResultsBtn.addEventListener("click", function () {
+          // Clear the content inside the "workoutsContainer"
+          workoutsContainer.innerHTML = "";
+        });
+
+        // Append elements to their respective parents
+        jumbotron.appendChild(h2);
+        jumbotron.appendChild(workoutsContainer);
+        jumbotron.appendChild(saveResultsBtn);
+        jumbotron.appendChild(clearResultsBtn);
+        jumbotron.appendChild(historyBtn);
+
+        section.appendChild(jumbotron);
+        dynamicContainer.appendChild(section);
+      });
+    </script> -->
+
+
     <!-- Container for "You're all set" section -->
     <section id="bookTrainer" class="jumbotron container px-4 justify-content-center mt-5">
-      <h2 class="text-center mb-4">You're all set, let's get you those results</h2>
-      <div class="row justify-content-center text-center mt-4">
-          <button id="bookaTrainerBtn" class="col-2 btn btn-primary mx-auto">Book a Trainer</button>
+      <h2 class="text-center mb-4">Need support with your workouts?</h2>
+      <div class="row justify-content-center mt-4">
+      <a class="justify-content-center" href="book-a-trainer.html" target="_blank">
+      <button class="col-2 btn btn-primary">Book a Trainer</button></a>
       </div>
     </section>
 
@@ -114,13 +176,15 @@
       </div>
     </div>
   </div>
-      <!-- Button to View BeWYLD Menu -->
-      <div class="row justify-content-center">
-        <h5 class="call-to-action text-center">To see the menu we use to create your meals, click below!</h5>
-          <button id="viewMenuBtn" class="col-2 btn btn-primary">View BeWYLD Menu</button>
+    <!-- Button to View BeWYLD Menu -->
+    <div class="row justify-content-center">
+      <h5 class="call-to-action text-center">To see the menu we use to create your meals, click below!</h5>
+        <a class="justify-content-center" href="https://www.bewyld.co.uk/_files/ugd/d9fc74_06834711b1094e22a5fbc17f3c3a8362.pdf" target="_blank">
+        <button id="viewMenuBtn" class="col-2 btn btn-primary">View BeWYLD Menu</button></a>
     </div>
 </section>
   </div>
+
 
   <!-- Included Footer -->
   <footer class="text-center text-lg-start bg-body-tertiary text-muted" style="background-color: rgba(0, 0, 0, 0.05);">
@@ -173,7 +237,7 @@
     crossorigin="anonymous"></script>
 
   <!-- Link to your custom script file -->
-  <script src="./script/script.js"></script>
+  <script src="./script/test.js"></script>
 </body>
 
 </html>
