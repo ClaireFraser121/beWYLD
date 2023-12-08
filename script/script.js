@@ -40,15 +40,15 @@ var fitnessQuestions = [
     iconClass: ["fa-dumbbell", "fa-weight-scale", "fa-heart-pulse", "fa-child-reaching"],
   },
   {
-    question: "How would you describe your fitness level?",
-    answers: ["Beginner", "Intermediate", "Advanced"],
-    iconClass: ["fa-circle", "fa-circle-half-stroke", "fa-circle",],
+    question: "How intense would you like to go?",
+    answers: ["Easy", "Make Me Sweat!",],
+    iconClass: ["fa-person-walking", "fa-face-grin-beam-sweat",],
 
   },
-  {
-    question: "What part of the body would you like to work on?",
-    answers: ["Chest", "Arms", "Abs", "Back", "Bum", "Legs"],
-  },
+  // {
+  //   question: "What part of the body would you like to work on?",
+  //   answers: ["Chest", "Arms", "Abs", "Back", "Bum", "Legs"],
+  // },
 ];
 
 // Remove muscles
@@ -61,17 +61,17 @@ var showResults = function(workout, gif) {
   $("#quiz-screen").attr("class", "hide")
   console.log(workout);
   console.log(gif);
-  function toTitleCase(str) {
+  function toTitleCase(string) {
     // Split the string into words
-    let words = str.split(' ');
+    var words = string.split(' ');
   
     // Capitalize the first letter of each word
-    let titleCaseWords = words.map(word => {
+    var titleCaseWords = words.map(word => {
       return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
     });
   
     // Join the words back into a string
-    let titleCaseString = titleCaseWords.join(' ');
+    var titleCaseString = titleCaseWords.join(' ');
   
     return titleCaseString;
   }
@@ -79,10 +79,10 @@ var showResults = function(workout, gif) {
   $('#yourWorkout').append(`<h2 class="display-4 mb-4">You asked for workouts to help you ${userAnswers[0].toLowerCase()}`)
   for (var i = 0; i < 3; i++) {
     $('#yourWorkout').append(`<div class="card mb-3">
-  <img src="${gif.data[0].images.original.url}" class="card-img-top" alt="${userAnswers[0]} Workout Gif" style="width:500px">
+  <img src="${gif.data[i].images.original.url}" class="card-img-top" alt="${userAnswers[0]} Workout Gif" style="width:300px">
   <div class="card-body">
-    <h4 class="card-title">${workout[i].name}</h4>
-    <p class="card-text">Equipment: ${toTitleCase(workout[i].equipment.replace(/_/g, ' '))}</p>
+    <h3 class="card-title">${workout[i].name}</h3>
+    <p class="card-text"><span>Equipment:</span> ${toTitleCase(workout[i].equipment.replace(/_/g, ' '))}</p>
     <h5>Instructions</h5>
     <p class="card-text">${workout[i].instructions}</p>
     <a href="#" class="btn btn-primary">Go somewhere</a>
@@ -93,21 +93,14 @@ var showResults = function(workout, gif) {
 
 // Function to pass fitnessQuestions into the excercises API and log results
 var getWorkout = function() {
-  // Maps user answers into parameters the API can understand
+  // Maps user answers to parameters the API can understand
   var answerMappings = {
     'Bulk': 'strength',
     'Tone': 'plyometrics',
     'Cardio': 'cardio',
     'Stretch': 'stretching',
-    'Beginner': 'beginner',
-    'Intermediate': 'intermediate',
-    'Advanced': 'expert',
-    'Chest': 'chest',
-    'Arms': ['biceps', 'forearms', 'triceps'],
-    'Abs': 'abdominals',
-    'Back': ['lats', 'lower_back', 'middle_back', 'traps', 'neck'],
-    'Bum': ['abductors', 'glutes'],
-    'Legs': ['adductors', 'calves', 'hamstrings', 'quadriceps'],
+    'Easy': 'beginner',
+    'Make Me Sweat!': 'intermediate',
   };
 
   // Picks a random value if the chosen answer has an array of values
@@ -120,11 +113,10 @@ var getWorkout = function() {
       return value;
     }
   };
-
 var type = answerMappings[userAnswers[0]]; // Maps the user chosen fitness goal to one of the APIable types of workout
 var difficulty = answerMappings[userAnswers[1]]; // Maps the user chosen skill level to an APIable parameter
-var muscle = getRandomWorkout(userAnswers[2]); // Maps the user chosen body area to an APIable muslce parameter
-var workoutUrl = "https://api.api-ninjas.com/v1/exercises?type=" + type + "&muscle=" + muscle + "&difficulty=" + difficulty;
+// var muscle = getRandomWorkout(userAnswers[2]); // Maps the user chosen body area to an APIable muslce parameter
+var workoutUrl = "https://api.api-ninjas.com/v1/exercises?type=" + type + "&difficulty=" + difficulty;
 
 // Fetch from workout API
 fetch(workoutUrl, {
@@ -152,12 +144,19 @@ var getGiphy = function (type, workoutData) {
     'stretching': ['3oKIPpaHCfN7ECPIGs', 'DBbPjLMsQPruMkDcrd', 'YSrDx5MlMDp3dvYCML', 'ef0AeVgH1Jb0FBNKq1']
   };
 
-  // Picks a random value from the relevant array in the userAnswers object
-  var getRandomGiphyId = function(type) {
+  var getRandomGif = function(type) {
     var value = giphyMappings[type];
-    return value[Math.floor(Math.random() * value.length)];
+    
+    // Shuffle the array
+    for (var i = value.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      [value[i], value[j]] = [value[j], value[i]];
+    }
+    return value;
   };
-  var randomGiphyId = getRandomGiphyId(type); // Store random giphyMappings value in variable
+  
+  var randomGiphyId = getRandomGif(type); // Store random giphyMappings value in variable
+  console.log(randomGiphyId)
   var giphyKey = "BpXTUZMuQkSFoZt9q5biIp1nwCwE5xEh";
   var giphyURL = "https://api.giphy.com/v1/gifs?ids=" + randomGiphyId + "&api_key=" + giphyKey;
 
