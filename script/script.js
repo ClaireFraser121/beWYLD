@@ -281,9 +281,6 @@ $('#card-container').on('click', '.card', function (event) {
 
         // Make API request based on user selections
         makeApiRequest(apiFitnessGoal, selectedSkill, selectedMuscle, selectedExerciseNumber);
-      });
-    });
-  }
 
   // Populate workout buttons
   generateWorkoutButtons(document.getElementById("workoutsContainer"), ["View Your Results"]);
