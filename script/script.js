@@ -65,26 +65,32 @@ var showResults = function(workout, gif) {
   $("#quiz-screen").attr("class", "hide")
   console.log(workout);
   console.log(gif);
+  // Dynamically generate dropdown options
+var populateDropdowns = function (element, options) {
+  for (var i = 0; i < options.length; i++) {
+    var optionEl = document.createElement("option");
+    optionEl.value = options[i];
+    optionEl.text = options[i];
+    element.append(optionEl);
+  }
+}
+// Populate dropdowns
+populateDropdowns($("#goalSelect"), fitnessQuestions[0].answers);
+populateDropdowns($("#skillSelect"), fitnessQuestions[1].answers);
+
   function toTitleCase(string) {
     // Split the string into words
     var words = string.split(' ');
-  
     // Capitalize the first letter of each word
     var titleCaseWords = words.map(word => {
       return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
     });
-  
     // Join the words back into a string
     var titleCaseString = titleCaseWords.join(' ');
-  
     return titleCaseString;
   }
 
-  // Check if userAnswers is defined and has at least one element
-  if (userAnswers && userAnswers.length > 0) {
-    $('#yourWorkout').append(`<h2 class="display-4 mb-4">You asked for workouts to help you ${userAnswers[0].toLowerCase()}`);
-  }
-  
+  $('#yourWorkout').append(`<h2 id workoutTitle class="display-4 mb-4">You asked for workouts to help you ${userAnswers[0].toLowerCase()}`)
   for (var i = 0; i < 3; i++) {
     $('#yourWorkout').append(`<div class="card mb-3">
   <img src="${gif.data[i].images.original.url}" class="mx-3 mt-4 card-img-top" alt="${userAnswers[0]} Workout Gif" style="width:300px">
@@ -97,6 +103,7 @@ var showResults = function(workout, gif) {
   </div>
 </div>`)
   }
+
   // IF STATEMENT TO SHOW THE RELEVANT MEAL CARDS
 }
 
@@ -202,19 +209,16 @@ var generateQuestion = function () {
 
 generateQuestion();
 
-// Function to show/hide meal cards based on user answer
-var toggleMealCard = function (userAnswer) {
-  // Hide both meal cards initially
-  $("#leanMealCard").hide();
-  $("#bulkMealCard").hide();
-
-  // Determine which meal card to show based on user's answer
-  if (userAnswer === "Tone" || userAnswer === "Cardio" || userAnswer === "Stretch") {
-    $("#leanMealCard").show();
-  } else if (userAnswer === "Bulk") {
-    $("#bulkMealCard").show();
-  }
-};
+$('#regenerateResultsBtn').on('click', function (event) {
+  event.preventDefault();
+  var selectedGoal = $('#goalSelect').val();
+  var selectedSkill = $('#skillSelect').val();
+  userAnswers = [];
+  userAnswers.push(selectedGoal, selectedSkill);
+  console.log(userAnswers)
+  $('#yourWorkout').text("");
+  getWorkout();
+});
 
 $('#card-container').on('click', '.card', function (event) {
   var userAnswer = $(event.currentTarget).find('.card-title').text();
@@ -228,93 +232,181 @@ $('#card-container').on('click', '.card', function (event) {
 //#region
 // document.addEventListener("DOMContentLoaded"), function () {
 //   // Sample data for dropdown options
-  const goals = ["Bulking", "Slimming", "Cardio", "Stretching"];
-  const skillLevels = ["Beginner", "Intermediate", "Advanced"];
-  const muscles = [
-    "Abdominals",
-    "Abductors",
-    "Adductors",
-    "Biceps",
-    "Calves",
-    "Chest",
-    "Forearms",
-    "Glutes",
-    "Hamstrings",
-    "Lats",
-    "Lower Back",
-    "Middle Back",
-    "Neck",
-    "Quadriceps",
-    "Traps",
-    "Triceps"
-  ];
-  const exerciseNumbers = Array.from({ length: 10 }, (_, i) => i + 1);
+//   const goals = ["Bulking", "Slimming", "Cardio", "Stretching"];
+//   const skillLevels = ["Beginner", "Intermediate", "Advanced"];
+//   const muscles = [
+//     "Abdominals",
+//     "Abductors",
+//     "Adductors",
+//     "Biceps",
+//     "Calves",
+//     "Chest",
+//     "Forearms",
+//     "Glutes",
+//     "Hamstrings",
+//     "Lats",
+//     "Lower Back",
+//     "Middle Back",
+//     "Neck",
+//     "Quadriceps",
+//     "Traps",
+//     "Triceps"
+//   ];
+//   const exerciseNumbers = Array.from({ length: 10 }, (_, i) => i + 1);
 
-//   // Function to dynamically generate dropdown options
-  function populateDropdown(selectElement, options) {
-    options.forEach(option => {
-      const optionElement = document.createElement("option");
-      optionElement.value = option;
-      optionElement.text = option;
-      selectElement.appendChild(optionElement);
-    });
-  }
+// //   // Function to dynamically generate dropdown options
+//   function populateDropdown(selectElement, options) {
+//     options.forEach(option => {
+//       const optionElement = document.createElement("option");
+//       optionElement.value = option;
+//       optionElement.text = option;
+//       selectElement.appendChild(optionElement);
+//     });
+//   }
 
-  // Populate dropdowns
-  populateDropdown(document.getElementById("goalSelect"), fitnessQuestions[0].answers);
-  populateDropdown(document.getElementById("skillSelect"), fitnessQuestions[1].answers);
+//   // Populate dropdowns
+//   populateDropdown(document.getElementById("goalSelect"), fitnessQuestions[0].answers);
+//   populateDropdown(document.getElementById("skillSelect"), fitnessQuestions[1].answers);
  
 
-   // Function to dynamically generate workout buttons
-   function generateWorkoutButtons(container, workouts) {
-    if (!container) {
-      console.error("Container is null");
-      return;
-    }
+//    // Function to dynamically generate workout buttons
+//    function generateWorkoutButtons(container, workouts) {
+//     if (!container) {
+//       console.error("Container is null");
+//       return;
+//     }
 
-    workouts.forEach(workout => {
-      const button = document.createElement("button");
-      button.classList.add("btn", "btn-primary", "mb-2");
-      button.textContent = workout;
-      container.appendChild(button);
+//     workouts.forEach(workout => {
+//       const button = document.createElement("button");
+//       button.classList.add("btn", "btn-primary", "mb-2");
+//       button.textContent = workout;
+//       container.appendChild(button);
 
-      // Add click event listener to each button
-      button.addEventListener("click", function () {
-        // Get user selections
-        const selectedGoal = document.getElementById("goalSelect").value;
-        const selectedSkill = document.getElementById("skillSelect").value;
+//       // Add click event listener to each button
+//       button.addEventListener("click", function () {
+//         // Get user selections
+//         const selectedGoal = document.getElementById("goalSelect").value;
+//         const selectedSkill = document.getElementById("skillSelect").value;
 
-        // Translate user-friendly fitness goal to API terms
-        const apiFitnessGoal = translateFitnessGoal(selectedGoal);
+//         // Translate user-friendly fitness goal to API terms
+//         const apiFitnessGoal = translateFitnessGoal(selectedGoal);
 
         // Make API request based on user selections
         makeApiRequest(apiFitnessGoal, selectedSkill, selectedMuscle, selectedExerciseNumber);
       });
     });
+  }
 
-    // Add "Regenerate" button
-    // const regenerateButton = document.createElement("button");
-    // regenerateButton.classList.add("btn", "btn-primary", "mb-2");
-    // regenerateButton.textContent = "Regenerate";
-    // container.appendChild(regenerateButton);
+  // Populate workout buttons
+  generateWorkoutButtons(document.getElementById("workoutsContainer"), ["View Your Results"]);
 
-    // Add click event listener to the "Regenerate" button
-    regenerateButton.addEventListener("click", function () {
-      // Get user selections
-      const selectedGoal = document.getElementById("goalSelect").value;
-      const selectedSkill = document.getElementById("skillSelect").value;
+  // Function to translate user-friendly fitness goals to API terms
+  const fitnessGoalMapping = {
+    "Bulking": "strength",
+    "Slimming": "plyometrics",
+    "Cardio": "cardio",
+    "Stretching": "stretching"
+  };
 
-      // Translate user-friendly fitness goal to API terms
-      const apiFitnessGoal = translateFitnessGoal(selectedGoal);
+  function translateFitnessGoal(userFriendlyGoal) {
+    return fitnessGoalMapping[userFriendlyGoal] || userFriendlyGoal;
+  }
 
-      // Make API request based on user selections
-      makeApiRequest(apiFitnessGoal, selectedSkill, selectedMuscle, selectedExerciseNumber);
+  // Function to make API request
+  function makeApiRequest(goal, skill, muscle, exerciseNumber) {
+    $.ajax({
+      method: 'GET',
+      url: `https://api.api-ninjas.com/v1/exercises?&difficulty=${skill}&muscle=${muscle}&goal=${goal}&limit=${exerciseNumber}`,
+      headers: { 'X-Api-Key': 'Xm9KrAkFaXPAXu1rR0wdLw==EAJWzakA1gYNDQF6' },
+      contentType: 'application/json',
+      success: function (result) {
+        // Process and display API results here
+        console.log(result);
+        displayWorkouts(result); // Assuming you have a function to display the results
+      },
+      error: function ajaxError(jqXHR) {
+        console.error('Error: ', jqXHR.responseText);
+      }
     });
   }
 
-//   // Populate workout buttons
-  generateWorkoutButtons(document.getElementById("workoutsContainer"), ["Regenerate"]);
+  // Function to display workout results (modify as needed)
+function displayWorkouts(results) {
+  // Clear previous results
+  const workoutsContainer = document.getElementById("workoutsContainer");
+  workoutsContainer.innerHTML = "";
 
+  // Display results, modify as needed
+  results.forEach(result => {
+    const workoutCard = document.createElement("div");
+    workoutCard.classList.add("card", "mb-4");
+
+    const workoutCardContent = `
+      <div class="card-body">
+        <h5 class="card-title">${result.name}</h5>
+        <p class="card-text">${result.description}</p>
+      </div>
+    `;
+
+    workoutCard.innerHTML = workoutCardContent;
+    workoutsContainer.appendChild(workoutCard);
+  });
+
+  // Create the "View Saved Workouts" button dynamically
+  const viewSavedWorkoutsBtn = document.createElement("button");
+  viewSavedWorkoutsBtn.id = "viewSavedWorkoutsBtn";
+  viewSavedWorkoutsBtn.classList.add("btn", "btn-primary", "mb-2");
+  viewSavedWorkoutsBtn.textContent = "View Saved Workouts";
+
+  // Add an event listener to the button for redirection
+  viewSavedWorkoutsBtn.addEventListener("click", function () {
+    // Redirect to the saved workouts page
+    window.location.href = "saved-workouts.html";
+  });
+
+  // Append the button to the same container as the "Save Results" button
+  workoutsContainer.appendChild(viewSavedWorkoutsBtn);
+}
+// Function to display saved results on a separate page
+function displaySavedResultsPage() {
+  const savedResults = getResultsFromLocalStorage();
+
+  if (savedResults) {
+    // Display saved results on the saved workouts page
+    const savedWorkoutsContainer = document.getElementById("savedWorkoutsContainer");
+
+    // Clear previous results
+    savedWorkoutsContainer.innerHTML = "";
+
+    // Display results, modify as needed
+    savedResults.forEach(result => {
+      const workoutCard = document.createElement("div");
+      workoutCard.classList.add("col-md-4", "mb-4");
+
+      const cardContent = `
+        <div class="card h-100">
+          <div class="card-body">
+            <h5 class="card-title">${result.name}</h5>
+            <p class="card-text">${result.description}</p>
+          </div>
+        </div>
+      `;
+
+      workoutCard.innerHTML = cardContent;
+      savedWorkoutsContainer.appendChild(workoutCard);
+    });
+  } else {
+    console.log("No saved results found.");
+    console.log("Saved Workouts Container not found.");
+  }
+}
+
+// Call the function to display saved results when the page loads
+document.addEventListener("DOMContentLoaded", function () {
+  displaySavedResultsPage();
+});
+
+// -------------- END OF CLAIRES CODE ---------------------------------
 
   // This will get the category IDs based on the provided category
   // var categoryIds = categories[category];
