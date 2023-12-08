@@ -45,14 +45,7 @@ var fitnessQuestions = [
     iconClass: ["fa-person-walking", "fa-face-grin-beam-sweat",],
 
   },
-  // {
-  //   question: "What part of the body would you like to work on?",
-  //   answers: ["Chest", "Arms", "Abs", "Back", "Bum", "Legs"],
-  // },
 ];
-
-// Remove muscles
-// Remove 
 
 // Function to show results page
 // NEEDS BUILDING OUT WITH DYNAMIC HTML
@@ -79,7 +72,7 @@ var showResults = function(workout, gif) {
   $('#yourWorkout').append(`<h2 class="display-4 mb-4">You asked for workouts to help you ${userAnswers[0].toLowerCase()}`)
   for (var i = 0; i < 3; i++) {
     $('#yourWorkout').append(`<div class="card mb-3">
-  <img src="${gif.data[i].images.original.url}" class="card-img-top" alt="${userAnswers[0]} Workout Gif" style="width:300px">
+  <img src="${gif.data[i].images.original.url}" class="mx-3 mt-4 card-img-top" alt="${userAnswers[0]} Workout Gif" style="width:300px">
   <div class="card-body">
     <h3 class="card-title">${workout[i].name}</h3>
     <p class="card-text"><span>Equipment:</span> ${toTitleCase(workout[i].equipment.replace(/_/g, ' '))}</p>
@@ -103,19 +96,8 @@ var getWorkout = function() {
     'Make Me Sweat!': 'intermediate',
   };
 
-  // Picks a random value if the chosen answer has an array of values
-  var getRandomWorkout = function(key) {
-    var value = answerMappings[key];
-    if (Array.isArray(value)) {
-      // If the value is an array, choose a random element
-      return value[Math.floor(Math.random() * value.length)];
-    } else {
-      return value;
-    }
-  };
 var type = answerMappings[userAnswers[0]]; // Maps the user chosen fitness goal to one of the APIable types of workout
 var difficulty = answerMappings[userAnswers[1]]; // Maps the user chosen skill level to an APIable parameter
-// var muscle = getRandomWorkout(userAnswers[2]); // Maps the user chosen body area to an APIable muslce parameter
 var workoutUrl = "https://api.api-ninjas.com/v1/exercises?type=" + type + "&difficulty=" + difficulty;
 
 // Fetch from workout API
