@@ -234,33 +234,36 @@ $('#card-container').on('click', '.card', function (event) {
   populateDropdown(document.getElementById("skillSelect"), fitnessQuestions[1].answers);
  
 
-//   // Function to dynamically generate workout buttons
+  // Function to dynamically generate workout buttons
   function generateWorkoutButtons(container, workouts) {
+    if (!container) {
+      console.error("Container is null");
+      return;
+    }
+
     workouts.forEach(workout => {
       const button = document.createElement("button");
       button.classList.add("btn", "btn-primary", "mb-2");
       button.textContent = workout;
       container.appendChild(button);
 
-//       // Add click event listener to each button
+      // Add click event listener to each button
       button.addEventListener("click", function () {
         // Get user selections
         const selectedGoal = document.getElementById("goalSelect").value;
         const selectedSkill = document.getElementById("skillSelect").value;
-//         const selectedMuscle = document.getElementById("muscleSelect").value;
-//         const selectedExerciseNumber = document.getElementById("exerciseSelect").value;
 
-//         // Translate user-friendly fitness goal to API terms
-//         const apiFitnessGoal = translateFitnessGoal(selectedGoal);
+        // Translate user-friendly fitness goal to API terms
+        const apiFitnessGoal = translateFitnessGoal(selectedGoal);
 
-//         // Make API request based on user selections
+        // Make API request based on user selections
         makeApiRequest(apiFitnessGoal, selectedSkill, selectedMuscle, selectedExerciseNumber);
       });
     });
   }
 
 //   // Populate workout buttons
-  generateWorkoutButtons(document.getElementById("workoutsContainer"), ["View Your Results"]);
+  generateWorkoutButtons(document.getElementById("workoutsContainer"), ["Regenerate"]);
 
 
   // This will get the category IDs based on the provided category
