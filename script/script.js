@@ -197,57 +197,56 @@ $('#card-container').on('click', '.card', function (event) {
 
 // document.addEventListener("DOMContentLoaded"), function () {
 //   // Sample data for dropdown options
-//   const goals = ["Bulking", "Slimming", "Cardio", "Stretching"];
-//   const skillLevels = ["Beginner", "Intermediate", "Advanced"];
-//   const muscles = [
-//     "Abdominals",
-//     "Abductors",
-//     "Adductors",
-//     "Biceps",
-//     "Calves",
-//     "Chest",
-//     "Forearms",
-//     "Glutes",
-//     "Hamstrings",
-//     "Lats",
-//     "Lower Back",
-//     "Middle Back",
-//     "Neck",
-//     "Quadriceps",
-//     "Traps",
-//     "Triceps"
-//   ];
-//   const exerciseNumbers = Array.from({ length: 10 }, (_, i) => i + 1);
+  const goals = ["Bulking", "Slimming", "Cardio", "Stretching"];
+  const skillLevels = ["Beginner", "Intermediate", "Advanced"];
+  const muscles = [
+    "Abdominals",
+    "Abductors",
+    "Adductors",
+    "Biceps",
+    "Calves",
+    "Chest",
+    "Forearms",
+    "Glutes",
+    "Hamstrings",
+    "Lats",
+    "Lower Back",
+    "Middle Back",
+    "Neck",
+    "Quadriceps",
+    "Traps",
+    "Triceps"
+  ];
+  const exerciseNumbers = Array.from({ length: 10 }, (_, i) => i + 1);
 
 //   // Function to dynamically generate dropdown options
-//   function populateDropdown(selectElement, options) {
-//     options.forEach(option => {
-//       const optionElement = document.createElement("option");
-//       optionElement.value = option;
-//       optionElement.text = option;
-//       selectElement.appendChild(optionElement);
-//     });
-//   }
+  function populateDropdown(selectElement, options) {
+    options.forEach(option => {
+      const optionElement = document.createElement("option");
+      optionElement.value = option;
+      optionElement.text = option;
+      selectElement.appendChild(optionElement);
+    });
+  }
 
   // Populate dropdowns
-  // populateDropdown(document.getElementById("goalSelect"), fitnessQuestions[0].answers);
-  // populateDropdown(document.getElementById("skillSelect"), fitnessQuestions[1].answers);
-  // populateDropdown(document.getElementById("muscleSelect"), fitnessQuestions[2].answers);
-  // populateDropdown(document.getElementById("exerciseSelect"), fitnessQuestions[3].answers);
+  populateDropdown(document.getElementById("goalSelect"), fitnessQuestions[0].answers);
+  populateDropdown(document.getElementById("skillSelect"), fitnessQuestions[1].answers);
+ 
 
 //   // Function to dynamically generate workout buttons
-//   function generateWorkoutButtons(container, workouts) {
-//     workouts.forEach(workout => {
-//       const button = document.createElement("button");
-//       button.classList.add("btn", "btn-primary", "mb-2");
-//       button.textContent = workout;
-//       container.appendChild(button);
+  function generateWorkoutButtons(container, workouts) {
+    workouts.forEach(workout => {
+      const button = document.createElement("button");
+      button.classList.add("btn", "btn-primary", "mb-2");
+      button.textContent = workout;
+      container.appendChild(button);
 
 //       // Add click event listener to each button
-//       button.addEventListener("click", function () {
-//         // Get user selections
-//         const selectedGoal = document.getElementById("goalSelect").value;
-//         const selectedSkill = document.getElementById("skillSelect").value;
+      button.addEventListener("click", function () {
+        // Get user selections
+        const selectedGoal = document.getElementById("goalSelect").value;
+        const selectedSkill = document.getElementById("skillSelect").value;
 //         const selectedMuscle = document.getElementById("muscleSelect").value;
 //         const selectedExerciseNumber = document.getElementById("exerciseSelect").value;
 
@@ -255,17 +254,17 @@ $('#card-container').on('click', '.card', function (event) {
 //         const apiFitnessGoal = translateFitnessGoal(selectedGoal);
 
 //         // Make API request based on user selections
-//         makeApiRequest(apiFitnessGoal, selectedSkill, selectedMuscle, selectedExerciseNumber);
-//       });
-//     });
-//   }
+        makeApiRequest(apiFitnessGoal, selectedSkill, selectedMuscle, selectedExerciseNumber);
+      });
+    });
+  }
 
 //   // Populate workout buttons
-//   generateWorkoutButtons(document.getElementById("workoutsContainer"), ["View Your Results"]);
+  generateWorkoutButtons(document.getElementById("workoutsContainer"), ["View Your Results"]);
 
 
-//   // This will get the category IDs based on the provided category
-//   var categoryIds = categories[category];
+  // This will get the category IDs based on the provided category
+  // var categoryIds = categories[category];
 
 //   // This will check if the category is valid
 //   if (!categoryIds) {
