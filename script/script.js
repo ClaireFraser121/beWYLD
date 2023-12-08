@@ -234,8 +234,8 @@ $('#card-container').on('click', '.card', function (event) {
   populateDropdown(document.getElementById("skillSelect"), fitnessQuestions[1].answers);
  
 
-  // Function to dynamically generate workout buttons
-  function generateWorkoutButtons(container, workouts) {
+   // Function to dynamically generate workout buttons
+   function generateWorkoutButtons(container, workouts) {
     if (!container) {
       console.error("Container is null");
       return;
@@ -259,6 +259,25 @@ $('#card-container').on('click', '.card', function (event) {
         // Make API request based on user selections
         makeApiRequest(apiFitnessGoal, selectedSkill, selectedMuscle, selectedExerciseNumber);
       });
+    });
+
+    // Add "Regenerate" button
+    // const regenerateButton = document.createElement("button");
+    // regenerateButton.classList.add("btn", "btn-primary", "mb-2");
+    // regenerateButton.textContent = "Regenerate";
+    // container.appendChild(regenerateButton);
+
+    // Add click event listener to the "Regenerate" button
+    regenerateButton.addEventListener("click", function () {
+      // Get user selections
+      const selectedGoal = document.getElementById("goalSelect").value;
+      const selectedSkill = document.getElementById("skillSelect").value;
+
+      // Translate user-friendly fitness goal to API terms
+      const apiFitnessGoal = translateFitnessGoal(selectedGoal);
+
+      // Make API request based on user selections
+      makeApiRequest(apiFitnessGoal, selectedSkill, selectedMuscle, selectedExerciseNumber);
     });
   }
 
