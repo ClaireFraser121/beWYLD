@@ -51,11 +51,6 @@ aside {
   width: 20%;
 }
 
-/* Workout container styles */
-#workoutsContainer {
-  /* Add your specific styles here */
-}
-
 /* Jumbotron styles */
 .jumbotron {
   background-color: #f8f9fa;
@@ -74,4 +69,5 @@ footer {
   color: white;
   text-align: center;
   padding: 10px 0;
+  margin-top: 100px;
 }
