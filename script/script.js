@@ -37,10 +37,12 @@ var fitnessQuestions = [
     question: "What is your fitness goal?",
     answers: ["Bulk", "Tone", "Cardio", "Stretch"],
     iconClass: ["fa-dumbbell", "fa-weight-scale", "fa-heart-pulse", "fa-child-reaching"]
+    iconClass: ["fa-dumbbell", "fa-weight-scale", "fa-heart-pulse", "fa-child-reaching"]
   },
   {
     question: "How intense would you like to go?",
     answers: ["Easy", "Make Me Sweat!",],
+    iconClass: ["fa-person-walking", "fa-face-grin-beam-sweat",]
     iconClass: ["fa-person-walking", "fa-face-grin-beam-sweat",]
 
   },
@@ -57,9 +59,20 @@ var mealMatcher = function () {
 };
 
 
+// Function to dynamically match meals based on fitness goals
+var mealMatcher = function () {
+  var fitnessGoals = {
+    'Bulk': bulkMealCard,
+    'Tone': leanMealCard,
+    'Cardio': leanMealCard,
+    'Stretch': leanMealCard,
+  };
+};
+
+
 // Function to show results page
 // NEEDS BUILDING OUT WITH DYNAMIC HTML
-var showResults = function(workout, gif) {
+var showResults = function (workout, gif) {
   $("#results-screen").removeClass("hide")
   $("#quiz-screen").attr("class", "hide")
   console.log(workout);
@@ -93,6 +106,7 @@ var showResults = function(workout, gif) {
     <h5>Instructions</h5>
     <p class="card-text">${workout[i].instructions}</p>
     <a href="#" class="btn btn-primary">Save exercise</a>
+    <a href="#" class="btn btn-primary">Save exercise</a>
   </div>
 </div>`)
 }
@@ -102,7 +116,7 @@ mealMatcher();
 };
 
 // Function to pass fitnessQuestions into the excercises API and log results
-var getWorkout = function() {
+var getWorkout = function () {
   // Maps user answers to parameters the API can understand
   var answerMappings = {
     'Bulk': 'strength',
@@ -113,29 +127,29 @@ var getWorkout = function() {
     'Make Me Sweat!': 'intermediate',
   };
 
-var type = answerMappings[userAnswers[0]]; // Maps the user chosen fitness goal to one of the APIable types of workout
-var difficulty = answerMappings[userAnswers[1]]; // Maps the user chosen skill level to an APIable parameter
-var workoutUrl = "https://api.api-ninjas.com/v1/exercises?type=" + type + "&difficulty=" + difficulty;
+  var type = answerMappings[userAnswers[0]]; // Maps the user chosen fitness goal to one of the APIable types of workout
+  var difficulty = answerMappings[userAnswers[1]]; // Maps the user chosen skill level to an APIable parameter
+  var workoutUrl = "https://api.api-ninjas.com/v1/exercises?type=" + type + "&difficulty=" + difficulty;
 
-// Fetch from workout API
-fetch(workoutUrl, {
-headers: { 'X-Api-Key': 'Xm9KrAkFaXPAXu1rR0wdLw==EAJWzakA1gYNDQF6' },
-})
-.then(function (response) {
-  console.log(workoutUrl)
-  return response.json();
-})
-.then(function (workoutData) {
-  getGiphy(type, workoutData)
-})
-.catch(function (error) {
-  console.error(error);
-});
+  // Fetch from workout API
+  fetch(workoutUrl, {
+    headers: { 'X-Api-Key': 'Xm9KrAkFaXPAXu1rR0wdLw==EAJWzakA1gYNDQF6' },
+  })
+    .then(function (response) {
+      console.log(workoutUrl)
+      return response.json();
+    })
+    .then(function (workoutData) {
+      getGiphy(type, workoutData)
+    })
+    .catch(function (error) {
+      console.error(error);
+    });
 };
 
 // Function to pass workoutData into Giphy API to get a gif
 var getGiphy = function (type, workoutData) {
-// Maps user answers to appropriate Giphy ID's
+  // Maps user answers to appropriate Giphy ID's
   var giphyMappings = {
     'strength': ['o4HacXW6rQty0', 'f5dDxjoo0MSnQMFPOp', 'dt40pTFK4lETk43ldq', '1oC7CzF6DHBQqPniuS'],
     'plyometrics': ['3oKIPz238SgcY0p8xG', 'xeUFXl6Wspcz6Yv7cY', 'jkrI2HmUmdDlBz9oeN', 'H6o2fJlAPEiVhJN3M6'],
@@ -143,9 +157,9 @@ var getGiphy = function (type, workoutData) {
     'stretching': ['3oKIPpaHCfN7ECPIGs', 'DBbPjLMsQPruMkDcrd', 'YSrDx5MlMDp3dvYCML', 'ef0AeVgH1Jb0FBNKq1']
   };
 
-  var getRandomGif = function(type) {
+  var getRandomGif = function (type) {
     var value = giphyMappings[type];
-    
+
     // Shuffle the array
     for (var i = value.length - 1; i > 0; i--) {
       var j = Math.floor(Math.random() * (i + 1));
@@ -153,7 +167,7 @@ var getGiphy = function (type, workoutData) {
     }
     return value;
   };
-  
+
   var randomGiphyId = getRandomGif(type); // Store random giphyMappings value in variable
   console.log(randomGiphyId)
   var giphyKey = "BpXTUZMuQkSFoZt9q5biIp1nwCwE5xEh";
@@ -161,15 +175,15 @@ var getGiphy = function (type, workoutData) {
 
   // Fetch from Giphy API
   fetch(giphyURL)
-  .then(function (response) {
-    return response.json();
-  })
-  .then(function (gifData) {
-    showResults(workoutData, gifData);
-  })
-  .catch(function (error) {
-    console.error(error);
-});
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (gifData) {
+      showResults(workoutData, gifData);
+    })
+    .catch(function (error) {
+      console.error(error);
+    });
 };
 
 // Generate Quiz question cards
@@ -228,6 +242,20 @@ var toggleMealCard = function (userAnswer) {
   }
 };
 
+// Function to show/hide meal cards based on user answer
+var toggleMealCard = function (userAnswer) {
+  // Hide both meal cards initially
+  $("#leanMealCard").hide();
+  $("#bulkMealCard").hide();
+
+  // Determine which meal card to show based on user's answer
+  if (userAnswer === "Tone" || userAnswer === "Cardio" || userAnswer === "Stretch") {
+    $("#leanMealCard").show();
+  } else if (userAnswer === "Bulk") {
+    $("#bulkMealCard").show();
+  }
+};
+
 $('#card-container').on('click', '.card', function (event) {
   var userAnswer = $(event.currentTarget).find('.card-title').text();
   userAnswers.push(userAnswer);
@@ -237,6 +265,7 @@ $('#card-container').on('click', '.card', function (event) {
 });
 
 // -------------------------- CLAIRE'S CODE ---------------------------------
+//#region
 //#region
 // document.addEventListener("DOMContentLoaded"), function () {
 //   // Sample data for dropdown options
