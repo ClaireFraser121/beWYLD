@@ -59,7 +59,7 @@ var showResults = function (workout, gif) {
     <p class="card-text"><span>Equipment:</span> ${toTitleCase(workout[i].equipment.replace(/_/g, ' '))}</p>
     <h5>Instructions</h5>
     <p class="card-text">${workout[i].instructions}</p>
-    <a href="#" id="btn-${i} class="btn btn-primary">Save exercise</a>
+    <a href="#" id="btn-${i}" class="btn btn-primary">Save exercise</a>
   </div>
 </div>`)
   }
