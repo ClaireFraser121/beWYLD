@@ -101,7 +101,12 @@ To use BeWyld Train & Meal Prep Coach:
 
 ### Webpage Demo Video
 
-[Watch the Demo Video](./images/2023,_21_24_52_(copy)%20(Original).mp4)
+
+https://github.com/AnnamKhalid/bewyld-api-project/assets/145933508/dfa35495-7d59-42d7-8734-6b13133470bf
+
+
+[Watch the Demo Video](https://github.com/AnnamKhalid/bewyld-api-project/assets/145933508/dfa35495-7d59-42d7-8734-6b13133470bf
+)
 
 
 ## Screenshots
