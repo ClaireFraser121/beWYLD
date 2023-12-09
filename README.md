@@ -97,7 +97,7 @@ To use BeWyld Train & Meal Prep Coach:
 
 ### Website
 
-![BeWyld Train & Meal Prep Coach](https://annamkhalid.github.io/bewyld-api-project/assets/images/your-screenshot-file.png)
+![BeWyld Train & Meal Prep Coach](https://annamkhalid.github.io/bewyld-api-project)
 
 ### Webpage Demo Video
 
