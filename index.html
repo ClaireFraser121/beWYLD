@@ -53,24 +53,26 @@
     <div class="container mt-5">
       <form>
         <div class="row mb-3">
-          <div id="goalDropdown" class="col-5">
+          <div id="goalDropdown" class="col-4">
             <label for="goalSelect" class="form-label">Goal</label>
             <select class="form-select" id="goalSelect">
               <!-- Dropdown ptions dynamically generated using JavaScript -->
               <option value="" selected>Select your goal</option>
             </select>
           </div>
-          <div id="skillDropdown" class="col-5">
+          <div id="skillDropdown" class="col-4">
             <label for="skillSelect" class="form-label">Intensity</label>
             <select class="form-select" id="skillSelect">
               <option value="" selected>Select your intensity</option>
             </select>
           </div>
           <div class="col d-flex align-items-end p-0">
-            <button id="regenerateResultsBtn" class="btn btn-primary w-100">Regenerate</button>
+            <button id="regenerateResultsBtn" class="btn btn-primary custom-btn-margin w-50">Regenerate</button>
+            <button id="regenerateResultsBtn" class="btn btn-secondary w-50">Saved excercies</button>
           </div>
         </div>
     </div>
+
 
 
     <!-- Workout container -->
@@ -119,7 +121,7 @@
       </div>
       <!-- Button to View BeWYLD Menu -->
       <div class="row justify-content-center">
-        <h5 class="call-to-action text-center mt-2 mb-4">To see the menu we use to create your meals, click below!</h5>
+        <h5 class="call-to-action text-center mt-2 mb-3">To see the menu we use to create your meals, click below!</h5>
         <button id="viewMenuBtn" class="col-2 mb-3 btn btn-primary">View BeWYLD Menu</button>
       </div>
     </section>

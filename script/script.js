@@ -49,7 +49,7 @@ var showResults = function (workout, gif) {
     <p class="card-text"><span>Equipment:</span> ${toTitleCase(workout[i].equipment.replace(/_/g, ' '))}</p>
     <h5>Instructions</h5>
     <p class="card-text">${workout[i].instructions}</p>
-    <a href="#" id="btn-${i}" class="btn btn-primary">Save exercise</a>
+    <a href="#" id="saveBtn-${i}" class="btn btn-primary">Save exercise</a>
   </div>
 </div>`)
   }
@@ -90,7 +90,6 @@ var getWorkout = function () {
     headers: { 'X-Api-Key': 'Xm9KrAkFaXPAXu1rR0wdLw==EAJWzakA1gYNDQF6' },
   })
     .then(function (response) {
-      console.log(workoutUrl)
       return response.json();
     })
     .then(function (workoutData) {
@@ -123,7 +122,6 @@ var getGiphy = function (type, workoutData) {
   };
 
   var randomGiphyId = getRandomGif(type); // Store random giphyMappings value in variable
-  console.log(randomGiphyId)
   var giphyKey = "BpXTUZMuQkSFoZt9q5biIp1nwCwE5xEh";
   var giphyURL = "https://api.giphy.com/v1/gifs?ids=" + randomGiphyId + "&api_key=" + giphyKey;
 
@@ -171,6 +169,25 @@ var generateQuestion = function () {
 
 generateQuestion(); // Call the function to start the quiz
 
+// Event listener for links on results page
+$('#bookaTrainerBtn, #mealPrep .btn, #viewMenuBtn').on('click', function (event) {
+  event.preventDefault();
+  var link;
+  var eventId = event.target.id;
+
+  if (eventId === 'bookaTrainerBtn') {
+    link = './book-a-trainer.html';
+  } else if (eventId === 'mealPrep') {
+    link = 'https://www.bewyld.co.uk/shop';
+  } else if (eventId === 'viewMenuBtn') {
+    link = 'https://www.bewyld.co.uk/_files/ugd/d9fc74_06834711b1094e22a5fbc17f3c3a8362.pdf';
+  }
+
+  if (link) {
+    window.open(link, '_blank');
+  }
+});
+
 // event listener to regenerate quiz questions
 $('#regenerateResultsBtn').on('click', function (event) {
   event.preventDefault();
@@ -182,24 +199,6 @@ $('#regenerateResultsBtn').on('click', function (event) {
   $("#bulkMealCard").hide();
   $('#yourWorkout').text("");
   getWorkout();
-});
-
-// event listener to book trainer
-$('#bookaTrainerBtn').on('click', function (event) {
-  event.preventDefault();
-  window.open('./book-a-trainer.html', '_blank');
-});
-
-// event listener to book trainer
-$('#mealPrep').on('click', '.btn', function (event) {
-  event.preventDefault();
-  window.open('https://www.bewyld.co.uk/shop', '_blank');
-});
-
-// event listener to view menu
-$('#viewMenuBtn').on('click', function (event) {
-  event.preventDefault();
-  window.open('https://www.bewyld.co.uk/_files/ugd/d9fc74_06834711b1094e22a5fbc17f3c3a8362.pdf', '_blank');
 });
 
 // Event listener for all quiz cards

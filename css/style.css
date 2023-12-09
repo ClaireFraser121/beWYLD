@@ -76,12 +76,25 @@ padding: 10px 0;
 margin-top: auto;
 }
 
+/* Bootstrap reset */
+.custom-btn-margin {
+  margin-right: 10px; /* Adjust the value as needed */
+}
+
 #goalDropdown {
   padding-left: 0 !important; 
 }
 
 #regenerateResultsBtn {
   margin-bottom: 9px;
+}
+
+#goalDropdown {
+  padding-right: 6px;
+}
+
+#skillDropdown {
+  padding-left: 6px;
 }
 
 .hide {
