@@ -71,7 +71,7 @@ margin-top: 20px;
 footer {
 background-color: #343a40;
 color: white;
-text-align: center;
+text-align: center !important;
 padding: 10px 0;
 margin-top: auto;
 }

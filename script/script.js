@@ -30,7 +30,7 @@ var showResults = function (workout, gif) {
   $("#quiz-screen").attr("class", "hide")
   console.log(workout);
   console.log(gif);
-// Function to change equipment string to title case
+  // Function to change equipment string to title case
   var toTitleCase = function (string) {
     var words = string.split(' '); // Split the string into words
     var titleCaseWords = words.map(word => { // Capitalize the first letter of each word
@@ -53,17 +53,73 @@ var showResults = function (workout, gif) {
   </div>
 </div>`)
   }
+  
   // Function to show/hide meal cards based on user answer
   var toggleMealCard = function (userAnswer) {
-    // Hide both meal cards initially
-    $("#leanMealCard").hide();
-    $("#bulkMealCard").hide();
-
+// Object to store the different meal types available
+var mealData = {
+  lean: [
+    {
+      title: "Lean Meal Small",
+      description: "Our Small Meal Prep Pack comes with 6 meals of your choice from the beWYLD Meal Prep Menu and is designed for those that want to lose body fat and retain or grow muscle mass.",
+      url: "https://www.bewyld.co.uk/product-page/3-day-nurture-maintain-meal-prep-package",
+    },
+    {
+      title: "Lean Meal Medium",
+      description: "Our Medium Meal Prep Pack comes with 9 meals of your choice from the beWYLD Meal Prep Menu and is designed for those that want to lose body fat and retain or grow muscle mass.",
+      url: "https://www.bewyld.co.uk/product-page/3-day-grow-gain-meal-prep-package",
+    },
+    {
+      title: "Lean Meal Large",
+      description: "Our Small Meal Prep Pack comes with 12 meals of your choice from the beWYLD Meal Prep Menu and is designed for those that want to lose body fat and retain or grow muscle mass.",
+      url: "https://www.bewyld.co.uk/product-page/3-day-lean-and-clean-meal-prep-package",
+    }
+  ],
+  bulk: [
+    {
+      title: "Bulk Meal Small",
+      description: "6 meals of your choice from the beWYLD Meal Prep Menu and is designed for those that want to gain Strength and Muscle Mass by including extra Protein and low GI Carbohydrates",
+      url: "https://www.bewyld.co.uk/product-page/nurture-maintain-meal-prep-package",
+    },
+    {
+      title: "Bulk Meal Medium",
+      description: "9 meals of your choice from the beWYLD Meal Prep Menu and is designed for those that want to gain Strength and Muscle Mass by including extra Protein and low GI Carbohydrates",
+      url: "https://www.bewyld.co.uk/product-page/copy-of-wyld-bulk-medium-box-9-meals-8-per-meal",
+    },
+    {
+      title: "Bulk Meal Large",
+      description: "12 meals of your choice from the beWYLD Meal Prep Menu and is designed for those that want to gain Strength and Muscle Mass by including extra Protein and low GI Carbohydrates",
+      url: "https://www.bewyld.co.uk/product-page/wyld-bulk-large-box-12-meals-7-50-per-meal",
+    }
+  ]
+};
     // Determine which meal card to show based on user's answer
     if (userAnswer === "Tone" || userAnswer === "Cardio" || userAnswer === "Stretch") {
-      $("#leanMealCard").show();
+      for (var i = 0; i < mealData.lean.length; i++) {
+        $('#mealCardRow').append(`<div class="col-md-3 mb-4 mt-2" id="leanMealCard-${i}">
+        <div class="card" style="width: 18rem;">
+          <i class="fas fa-utensils fa-5x text-primary mx-auto mt-3"></i>
+          <div class="card-body text-center">
+            <h5 class="card-title">${mealData.lean[i].title}</h5>
+            <p class="card-text">${mealData.lean[i].description}</p>
+            <a href="${mealData.lean[i].url}" target="_blank"class="btn btn-primary mealLearnBtn">Find out more</a>
+          </div>
+        </div>
+      </div>`)
+      }
     } else if (userAnswer === "Bulk") {
-      $("#bulkMealCard").show();
+      for (var i = 0; i < mealData.lean.length; i++) {
+        $('#mealCardRow').append(`<div class="col-md-3 mb-4 mt-2" id="bulkMealCard-${i}">
+        <div class="card" style="width: 18rem;">
+          <i class="fas fa-dumbbell fa-5x text-danger mx-auto mt-3"></i>
+          <div class="card-body text-center">
+            <h5 class="card-title">${mealData.bulk[i].title}</h5>
+            <p class="card-text">${mealData.bulk[i].description}</p>
+            <a href="${mealData.bulk[i].url}" target="_blank" class="btn btn-primary mealLearnBtn">Find out more</a>
+          </div>
+        </div>
+      </div>`)
+      }
     }
   };
   toggleMealCard(userAnswers[0]);
@@ -182,7 +238,6 @@ $('#bookaTrainerBtn, #mealPrep .btn, #viewMenuBtn').on('click', function (event)
   } else if (eventId === 'viewMenuBtn') {
     link = 'https://www.bewyld.co.uk/_files/ugd/d9fc74_06834711b1094e22a5fbc17f3c3a8362.pdf';
   }
-
   if (link) {
     window.open(link, '_blank');
   }
@@ -198,6 +253,7 @@ $('#regenerateResultsBtn').on('click', function (event) {
   $("#leanMealCard").hide();
   $("#bulkMealCard").hide();
   $('#yourWorkout').text("");
+  $('#mealCardRow').text("");
   getWorkout();
 });
 

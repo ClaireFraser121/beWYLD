@@ -43,14 +43,14 @@
   <div id="quiz-screen" class="container-fluid mt-5 row justify-content-center">
     <h1 class="text-center mb-4">Get Your Perfect Workout and Meal Plan</h1>
     <h3 id="question-title" class="text-center"></h3>
-    <div id="card-container" class="row justify-content-center">
+    <div id="card-container" class="row justify-content-center mb-5">
     </div>
   </div>
 
   <!-- Start results screen -->
   <div id="results-screen" class="hide">
     <!-- Workout Dropdown Container -->
-    <div class="container mt-5">
+    <div class="container mt-4">
       <form>
         <div class="row mb-3">
           <div id="goalDropdown" class="col-4">
@@ -78,7 +78,6 @@
     <!-- Workout container -->
     <section id="workoutsContainer" class="jumbotron container mt-3 px-4">
       <div id="yourWorkout" class="row">
-
       </div>
     </section>
 
@@ -93,43 +92,21 @@
     <!-- Personalized Meal Prep Container -->
     <section id="mealPrep" class="jumbotron container px-4 mt-5">
       <h2 class="text-center">Your Personalised Meal Prep</h2>
-      <div class="row justify-content-center">
-        <!-- Dynamically generated lean meal cards will be placed here using JavaScript -->
-        <div class="col-md-3 mb-4 mt-2" id="leanMealCard">
-          <div class="card" style="width: 18rem;">
-            <i class="fas fa-utensils fa-5x text-primary mx-auto mt-3"></i> <!-- Font Awesome icon -->
-            <div class="card-body text-center">
-              <h5 class="card-title">Lean Meal</h5>
-              <p class="card-text">Select from one of our stress-free meal prep pack sizes, which you can customize
-                using the menu below.</p>
-              <btn id="mealLearn1" class="btn btn-primary">Learn more</a>
-            </div>
-          </div>
-        </div>
-        <!-- Dynamically generated bulk meal cards will be placed here using JavaScript -->
-        <div class="col-md-3 mb-4 mt-2" id="bulkMealCard">
-          <div class="card" style="width: 18rem;">
-            <i class="fas fa-dumbbell fa-5x text-danger mx-auto mt-3"></i> <!-- Font Awesome icon -->
-            <div class="card-body text-center">
-              <h5 class="card-title">Bulk Meal</h5>
-              <p class="card-text">Select from one of our stress-free meal prep pack sizes, which you can customize
-                using the menu below.</p>
-              <btn id="mealLearn2" class="btn btn-primary">Learn more</btn>
-            </div>
-          </div>
-        </div>
+        <!-- Button to View BeWYLD Menu -->
+        <div class="row justify-content-center">
+          <h5 class="call-to-action text-center mt-2 mb-3">To see the menu we use to create your meals, click below!
+          </h5>
+          <button id="viewMenuBtn" class="col-2 mb-3 btn btn-primary">View BeWYLD Menu</button>
+          <div id="mealCardRow" class="row justify-content-center">
+            <!-- Dynamically generated lean meal cards will be placed here using JavaScript -->
       </div>
-      <!-- Button to View BeWYLD Menu -->
-      <div class="row justify-content-center">
-        <h5 class="call-to-action text-center mt-2 mb-3">To see the menu we use to create your meals, click below!</h5>
-        <button id="viewMenuBtn" class="col-2 mb-3 btn btn-primary">View BeWYLD Menu</button>
-      </div>
+        </div>
     </section>
   </div>
 
   <!-- Footer -->
   <footer class="text-center text-lg-start bg-body-tertiary text-muted" style="background-color: rgba(0, 0, 0, 0.05);">
-    <div class="container text-center text-md-start mt-5">
+    <div class="container text-center text-md-start mt-4">
       <div class="row mt-2">
         <div class="col-md-3 col-lg-3 col-xl-3 mb-10 mb-4">
           <img src="images/beWYLD_black_logo.png" class="img-fluid logo-image" alt="bewyld logo image">
@@ -165,7 +142,7 @@
         </div>
       </div>
     </div>
-    <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+    <div class="text-center p-2" style="background-color: rgba(0, 0, 0, 0.05);">
       <p>&copy;2020</p>
     </div>
   </footer>
