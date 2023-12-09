@@ -101,23 +101,16 @@ To use BeWyld Train & Meal Prep Coach:
 
 ### Webpage Demo Video
 
-
-https://github.com/AnnamKhalid/bewyld-api-project/assets/145933508/dfa35495-7d59-42d7-8734-6b13133470bf
-
-
 [Watch the Demo Video](https://github.com/AnnamKhalid/bewyld-api-project/assets/145933508/dfa35495-7d59-42d7-8734-6b13133470bf
 )
 
-
 ## Screenshots
 
-![Screenshot 1](https://placeholder.link/screenshot1.png)
+![screenshot1](https://github.com/AnnamKhalid/bewyld-api-project/assets/145933508/2d120116-8970-45b6-9bc6-eed39304cfbc)
+*Caption: The landing page for the application*
 
-*Caption: Brief description of the first screenshot.*
-
-![Screenshot 2](https://placeholder.link/screenshot2.png)
-
-*Caption: Brief description of the second screenshot.*
+![screenshot2](https://github.com/AnnamKhalid/bewyld-api-project/assets/145933508/bb813d3f-687b-42e6-9c66-cceeaee85f30)
+*Caption: The results of the Workout and Meal Matcher.*
 
 ## Credits
 
