@@ -11,7 +11,6 @@ var fitnessQuestions = [
     question: "How intense would you like to go?",
     answers: ["Easy", "Make Me Sweat!",],
     iconClass: ["fa-person-walking", "fa-face-grin-beam-sweat",]
-
   },
 ];
 
@@ -25,15 +24,7 @@ var mealMatcher = function () {
   };
 };
 
-
-// Function to show results page
-// NEEDS BUILDING OUT WITH DYNAMIC HTML
-var showResults = function(workout, gif) {
-  $("#results-screen").removeClass("hide")
-  $("#quiz-screen").attr("class", "hide")
-  console.log(workout);
-  console.log(gif);
-    // Dynamically generate dropdown options
+// Dynamically generate dropdown options for the results page
 var populateDropdowns = function (element, options) {
   for (var i = 0; i < options.length; i++) {
     var optionEl = document.createElement("option");
@@ -42,29 +33,24 @@ var populateDropdowns = function (element, options) {
     element.append(optionEl);
   }
 }
-// Populate dropdowns
-populateDropdowns($("#goalSelect"), fitnessQuestions[0].answers);
-populateDropdowns($("#skillSelect"), fitnessQuestions[1].answers);
-  function toTitleCase(string) {
-    // Split the string into words
-    var words = string.split(' ');
-  
-    // Capitalize the first letter of each word
-    var titleCaseWords = words.map(word => {
+
+// Function to show results page
+var showResults = function (workout, gif) {
+  $("#results-screen").removeClass("hide")
+  $("#quiz-screen").attr("class", "hide")
+  console.log(workout);
+  console.log(gif);
+// Function to change equipment string to title case
+  var toTitleCase = function (string) {
+    var words = string.split(' '); // Split the string into words
+    var titleCaseWords = words.map(word => { // Capitalize the first letter of each word
       return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
     });
-  
-    // Join the words back into a string
-    var titleCaseString = titleCaseWords.join(' ');
-  
+    var titleCaseString = titleCaseWords.join(' ');  // Join the words back into a string
     return titleCaseString;
   }
-
-  // Check if userAnswers is defined and has at least one element
-  if (userAnswers && userAnswers.length > 0) {
-    $('#yourWorkout').append(`<h2 class="display-4 mb-4">You asked for workouts to help you ${userAnswers[0].toLowerCase()}`);
-  }
-  
+  // Dynamically display results page content
+  $('#yourWorkout').append(`<h2 class="display-4 mb-4">You asked for workouts to help you ${userAnswers[0].toLowerCase()}`);
   for (var i = 0; i < 3; i++) {
     $('#yourWorkout').append(`<div class="card mb-3">
   <img src="${gif.data[i].images.original.url}" class="mx-3 mt-4 card-img-top" alt="${userAnswers[0]} Workout Gif" style="width:300px">
@@ -73,30 +59,30 @@ populateDropdowns($("#skillSelect"), fitnessQuestions[1].answers);
     <p class="card-text"><span>Equipment:</span> ${toTitleCase(workout[i].equipment.replace(/_/g, ' '))}</p>
     <h5>Instructions</h5>
     <p class="card-text">${workout[i].instructions}</p>
-    <a href="#" class="btn btn-primary">Save exercise</a>
+    <a href="#" id="btn-${i} class="btn btn-primary">Save exercise</a>
   </div>
 </div>`)
-}
-// Function to show/hide meal cards based on user answer
-var toggleMealCard = function (userAnswer) {
-  // Hide both meal cards initially
-  $("#leanMealCard").hide();
-  $("#bulkMealCard").hide();
-
-  // Determine which meal card to show based on user's answer
-  if (userAnswer === "Tone" || userAnswer === "Cardio" || userAnswer === "Stretch") {
-    $("#leanMealCard").show();
-  } else if (userAnswer === "Bulk") {
-    $("#bulkMealCard").show();
   }
-};
-toggleMealCard(userAnswers[0]);
-// Display meal cards based on fitness goal
-mealMatcher();
+  // Function to show/hide meal cards based on user answer
+  var toggleMealCard = function (userAnswer) {
+    // Hide both meal cards initially
+    $("#leanMealCard").hide();
+    $("#bulkMealCard").hide();
+
+    // Determine which meal card to show based on user's answer
+    if (userAnswer === "Tone" || userAnswer === "Cardio" || userAnswer === "Stretch") {
+      $("#leanMealCard").show();
+    } else if (userAnswer === "Bulk") {
+      $("#bulkMealCard").show();
+    }
+  };
+  toggleMealCard(userAnswers[0]);
+  // Display meal cards based on fitness goal
+  mealMatcher();
 };
 
 // Function to pass fitnessQuestions into the excercises API and log results
-var getWorkout = function() {
+var getWorkout = function () {
   // Maps user answers to parameters the API can understand
   var answerMappings = {
     'Bulk': 'strength',
@@ -107,29 +93,29 @@ var getWorkout = function() {
     'Make Me Sweat!': 'intermediate',
   };
 
-var type = answerMappings[userAnswers[0]]; // Maps the user chosen fitness goal to one of the APIable types of workout
-var difficulty = answerMappings[userAnswers[1]]; // Maps the user chosen skill level to an APIable parameter
-var workoutUrl = "https://api.api-ninjas.com/v1/exercises?type=" + type + "&difficulty=" + difficulty;
+  var type = answerMappings[userAnswers[0]]; // Maps the user chosen fitness goal to one of the APIable types of workout
+  var difficulty = answerMappings[userAnswers[1]]; // Maps the user chosen skill level to an APIable parameter
+  var workoutUrl = "https://api.api-ninjas.com/v1/exercises?type=" + type + "&difficulty=" + difficulty;
 
-// Fetch from workout API
-fetch(workoutUrl, {
-headers: { 'X-Api-Key': 'Xm9KrAkFaXPAXu1rR0wdLw==EAJWzakA1gYNDQF6' },
-})
-.then(function (response) {
-  console.log(workoutUrl)
-  return response.json();
-})
-.then(function (workoutData) {
-  getGiphy(type, workoutData)
-})
-.catch(function (error) {
-  console.error(error);
-});
+  // Fetch from workout API
+  fetch(workoutUrl, {
+    headers: { 'X-Api-Key': 'Xm9KrAkFaXPAXu1rR0wdLw==EAJWzakA1gYNDQF6' },
+  })
+    .then(function (response) {
+      console.log(workoutUrl)
+      return response.json();
+    })
+    .then(function (workoutData) {
+      getGiphy(type, workoutData)
+    })
+    .catch(function (error) {
+      console.error(error);
+    });
 };
 
 // Function to pass workoutData into Giphy API to get a gif
 var getGiphy = function (type, workoutData) {
-// Maps user answers to appropriate Giphy ID's
+  // Maps user answers to appropriate Giphy ID's
   var giphyMappings = {
     'strength': ['o4HacXW6rQty0', 'f5dDxjoo0MSnQMFPOp', 'dt40pTFK4lETk43ldq', '1oC7CzF6DHBQqPniuS'],
     'plyometrics': ['3oKIPz238SgcY0p8xG', 'xeUFXl6Wspcz6Yv7cY', 'jkrI2HmUmdDlBz9oeN', 'H6o2fJlAPEiVhJN3M6'],
@@ -137,9 +123,9 @@ var getGiphy = function (type, workoutData) {
     'stretching': ['3oKIPpaHCfN7ECPIGs', 'DBbPjLMsQPruMkDcrd', 'YSrDx5MlMDp3dvYCML', 'ef0AeVgH1Jb0FBNKq1']
   };
 
-// Gets random gif from the giphyMappings arrays
-  var getRandomGif = function(type) {
-    var value = giphyMappings[type];  
+  // Gets random gif from the giphyMappings arrays
+  var getRandomGif = function (type) {
+    var value = giphyMappings[type];
     // Shuffle the array
     for (var i = value.length - 1; i > 0; i--) {
       var j = Math.floor(Math.random() * (i + 1));
@@ -147,7 +133,7 @@ var getGiphy = function (type, workoutData) {
     }
     return value;
   };
-  
+
   var randomGiphyId = getRandomGif(type); // Store random giphyMappings value in variable
   console.log(randomGiphyId)
   var giphyKey = "BpXTUZMuQkSFoZt9q5biIp1nwCwE5xEh";
@@ -155,15 +141,15 @@ var getGiphy = function (type, workoutData) {
 
   // Fetch from Giphy API
   fetch(giphyURL)
-  .then(function (response) {
-    return response.json();
-  })
-  .then(function (gifData) {
-    showResults(workoutData, gifData);
-  })
-  .catch(function (error) {
-    console.error(error);
-});
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (gifData) {
+      showResults(workoutData, gifData);
+    })
+    .catch(function (error) {
+      console.error(error);
+    });
 };
 
 // Generate Quiz question cards
@@ -189,13 +175,13 @@ var generateQuestion = function () {
   } else {
     console.log(userAnswers)
     getWorkout();
+    populateDropdowns($("#goalSelect"), fitnessQuestions[0].answers);  // Populate dropdowns
+    populateDropdowns($("#skillSelect"), fitnessQuestions[1].answers);
 
-}
+  }
 };
 
-generateQuestion();
-
-
+generateQuestion(); // Call the function to start the quiz
 
 // event listener to regenerate quiz questions
 $('#regenerateResultsBtn').on('click', function (event) {
@@ -204,7 +190,8 @@ $('#regenerateResultsBtn').on('click', function (event) {
   var selectedSkill = $('#skillSelect').val();
   userAnswers = [];
   userAnswers.push(selectedGoal, selectedSkill);
-  console.log(userAnswers)
+  $("#leanMealCard").hide();
+  $("#bulkMealCard").hide();
   $('#yourWorkout').text("");
   getWorkout();
 });
@@ -226,8 +213,6 @@ $('#viewMenuBtn').on('click', function (event) {
   event.preventDefault();
   window.open('https://www.bewyld.co.uk/_files/ugd/d9fc74_06834711b1094e22a5fbc17f3c3a8362.pdf', '_blank');
 });
-
-
 
 // Event listener for all quiz cards
 $('#card-container').on('click', '.card', function (event) {

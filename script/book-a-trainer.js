@@ -38,9 +38,4 @@ $(document).ready(function () {
         // Redirect to the index.html page
         window.location.href = "index.html";
     });
-    // Handle click event for "Return To Results Page" button
-    $("#returnToResultsBtn").on("click", function () {
-        // Redirect to the index.html page
-        window.location.href = "index.html";
-    });
 });
