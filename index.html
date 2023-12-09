@@ -78,7 +78,6 @@
     <!-- Workout container -->
     <section id="workoutsContainer" class="jumbotron container mt-3 px-4">
       <div id="yourWorkout" class="row">
-
       </div>
     </section>
 
@@ -93,37 +92,14 @@
     <!-- Personalized Meal Prep Container -->
     <section id="mealPrep" class="jumbotron container px-4 mt-5">
       <h2 class="text-center">Your Personalised Meal Prep</h2>
-      <div class="row justify-content-center">
+      <div id="mealCardRow" class="row justify-content-center">
         <!-- Dynamically generated lean meal cards will be placed here using JavaScript -->
-        <div class="col-md-3 mb-4 mt-2" id="leanMealCard">
-          <div class="card" style="width: 18rem;">
-            <i class="fas fa-utensils fa-5x text-primary mx-auto mt-3"></i> <!-- Font Awesome icon -->
-            <div class="card-body text-center">
-              <h5 class="card-title">Lean Meal</h5>
-              <p class="card-text">Select from one of our stress-free meal prep pack sizes, which you can customize
-                using the menu below.</p>
-              <btn id="mealLearn1" class="btn btn-primary">Learn more</a>
-            </div>
-          </div>
+        <!-- Button to View BeWYLD Menu -->
+        <div class="row justify-content-center">
+          <h5 class="call-to-action text-center mt-2 mb-3">To see the menu we use to create your meals, click below!
+          </h5>
+          <button id="viewMenuBtn" class="col-2 mb-3 btn btn-primary">View BeWYLD Menu</button>
         </div>
-        <!-- Dynamically generated bulk meal cards will be placed here using JavaScript -->
-        <div class="col-md-3 mb-4 mt-2" id="bulkMealCard">
-          <div class="card" style="width: 18rem;">
-            <i class="fas fa-dumbbell fa-5x text-danger mx-auto mt-3"></i> <!-- Font Awesome icon -->
-            <div class="card-body text-center">
-              <h5 class="card-title">Bulk Meal</h5>
-              <p class="card-text">Select from one of our stress-free meal prep pack sizes, which you can customize
-                using the menu below.</p>
-              <btn id="mealLearn2" class="btn btn-primary">Learn more</btn>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Button to View BeWYLD Menu -->
-      <div class="row justify-content-center">
-        <h5 class="call-to-action text-center mt-2 mb-3">To see the menu we use to create your meals, click below!</h5>
-        <button id="viewMenuBtn" class="col-2 mb-3 btn btn-primary">View BeWYLD Menu</button>
-      </div>
     </section>
   </div>
 
