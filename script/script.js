@@ -14,16 +14,6 @@ var fitnessQuestions = [
   },
 ];
 
-// Function to dynamically match meals based on fitness goals
-var mealMatcher = function () {
-  var fitnessGoals = {
-    'Bulk': bulkMealCard,
-    'Tone': leanMealCard,
-    'Cardio': leanMealCard,
-    'Stretch': leanMealCard,
-  };
-};
-
 // Dynamically generate dropdown options for the results page
 var populateDropdowns = function (element, options) {
   for (var i = 0; i < options.length; i++) {
@@ -77,8 +67,6 @@ var showResults = function (workout, gif) {
     }
   };
   toggleMealCard(userAnswers[0]);
-  // Display meal cards based on fitness goal
-  mealMatcher();
 };
 
 // Function to pass fitnessQuestions into the excercises API and log results
