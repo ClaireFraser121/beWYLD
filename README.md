@@ -142,8 +142,9 @@ This project is licensed under the [MIT License](LICENSE).
 
 ## Badges
 
-![top language](https://img.shields.io/github/languages/top/AnnamKhalid/bewyld-api-project)
-![license](https://img.shields.io/github/license/AnnamKhalid/bewyld-api-project)
+![top language](https://img.shields.io/github/languages/top/ClaireFraser121/beWYLD)
+![JavaScript](https://img.shields.io/github/languages/top/ClaireFraser121/beWYLD?label=JavaScript)
+![license](https://img.shields.io/github/license/ClaireFraser121/beWYLD)
 
 ## Features
 
